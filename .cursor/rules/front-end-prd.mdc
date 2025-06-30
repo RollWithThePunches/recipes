@@ -1,0 +1,54 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Rule: Front-end development requirements and process
+
+## Goal
+
+Follow these requirements and the process for generating components, patterns, pages, and tokens. front-end task list will need to be created based on this. The task list will be an `md` in the `tasks` folder.
+
+## Requirements
+
+- Generate components based on uploaded images or Figma link provided by the user. Figma MCP must be active.
+- Tokens should be generated based on Figma variables, styles provided in the `design-requirements-prd.mdc` file, or styles specified by the user.
+- Follow all rules in the `design-requirement-prd.mdc` file.
+- Use Tailwind and Shadcn unless otherwise specified.
+- Review all component names or names of frames in the Figma link provided and generate based on them. If none are provided, base it on your own knowledge.
+
+## Process
+
+### Creating tokens
+
+- Review any styles provided in tbe `design-requirements-prd.mdc` file. If they are provided, create tokens based on them in a `tokens.css` file.
+- If the user provides a link to Figma, create any other tokens based on styles used throughout it the frame. Check for variables and create token names based on those names.
+- If an image is provided by the user, create tokens based on styles in the image.
+- After tokens have been created, ensure that they are used in the Tailwind classes rather than default or code such as hexidecimal.
+
+### Creating components
+
+- The user should provide an image or a link to Figma. If they do not, ask them to specify what they need.
+- Ask if they would like to create and name components based on the naming in Figma. If it's from an image base it on your knowledge.
+- Components should be dynamic with props and content coming from a JSON called `content.json`.
+- Use tokens that already exist in a `tokens.css` file and include in the Tailwind classes. If they do not exist, ask the user if the user would like to create them based on variables in Figma or styles in an image.
+- Compenents must meet WCAG 2.1 requirements
+- After all is completed, review again that styles and component structure match Figma or the image, ensure tokens are used in Tailwind classes, and all meets WCAG 2.1 requirements.
+
+### Creating patterns
+
+- Review the Figma frame provided in the link or image and see if there is pattern, such as a 50/50 section.
+- These pattersn may include a hero, 50/50 section, a card section, etc.
+- Review naming convention used in Figma, if there is one included.
+
+### Creating pages
+
+- Pages will often be provided by the user in either a Figma link or an uploaded image.
+- Review pages and use components or patterns to construct them.
+- If a component or pattern does not already exist, ask the user if they would like it created
+- All content on pages should be dynamic and import from the `content.json` file.
+- After the page has been created, review these requirements one more time: 
+    - It matches the design provided in the Figma frame or uploaded image.
+    - Tokens are being used in either the Tailwind classes or styles.
+    - Components or patterns that already exist are being used.
+    - It meets WCAG 2.1 requirements.

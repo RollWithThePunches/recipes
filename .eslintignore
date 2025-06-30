@@ -1,0 +1,17 @@
+# Node.js scripts - use CommonJS
+scripts/
+
+# Build outputs
+.next/
+out/
+dist/
+build/
+
+# Dependencies
+node_modules/
+
+# Environment files
+.env*
+
+# Generated files
+*.generated.* 

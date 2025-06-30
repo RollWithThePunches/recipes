@@ -1,0 +1,369 @@
+{
+  "homepage": {
+    "hero": {
+      "title": "Summer grillin'",
+      "subtitle": "Summer grilling recipes focus on fresh, seasonal ingredients like corn, zucchini, tomatoes, and stone fruits paired with classic proteins such as burgers, chicken, fish, and kebabs.",
+      "searchPlaceholder": "Search by ingredient...",
+      "learnMoreText": "Learn about grilling for the summer.",
+      "image": "/assets/fh-tacos-3784500610.jpg"
+    },
+    "categories": [
+      {
+        "id": "bbq",
+        "name": "BBQ & Grilling",
+        "description": "Smoky barbecue recipes perfect for outdoor cooking",
+        "image": "/assets/fh-tacos-3784500610.jpg",
+        "recipeCount": 12
+      },
+      {
+        "id": "summer-drinks",
+        "name": "Summer Drinks",
+        "description": "Refreshing beverages to beat the heat",
+        "image": "/assets/fh-tacos-3784500610.jpg",
+        "recipeCount": 8
+      },
+      {
+        "id": "mexican",
+        "name": "Mexican Cuisine",
+        "description": "Authentic Mexican flavors and recipes",
+        "image": "/assets/fh-tacos-3784500610.jpg",
+        "recipeCount": 15
+      }
+    ],
+    "featuredRecipes": ["barbacoa-tacos", "char-burgers", "lime-corn", "margaritas"],
+    "sections": {
+      "summerRecipes": {
+        "title": "Summer lovin' recipes",
+        "recipes": [
+          {
+            "id": "char-burgers",
+            "title": "\"Char burgers\"",
+            "description": "These feature a seared exterior with grill marks and smoky flavor.",
+            "image": "/assets/fh-tacos-3784500610.jpg"
+          },
+          {
+            "id": "shake-mixin",
+            "title": "Shake mixin'",
+            "description": "Blend ice cream, milk, and flavorings until smooth for creamy milkshakes",
+            "image": "/assets/fh-tacos-3784500610.jpg"
+          },
+          {
+            "id": "lime-corn",
+            "title": "Lime corn",
+            "description": "Grill until charred, then brush with lime juice and sprinkle with chili powder.",
+            "image": "/assets/fh-tacos-3784500610.jpg"
+          },
+          {
+            "id": "margaritas",
+            "title": "Margaritas, anyone?",
+            "description": "Fresh lime juice, tequila, and triple sec blended with ice creates the perfect margarita.",
+            "image": "/assets/fh-tacos-3784500610.jpg"
+          }
+        ]
+      },
+      "popularNow": {
+        "title": "Popular now"
+      }
+    }
+  },
+  "recipes": [
+    {
+      "id": "barbacoa-tacos",
+      "title": "Barbacoa Tacos",
+      "description": "These barbacoa tacos are packed with smoky shredded beef that's perfectly tender. Spices like cumin complement the chiles, while oregano and bay leaves add an earthiness to this recipe.",
+      "image": "/assets/fh-tacos-3784500610.jpg",
+      "cuisine": "Mexican",
+      "mealType": "dinner",
+      "prepTime": 30,
+      "cookTime": 180,
+      "servings": 6,
+      "difficulty": "medium",
+      "dietary": ["gluten-free option"],
+      "ingredients": [
+        {
+          "item": "beef chuck roast",
+          "quantity": "3",
+          "unit": "lbs"
+        },
+        {
+          "item": "chipotle chiles in adobo",
+          "quantity": "3",
+          "unit": "chiles"
+        },
+        {
+          "item": "white onion",
+          "quantity": "1",
+          "unit": "large"
+        },
+        {
+          "item": "garlic cloves",
+          "quantity": "4",
+          "unit": "cloves"
+        },
+        {
+          "item": "ground cumin",
+          "quantity": "2",
+          "unit": "tsp"
+        },
+        {
+          "item": "dried oregano",
+          "quantity": "1",
+          "unit": "tsp"
+        },
+        {
+          "item": "bay leaves",
+          "quantity": "2",
+          "unit": "leaves"
+        },
+        {
+          "item": "beef broth",
+          "quantity": "1",
+          "unit": "cup"
+        },
+        {
+          "item": "lime juice",
+          "quantity": "2",
+          "unit": "tbsp"
+        },
+        {
+          "item": "corn tortillas",
+          "quantity": "12",
+          "unit": "tortillas"
+        },
+        {
+          "item": "white onion, diced",
+          "quantity": "1/2",
+          "unit": "cup"
+        },
+        {
+          "item": "fresh cilantro",
+          "quantity": "1/4",
+          "unit": "cup"
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Season the beef chuck roast with salt and pepper. Heat a large Dutch oven over medium-high heat and sear the roast on all sides until browned, about 8 minutes total."
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Add the chipotle chiles, onion, garlic, cumin, oregano, bay leaves, and beef broth to the pot. Bring to a simmer."
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Cover and transfer to a 325°F oven. Cook for 3 hours or until the meat shreds easily with a fork."
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Remove the meat from the pot and shred using two forks. Strain the cooking liquid and return 1/2 cup to the shredded meat along with lime juice."
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Warm the tortillas and serve the barbacoa with diced onion, cilantro, and additional lime wedges."
+        }
+      ]
+    },
+    {
+      "id": "char-burgers",
+      "title": "Char Burgers",
+      "description": "These feature a seared exterior with grill marks and smoky flavor that makes them irresistible for summer grilling.",
+      "image": "/assets/fh-tacos-3784500610.jpg",
+      "cuisine": "American",
+      "mealType": "dinner",
+      "prepTime": 15,
+      "cookTime": 20,
+      "servings": 4,
+      "difficulty": "easy",
+      "dietary": [],
+      "ingredients": [
+        {
+          "item": "ground beef (80/20)",
+          "quantity": "1.5",
+          "unit": "lbs"
+        },
+        {
+          "item": "salt",
+          "quantity": "1",
+          "unit": "tsp"
+        },
+        {
+          "item": "black pepper",
+          "quantity": "1/2",
+          "unit": "tsp"
+        },
+        {
+          "item": "hamburger buns",
+          "quantity": "4",
+          "unit": "buns"
+        },
+        {
+          "item": "cheese slices",
+          "quantity": "4",
+          "unit": "slices"
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Preheat grill to medium-high heat. Form ground beef into 4 patties, season with salt and pepper."
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Grill patties for 4-5 minutes per side for medium doneness, creating nice grill marks."
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Add cheese in the last minute of cooking. Toast buns on the grill briefly."
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Serve immediately on toasted buns with your favorite toppings."
+        }
+      ]
+    },
+    {
+      "id": "lime-corn",
+      "title": "Mexican Street Corn (Elote)",
+      "description": "Grill until charred, then brush with lime juice and sprinkle with chili powder for an authentic Mexican street food experience.",
+      "image": "/assets/fh-tacos-3784500610.jpg",
+      "cuisine": "Mexican",
+      "mealType": "side",
+      "prepTime": 10,
+      "cookTime": 15,
+      "servings": 4,
+      "difficulty": "easy",
+      "dietary": ["vegetarian", "gluten-free"],
+      "ingredients": [
+        {
+          "item": "corn on the cob",
+          "quantity": "4",
+          "unit": "ears"
+        },
+        {
+          "item": "mayonnaise",
+          "quantity": "1/4",
+          "unit": "cup"
+        },
+        {
+          "item": "lime juice",
+          "quantity": "2",
+          "unit": "tbsp"
+        },
+        {
+          "item": "chili powder",
+          "quantity": "1",
+          "unit": "tsp"
+        },
+        {
+          "item": "cotija cheese",
+          "quantity": "1/4",
+          "unit": "cup"
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Preheat grill to medium-high heat. Husk the corn and remove silk."
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Grill corn, turning occasionally, until charred all over, about 10-12 minutes."
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Brush grilled corn with mayonnaise, then sprinkle with lime juice, chili powder, and cotija cheese."
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Serve immediately with lime wedges."
+        }
+      ]
+    },
+    {
+      "id": "margaritas",
+      "title": "Classic Margaritas",
+      "description": "Fresh lime juice, tequila, and triple sec blended with ice creates the perfect margarita for summer entertaining.",
+      "image": "/assets/fh-tacos-3784500610.jpg",
+      "cuisine": "Mexican",
+      "mealType": "drink",
+      "prepTime": 5,
+      "cookTime": 0,
+      "servings": 2,
+      "difficulty": "easy",
+      "dietary": ["vegan", "gluten-free"],
+      "ingredients": [
+        {
+          "item": "silver tequila",
+          "quantity": "4",
+          "unit": "oz"
+        },
+        {
+          "item": "fresh lime juice",
+          "quantity": "2",
+          "unit": "oz"
+        },
+        {
+          "item": "triple sec",
+          "quantity": "1",
+          "unit": "oz"
+        },
+        {
+          "item": "agave syrup",
+          "quantity": "1",
+          "unit": "tsp"
+        },
+        {
+          "item": "coarse salt",
+          "quantity": "for rimming",
+          "unit": ""
+        },
+        {
+          "item": "ice",
+          "quantity": "1",
+          "unit": "cup"
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Rim glasses with lime juice and coarse salt. Fill with ice."
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "In a cocktail shaker, combine tequila, lime juice, triple sec, and agave syrup with ice."
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Shake vigorously for 15 seconds until well chilled."
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Strain into prepared glasses and garnish with lime wheels."
+        }
+      ]
+    }
+  ],
+  "ui": {
+    "navigation": {
+      "brand": "Cooking",
+      "searchPlaceholder": "Search recipes...",
+      "menuItems": ["Recipes", "Categories", "About", "Contact"]
+    },
+    "buttons": {
+      "learnMore": "Learn more",
+      "viewRecipe": "View Recipe",
+      "searchRecipes": "Search Recipes"
+    },
+    "footer": {
+      "brand": "Cooking",
+      "copyright": "© 2025 Cooking, Inc",
+      "links": [
+        { "label": "Privacy", "href": "/privacy" },
+        { "label": "Terms", "href": "/terms" },
+        { "label": "Security Measures", "href": "/security" },
+        { "label": "Sitemap", "href": "/sitemap" }
+      ]
+    }
+  }
+} 
