@@ -1,11 +1,22 @@
 "use client";
 
+import { useState } from 'react';
 import contentData from '@/data/content.json';
 import { ContentData } from '@/types/content';
+import Drawer from './Drawer';
 
 const content = contentData as ContentData;
 
 export default function Header() {
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const handleDrawerToggle = () => {
+    setIsDrawerOpen(!isDrawerOpen);
+  };
+
+  const handleDrawerClose = () => {
+    setIsDrawerOpen(false);
+  };
   return (
     <header 
       className="relative w-full h-[60px] bg-white border-b border-solid border-[var(--color-text-heading)]"
@@ -17,9 +28,10 @@ export default function Header() {
           <div className="flex flex-row items-center gap-6">
             {/* Hamburger menu button */}
             <button
-              className="w-6 h-4 shrink-0 flex items-center justify-center"
+              className="w-6 h-4 shrink-0 flex items-center justify-center hover:opacity-75 focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)] rounded transition-opacity duration-150"
               aria-label="Open navigation menu"
-              aria-expanded="false"
+              aria-expanded={isDrawerOpen}
+              onClick={handleDrawerToggle}
             >
               <svg 
                 width="24" 
@@ -121,6 +133,9 @@ export default function Header() {
           </div>
         </div>
       </div>
+      
+      {/* Drawer Component */}
+      <Drawer isOpen={isDrawerOpen} onClose={handleDrawerClose} />
     </header>
   );
 } 

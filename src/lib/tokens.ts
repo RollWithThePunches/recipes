@@ -12,6 +12,7 @@ export const colors = {
   background: '#FFFFFF',
   backgroundDark: '#333333',
   backgroundYellow: '#FFF9E8',
+  backgroundOverlay: 'rgba(0, 0, 0, 0.5)',
   
   // Text Colors
   textHeading: '#333333',
