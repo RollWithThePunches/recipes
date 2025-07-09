@@ -16,7 +16,7 @@ export default function HeroSection({ hero, summerRecipes }: HeroSectionProps) {
           <div className="flex flex-col gap-4 w-full md:flex-1 md:h-[494px] items-end">
             {/* Hero image */}
             <div 
-              className="w-full h-[250px] md:h-auto md:flex-1 bg-cover bg-center bg-no-repeat rounded-lg"
+              className="w-full h-[250px] md:h-auto md:flex-1 bg-cover bg-center bg-no-repeat"
               style={{ backgroundImage: `url('${hero.image}')` }}
               role="img"
               aria-label={hero.title}

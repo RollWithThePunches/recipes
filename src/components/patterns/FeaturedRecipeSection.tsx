@@ -13,7 +13,7 @@ export default function FeaturedRecipeSection({
     <div className="flex flex-col md:flex-row gap-6 items-start w-full">
       {/* Image - always first on mobile, positioned based on imagePosition on desktop */}
       <div 
-        className={`w-full md:flex-1 bg-cover bg-center bg-no-repeat h-[250px] md:h-[294px] rounded-lg ${
+        className={`w-full md:flex-1 bg-cover bg-center bg-no-repeat h-[250px] md:h-[294px] ${
           imagePosition === 'right' ? 'order-1 md:order-2' : 'order-1 md:order-1'
         }`}
         style={{ backgroundImage: `url('${recipe.image}')` }}

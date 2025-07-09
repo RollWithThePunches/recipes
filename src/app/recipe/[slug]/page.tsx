@@ -1,180 +1,111 @@
-import Image from "next/image";
-import { Heart, Share, Printer } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import Breadcrumb, { BreadcrumbItem } from "@/components/Breadcrumb";
-import RecipeRating from "@/components/RecipeRating";
-import RecipeStats from "@/components/RecipeStats";
-import IngredientsList from "@/components/IngredientsList";
-import RecipeDirections from "@/components/RecipeDirections";
+import { notFound } from "next/navigation";
+import contentData from "@/data/content.json";
+import { ContentData } from "@/types/content";
+import RecipeClientPage from "./RecipeClientPage";
+import { BreadcrumbItem } from "@/components/Breadcrumb";
 
-// This would typically come from a database or API
-const recipeData = {
-  id: "barbacoa-tacos",
-  title: "Barbacoa Tacos",
-  description: "These barbacoa tacos are packed with smoky shredded beef that's perfectly tender. Spices like cumin complement the chiles, while oregano and bay leaves add an earthy sweetness to this recipe.",
-  rating: 4,
-  image: "/assets/fh-tacos-3784500610.jpg", // Taco image from Unsplash
+const content = contentData as ContentData;
+
+interface RecipePageProps {
+  params: Promise<{
+    slug: string;
+  }>;
+}
+
+interface TransformedRecipeData {
+  id: string;
+  title: string;
+  description: string;
+  rating: number;
+  image: string;
   stats: {
-    prepTime: "45 mins",
-    cookTime: "2 hrs",
-    totalTime: "2 hrs 45 mins",
-    servings: "6"
-  },
-  ingredients: [
-    { amount: "2 ripe plum tomatoes", item: "" },
-    { amount: "1 small white onion, quartered", item: "" },
-    { amount: "2 cloves garlic, peeled", item: "" },
-    { amount: "4 chipotle peppers in adobo sauce", item: "" },
-    { amount: "3 teaspoons kosher salt", item: "" },
-    { amount: "1 ½ teaspoons chili powder", item: "" },
-    { amount: "1 teaspoon ground cumin", item: "" },
-    { amount: "½ teaspoon freshly ground black pepper", item: "" },
-    { amount: "3 pounds chuck roast, cut into 6-equal sized cubes", item: "" },
-    { amount: "2 tablespoons olive oil", item: "" },
-    { amount: "1 cup water", item: "" },
-    { amount: "1 tablespoon light brown sugar", item: "" },
-    { amount: "2 teaspoons dried oregano", item: "" },
-    { amount: "3 fresh bay leaves", item: "" },
-    { amount: "1 tablespoon lime juice", item: "" },
-    { amount: "corn tortillas, warmed", item: "" },
-    { amount: "2 ripe avocados, peeled, pitted and sliced", item: "" },
-    { amount: "½ bunch radishes, thinly sliced", item: "" },
-    { amount: "2 tablespoons chopped fresh cilantro, or to taste", item: "" }
-  ],
-  directions: [
-    {
-      stepNumber: 1,
-      instruction: "In a large cast iron skillet over medium-high, arrange whole tomatoes, onions (cut side down), and garlic in the dry skillet in a single layer, working in batches if needed. Cook, turning occasionally, until charred on all sides, about 6 minutes for the garlic and about 12 minutes for the onions and tomatoes."
-    },
-    {
-      stepNumber: 2,
-      instruction: "Transfer charred vegetables to a blender and add chipotle peppers. Process until smooth, about 1 minute."
-    },
-    {
-      stepNumber: 3,
-      instruction: "Stir salt, chili powder, cumin, and black pepper together in a small bowl; season beef evenly with salt mixture."
-    },
-    {
-      stepNumber: 4,
-      instruction: "Heat oil in a Dutch oven over medium-high heat. Add beef in batches and cook, turning occasionally, until browned on all sides, about 5 minutes per side. Transfer browned beef to a large plate."
-    },
-    {
-      stepNumber: 5,
-      instruction: "Pour water into the Dutch oven and scrape up any browned bits from the bottom of the pan. Stir in onion-tomato mixture, brown sugar, oregano, and bay leaves. Reduce heat to medium-low and bring to a simmer."
-    },
-    {
-      stepNumber: 6,
-      instruction: "Nestle beef back into pot and cover. Cook, stirring and re-nestling beef occasionally (about every 20 to 30 minutes), until beef is tender and pulls easily apart with a fork, 1 hour and 45 minutes to 2 hours and 15 minutes. Remove bay leaves and discard."
-    },
-    {
-      stepNumber: 7,
-      instruction: "Remove beef from Dutch oven, place on cutting board; shred beef using 2 forks."
-    },
-    {
-      stepNumber: 8,
-      instruction: "Return beef to the Dutch oven, add lime juice, and stir to combine."
-    },
-    {
-      stepNumber: 9,
-      instruction: "Serve in corn tortillas with avocado, radishes, and cilantro."
-    }
-  ]
-};
+    prepTime: string;
+    cookTime: string;
+    totalTime: string;
+    servings: string;
+  };
+  ingredients: Array<{
+    amount: string;
+    item: string;
+  }>;
+  directions: Array<{
+    stepNumber: number;
+    instruction: string;
+  }>;
+  cuisine: string;
+  difficulty: string;
+  dietary: string[];
+}
 
-export default function RecipePage() {
-  const breadcrumbItems: BreadcrumbItem[] = [
-    { label: "Mexican", href: "/category/mexican" },
-    { label: "Main dish", href: "/category/main-dish" },
-    { label: "Tacos", href: "/category/tacos" },
+// Helper function to format time
+function formatTime(minutes: number): string {
+  if (minutes < 60) {
+    return `${minutes} mins`;
+  } else {
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+    if (remainingMinutes === 0) {
+      return `${hours} hr${hours > 1 ? 's' : ''}`;
+    } else {
+      return `${hours} hr${hours > 1 ? 's' : ''} ${remainingMinutes} mins`;
+    }
+  }
+}
+
+// Helper function to get breadcrumb items based on cuisine
+function getBreadcrumbItems(cuisine: string): BreadcrumbItem[] {
+  const baseItems: BreadcrumbItem[] = [
+    { label: "Home", href: "/" },
+    { label: "Recipes", href: "/recipes" }
   ];
 
-  return (
-    <div className="max-w-3xl mx-auto p-[var(--spacing-lg)] md:p-[var(--spacing-xl)]">
-      {/* Breadcrumb */}
-      <div className="mb-[var(--spacing-lg)]">
-        <Breadcrumb items={breadcrumbItems} />
-      </div>
+  if (cuisine) {
+    baseItems.push({ label: cuisine, href: `/category/${cuisine.toLowerCase()}` });
+  }
 
-      {/* Recipe Header */}
-      <div className="mb-[var(--spacing-xl)]">
-        <h1 className="text-[var(--font-size-4xl)] font-bold text-[var(--color-text-heading)] mb-[var(--spacing-md)] font-[var(--font-family-heading)]">
-          {recipeData.title}
-        </h1>
-        
-        {/* Rating and Actions */}
-        <div className="flex items-center justify-between mb-[var(--spacing-lg)]">
-          <RecipeRating rating={recipeData.rating} />
-          <div className="flex items-center gap-[var(--spacing-sm)]">
-            <Button variant="ghost" size="icon" aria-label="Save to favorites">
-              <Heart className="w-5 h-5 text-[var(--color-primary)]" />
-            </Button>
-            <Button variant="ghost" size="icon" aria-label="Share recipe">
-              <Share className="w-5 h-5 text-[var(--color-text-heading)]" />
-            </Button>
-            <Button variant="ghost" size="icon" aria-label="Print recipe">
-              <Printer className="w-5 h-5 text-[var(--color-text-heading)]" />
-            </Button>
-          </div>
-        </div>
+  return baseItems;
+}
 
-        {/* Description */}
-        <p className="text-[var(--color-text-body)] text-[var(--font-size-base)] leading-[var(--line-height-normal)] font-[var(--font-family-body)] mb-[var(--spacing-xl)]">
-          {recipeData.description}
-        </p>
-      </div>
+export default async function RecipePage({ params }: RecipePageProps) {
+  // Await the params since they're a Promise in Next.js 15
+  const { slug } = await params;
+  
+  // Find the recipe in content.json
+  const recipe = content.recipes.find(r => r.id === slug);
 
-      {/* Recipe Image */}
-      <div className="mb-[var(--spacing-xl)]">
-        <div className="relative w-full h-[400px] rounded-lg overflow-hidden">
-          <Image
-            src={recipeData.image}
-            alt={recipeData.title}
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
-      </div>
+  if (!recipe) {
+    notFound();
+  }
 
-      {/* Recipe Stats and Ingredients */}
-      <div style={{ backgroundColor: 'var(--color-background-yellow)' }} className="mb-[var(--spacing-xl)] p-[var(--spacing-xl)] gap-[var(--spacing-xl)] flex flex-col">
-        {/* Recipe Stats */}
-        <RecipeStats
-          prepTime={recipeData.stats.prepTime}
-          cookTime={recipeData.stats.cookTime}
-          totalTime={recipeData.stats.totalTime}
-          servings={recipeData.stats.servings}
-          className=""
-        />
+  // Transform the recipe data to match the component expectations
+  const recipeData: TransformedRecipeData = {
+    id: recipe.id,
+    title: recipe.title,
+    description: recipe.description,
+    rating: 4, // Default rating - could be added to content.json later
+    image: recipe.image,
+    stats: {
+      prepTime: formatTime(recipe.prepTime),
+      cookTime: formatTime(recipe.cookTime),
+      totalTime: formatTime(recipe.prepTime + recipe.cookTime),
+      servings: recipe.servings.toString()
+    },
+    ingredients: recipe.ingredients.map(ing => ({
+      amount: `${ing.quantity} ${ing.unit}`.trim(),
+      item: ing.item
+    })),
+    directions: recipe.steps.map(step => ({
+      stepNumber: step.stepNumber,
+      instruction: step.instruction
+    })),
+    cuisine: recipe.cuisine,
+    difficulty: recipe.difficulty,
+    dietary: recipe.dietary
+  };
 
-        {/* Ingredients */}
-        <IngredientsList 
-          ingredients={recipeData.ingredients.map(ing => ({
-            amount: ing.amount,
-            item: ing.item
-          }))}
-          className=""
-        />
-      </div>
+  const breadcrumbItems = getBreadcrumbItems(recipe.cuisine);
 
-      {/* Directions */}
-      <RecipeDirections 
-        steps={recipeData.directions}
-        className="mb-[var(--spacing-xl)]"
-      />
+  return <RecipeClientPage recipeData={recipeData} breadcrumbItems={breadcrumbItems} />;
+}
 
-      {/* Footer Actions */}
-      <div className="flex items-center justify-center gap-[var(--spacing-lg)] pt-[var(--spacing-xl)] border-t border-gray-200">
-        <Button variant="ghost" size="icon" aria-label="Save to favorites">
-          <Heart className="w-6 h-6 text-[var(--color-primary)]" />
-        </Button>
-        <Button variant="ghost" size="icon" aria-label="Print recipe">
-          <Printer className="w-6 h-6 text-[var(--color-text-heading)]" />
-        </Button>
-        <Button variant="ghost" size="icon" aria-label="Share recipe">
-          <Share className="w-6 h-6 text-[var(--color-text-heading)]" />
-        </Button>
-      </div>
-    </div>
-  );
-} 
+export type { TransformedRecipeData }; 

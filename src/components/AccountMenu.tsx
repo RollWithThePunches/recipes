@@ -34,8 +34,11 @@ export default function AccountMenu({
   onMessagesClick,
 }: AccountMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isKeyboardNavigation, setIsKeyboardNavigation] = useState(false);
   const signInButtonRef = useRef<HTMLButtonElement>(null);
-  const firstMenuItemRef = useRef<HTMLDivElement>(null);
+  const accountItemRef = useRef<HTMLDivElement>(null);
+  const securityItemRef = useRef<HTMLDivElement>(null);
+  const messagesItemRef = useRef<HTMLDivElement>(null);
   const signOutButtonRef = useRef<HTMLButtonElement>(null);
   const avatarButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -44,14 +47,21 @@ export default function AccountMenu({
     if (isOpen) {
       // Small delay to ensure the element is rendered
       setTimeout(() => {
-        if (isLoggedIn && firstMenuItemRef.current) {
-          firstMenuItemRef.current.focus();
+        if (isLoggedIn && accountItemRef.current) {
+          accountItemRef.current.focus();
         } else if (!isLoggedIn && signInButtonRef.current) {
           signInButtonRef.current.focus();
         }
       }, 100);
     }
   }, [isOpen, isLoggedIn]);
+
+  // Reset keyboard navigation state when menu closes
+  useEffect(() => {
+    if (!isOpen) {
+      setIsKeyboardNavigation(false);
+    }
+  }, [isOpen]);
 
   const handleSignIn = () => {
     setIsOpen(false);
@@ -68,33 +78,76 @@ export default function AccountMenu({
     action?.();
   };
 
-  const handleFirstItemKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Tab' && e.shiftKey) {
-      e.preventDefault();
+  // Track when mouse interaction happens
+  const handleMouseEnter = () => {
+    setIsKeyboardNavigation(false);
+  };
+
+  // Handle keyboard navigation for the entire dropdown content
+  const handleContentKeyDown = (e: React.KeyboardEvent) => {
+    setIsKeyboardNavigation(true);
+    
+    if (e.key === 'Escape') {
       setIsOpen(false);
       setTimeout(() => {
         avatarButtonRef.current?.focus();
       }, 100);
+      return;
     }
-  };
 
-  const handleLastItemKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Tab' && !e.shiftKey) {
-      e.preventDefault();
-      setIsOpen(false);
-      setTimeout(() => {
-        avatarButtonRef.current?.focus();
-      }, 100);
-    }
-  };
-
-  const handleSingleItemKeyDown = (e: React.KeyboardEvent) => {
+    // Handle Tab navigation manually within the dropdown
     if (e.key === 'Tab') {
-      e.preventDefault();
-      setIsOpen(false);
-      setTimeout(() => {
-        avatarButtonRef.current?.focus();
-      }, 100);
+      const currentElement = e.target as HTMLElement;
+      
+      if (!e.shiftKey) {
+        // Forward Tab navigation
+        if (currentElement === accountItemRef.current) {
+          e.preventDefault();
+          securityItemRef.current?.focus();
+        } else if (currentElement === securityItemRef.current) {
+          e.preventDefault();
+          messagesItemRef.current?.focus();
+        } else if (currentElement === messagesItemRef.current) {
+          e.preventDefault();
+          signOutButtonRef.current?.focus();
+        } else if (currentElement === signOutButtonRef.current) {
+          e.preventDefault();
+          setIsOpen(false);
+          setTimeout(() => {
+            avatarButtonRef.current?.focus();
+          }, 100);
+        } else if (currentElement === signInButtonRef.current) {
+          e.preventDefault();
+          setIsOpen(false);
+          setTimeout(() => {
+            avatarButtonRef.current?.focus();
+          }, 100);
+        }
+      } else {
+        // Backward Tab navigation (Shift+Tab)
+        if (currentElement === signOutButtonRef.current) {
+          e.preventDefault();
+          messagesItemRef.current?.focus();
+        } else if (currentElement === messagesItemRef.current) {
+          e.preventDefault();
+          securityItemRef.current?.focus();
+        } else if (currentElement === securityItemRef.current) {
+          e.preventDefault();
+          accountItemRef.current?.focus();
+        } else if (currentElement === accountItemRef.current) {
+          e.preventDefault();
+          setIsOpen(false);
+          setTimeout(() => {
+            avatarButtonRef.current?.focus();
+          }, 100);
+        } else if (currentElement === signInButtonRef.current) {
+          e.preventDefault();
+          setIsOpen(false);
+          setTimeout(() => {
+            avatarButtonRef.current?.focus();
+          }, 100);
+        }
+      }
     }
   };
 
@@ -105,20 +158,29 @@ export default function AccountMenu({
           ref={avatarButtonRef}
           variant="ghost"
           size="icon"
-          className="relative w-6 h-6 rounded-full p-0 bg-[var(--color-background)] border-2 border-[var(--color-text-heading)] hover:bg-[var(--color-hover-background)] hover:border-[var(--color-primary)] focus:bg-[var(--color-hover-background)] focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-focus)] transition-colors duration-150 group"
+          className={`relative w-6 h-6 rounded-full p-0 border-2 focus:ring-2 focus:ring-[var(--color-focus)] transition-colors duration-150 group ${
+            isLoggedIn 
+              ? 'bg-[var(--color-primary)] border-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:border-[var(--color-primary)] focus:bg-[var(--color-primary)] focus:border-[var(--color-primary)]'
+              : 'bg-[var(--color-background)] border-[var(--color-text-heading)] hover:bg-[var(--color-hover-background)] hover:border-[var(--color-primary)] focus:bg-[var(--color-hover-background)] focus:border-[var(--color-primary)]'
+          }`}
           aria-label="User account menu"
         >
           <User 
-            className="w-4 h-4 text-[var(--color-text-heading)] group-hover:text-[var(--color-primary)] transition-colors duration-150" 
+            className={`w-4 h-4 transition-colors duration-150 ${
+              isLoggedIn
+                ? 'text-white group-hover:text-white'
+                : 'text-[var(--color-text-heading)] group-hover:text-[var(--color-primary)]'
+            }`}
             strokeWidth={3}
           />
         </Button>
       </DropdownMenuTrigger>
       
       <DropdownMenuContent
-        className="w-64 bg-[var(--color-background)] rounded-none rounded-b-lg shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] border-0 p-0"
+        className="w-64 bg-[var(--color-background)] rounded-none rounded-b-lg shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] border-0 p-0 data-[state=open]:animate-none data-[state=closed]:animate-none data-[side=bottom]:animate-none data-[side=left]:animate-none data-[side=right]:animate-none data-[side=top]:animate-none"
         align="end"
         sideOffset={17}
+        onKeyDown={handleContentKeyDown}
       >
         {!isLoggedIn ? (
           // Logged out state
@@ -145,7 +207,7 @@ export default function AccountMenu({
               className="w-full"
               style={{ fontFamily: 'var(--font-family-body)' }}
               onClick={handleSignIn}
-              onKeyDown={handleSingleItemKeyDown}
+              onMouseEnter={handleMouseEnter}
             >
               {content.ui.buttons.signIn}
             </Button>
@@ -176,43 +238,46 @@ export default function AccountMenu({
               }}
             >
               <DropdownMenuItem 
-                ref={firstMenuItemRef}
-                className="text-[var(--color-text-heading)] hover:bg-[var(--color-hover-background)] focus:bg-[var(--color-hover-background)] cursor-pointer"
+                ref={accountItemRef}
+                className={`text-[var(--color-text-heading)] hover:bg-[var(--color-hover-background)] hover:text-[var(--color-text-heading)] focus:bg-[var(--color-hover-background)] focus:text-[var(--color-text-heading)] focus:outline-none cursor-pointer transition-colors duration-150 ${
+                  isKeyboardNavigation ? 'focus:ring-2 focus:ring-[var(--color-focus)]' : ''
+                }`}
                 style={{ 
                   fontFamily: 'var(--font-family-body)',
                   fontSize: 'var(--font-size-md)'
                 }}
                 onClick={() => handleMenuItemClick(onAccountClick)}
-                onKeyDown={handleFirstItemKeyDown}
+                onMouseEnter={handleMouseEnter}
               >
                 {content.ui.accountMenu.menuItems.account}
               </DropdownMenuItem>
               
               <DropdownMenuItem 
-                className="text-[var(--color-text-heading)] hover:bg-[var(--color-hover-background)] focus:bg-[var(--color-hover-background)] cursor-pointer"
+                ref={securityItemRef}
+                className={`text-[var(--color-text-heading)] hover:bg-[var(--color-hover-background)] hover:text-[var(--color-text-heading)] focus:bg-[var(--color-hover-background)] focus:text-[var(--color-text-heading)] focus:outline-none cursor-pointer transition-colors duration-150 ${
+                  isKeyboardNavigation ? 'focus:ring-2 focus:ring-[var(--color-focus)]' : ''
+                }`}
                 style={{ 
                   fontFamily: 'var(--font-family-body)',
                   fontSize: 'var(--font-size-md)'
                 }}
                 onClick={() => handleMenuItemClick(onSecurityClick)}
+                onMouseEnter={handleMouseEnter}
               >
                 {content.ui.accountMenu.menuItems.security}
               </DropdownMenuItem>
               
               <DropdownMenuItem 
-                className="text-[var(--color-text-heading)] hover:bg-[var(--color-hover-background)] focus:bg-[var(--color-hover-background)] cursor-pointer"
+                ref={messagesItemRef}
+                className={`text-[var(--color-text-heading)] hover:bg-[var(--color-hover-background)] hover:text-[var(--color-text-heading)] focus:bg-[var(--color-hover-background)] focus:text-[var(--color-text-heading)] focus:outline-none cursor-pointer transition-colors duration-150 ${
+                  isKeyboardNavigation ? 'focus:ring-2 focus:ring-[var(--color-focus)]' : ''
+                }`}
                 style={{ 
                   fontFamily: 'var(--font-family-body)',
                   fontSize: 'var(--font-size-md)'
                 }}
                 onClick={() => handleMenuItemClick(onMessagesClick)}
-                onKeyDown={(e) => {
-                  // Handle keyboard on Messages (last menu item before Sign Out button)
-                  if (e.key === 'Tab' && !e.shiftKey) {
-                    // Let it naturally tab to Sign Out button
-                    return;
-                  }
-                }}
+                onMouseEnter={handleMouseEnter}
               >
                 {content.ui.accountMenu.menuItems.messages}
               </DropdownMenuItem>
@@ -225,7 +290,7 @@ export default function AccountMenu({
               className="w-full"
               style={{ fontFamily: 'var(--font-family-body)' }}
               onClick={handleSignOut}
-              onKeyDown={handleLastItemKeyDown}
+              onMouseEnter={handleMouseEnter}
             >
               {content.ui.buttons.signOut}
             </Button>

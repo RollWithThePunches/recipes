@@ -15,7 +15,7 @@ export default function RecipeListItem({ recipe }: RecipeListItemProps) {
         {/* Recipe image */}
         <div className="shrink-0">
           <div 
-            className="w-[106px] h-[80px] bg-cover bg-center bg-no-repeat rounded"
+            className="w-[106px] h-[80px] bg-cover bg-center bg-no-repeat"
             style={{ 
               backgroundImage: `url('${recipe.image}')`,
               maskImage: 'url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTA2IiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMTA2IDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDYiIGhlaWdodD0iODAiIHJ4PSI0IiBmaWxsPSIjRDlEOUQ5Ii8+PC9zdmc+)',

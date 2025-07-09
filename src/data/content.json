@@ -5,21 +5,21 @@
       "subtitle": "Summer grilling recipes focus on fresh, seasonal ingredients like corn, zucchini, tomatoes, and stone fruits paired with classic proteins such as burgers, chicken, fish, and kebabs.",
       "searchPlaceholder": "Search by ingredient...",
       "learnMoreText": "Learn about grilling for the summer.",
-      "image": "/assets/fh-tacos-3784500610.jpg"
+      "image": "/assets/meats.jpg"
     },
     "categories": [
       {
         "id": "bbq",
         "name": "BBQ & Grilling",
         "description": "Smoky barbecue recipes perfect for outdoor cooking",
-        "image": "/assets/fh-tacos-3784500610.jpg",
+        "image": "/assets/burgers.jpg",
         "recipeCount": 12
       },
       {
         "id": "summer-drinks",
         "name": "Summer Drinks",
         "description": "Refreshing beverages to beat the heat",
-        "image": "/assets/fh-tacos-3784500610.jpg",
+        "image": "/assets/mixed-drinks.jpg",
         "recipeCount": 8
       },
       {
@@ -39,25 +39,25 @@
             "id": "char-burgers",
             "title": "\"Char burgers\"",
             "description": "These feature a seared exterior with grill marks and smoky flavor.",
-            "image": "/assets/fh-tacos-3784500610.jpg"
+            "image": "/assets/burgers.jpg"
           },
           {
             "id": "shake-mixin",
             "title": "Shake mixin'",
             "description": "Blend ice cream, milk, and flavorings until smooth for creamy milkshakes",
-            "image": "/assets/fh-tacos-3784500610.jpg"
+            "image": "/assets/sunday.jpg"
           },
           {
             "id": "lime-corn",
             "title": "Lime corn",
             "description": "Grill until charred, then brush with lime juice and sprinkle with chili powder.",
-            "image": "/assets/fh-tacos-3784500610.jpg"
+            "image": "/assets/corn.jpg"
           },
           {
             "id": "margaritas",
             "title": "Margaritas, anyone?",
             "description": "Fresh lime juice, tequila, and triple sec blended with ice creates the perfect margarita.",
-            "image": "/assets/fh-tacos-3784500610.jpg"
+            "image": "/assets/mixed-drinks.jpg"
           }
         ]
       },
@@ -168,7 +168,7 @@
       "id": "char-burgers",
       "title": "Char Burgers",
       "description": "These feature a seared exterior with grill marks and smoky flavor that makes them irresistible for summer grilling.",
-      "image": "/assets/fh-tacos-3784500610.jpg",
+      "image": "/assets/burgers.jpg",
       "cuisine": "American",
       "mealType": "dinner",
       "prepTime": 15,
@@ -226,7 +226,7 @@
       "id": "lime-corn",
       "title": "Mexican Street Corn (Elote)",
       "description": "Grill until charred, then brush with lime juice and sprinkle with chili powder for an authentic Mexican street food experience.",
-      "image": "/assets/fh-tacos-3784500610.jpg",
+      "image": "/assets/corn.jpg",
       "cuisine": "Mexican",
       "mealType": "side",
       "prepTime": 10,
@@ -284,7 +284,7 @@
       "id": "margaritas",
       "title": "Classic Margaritas",
       "description": "Fresh lime juice, tequila, and triple sec blended with ice creates the perfect margarita for summer entertaining.",
-      "image": "/assets/fh-tacos-3784500610.jpg",
+      "image": "/assets/mixed-drinks.jpg",
       "cuisine": "Mexican",
       "mealType": "drink",
       "prepTime": 5,
