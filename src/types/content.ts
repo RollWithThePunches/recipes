@@ -39,6 +39,8 @@ export interface ButtonsUI {
   learnMore: string;
   viewRecipe: string;
   searchRecipes: string;
+  signIn: string;
+  signOut: string;
 }
 
 export interface FooterLink {
@@ -52,9 +54,19 @@ export interface FooterUI {
   links: FooterLink[];
 }
 
+export interface AccountMenuUI {
+  loginPrompt: string;
+  menuItems: {
+    account: string;
+    security: string;
+    messages: string;
+  };
+}
+
 export interface UI {
   navigation: NavigationUI;
   buttons: ButtonsUI;
+  accountMenu: AccountMenuUI;
   footer: FooterUI;
 }
 

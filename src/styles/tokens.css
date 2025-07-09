@@ -21,6 +21,7 @@
   /* Interactive Colors */
   --color-link: #8B1300;
   --color-link-hover: #FF3D4A;
+  --color-hover-background: #f2f2f2;
   --color-button-hover: #8B1300;
   --color-focus: #8B1300;
   
@@ -71,10 +72,10 @@
   /* Buttons */
   --button-primary-bg: var(--color-primary);
   --button-primary-text: var(--color-text-on-dark);
-  --button-primary-hover: var(--color-button-hover);
+  --button-primary-hover: var(--color-hover-background);
   --button-secondary-bg: var(--color-secondary);
   --button-secondary-text: var(--color-text-on-dark);
-  --button-secondary-hover: var(--color-primary);
+  --button-secondary-hover: var(--color-hover-background);
   
   /* Cards */
   --card-background: var(--color-background);

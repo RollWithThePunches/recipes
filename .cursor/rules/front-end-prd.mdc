@@ -24,14 +24,17 @@ Follow these requirements and the process for generating components, patterns, p
 - Review any styles provided in tbe `design-requirements-prd.mdc` file. If they are provided, create tokens based on them in a `tokens.css` file.
 - If the user provides a link to Figma, create any other tokens based on styles used throughout it the frame. Check for variables and create token names based on those names.
 - If an image is provided by the user, create tokens based on styles in the image.
-- After tokens have been created, ensure that they are used in the Tailwind classes rather than default or code such as hexidecimal.
+- After tokens have been created, ensure that they are used in the Tailwind classes rather than default or code such as hexidecimal. For example, use `bg-[var(--color-primary)]`. This is **IMPORTANT** 
 
 ### Creating components
 
 - The user should provide an image or a link to Figma. If they do not, ask them to specify what they need.
 - Ask if they would like to create and name components based on the naming in Figma. If it's from an image base it on your knowledge.
 - Components should be dynamic with props and content coming from a JSON called `content.json`.
-- Use tokens that already exist in a `tokens.css` file and include in the Tailwind classes. If they do not exist, ask the user if the user would like to create them based on variables in Figma or styles in an image.
+- Use Shadcn components for customization whenever possible. This is **IMPORTANT**.
+- Use tokens that already exist in a `tokens.css` file and include in the Tailwind classes. For example, `bg-[var(--color-primary)]`. This is **IMPORTANT** 
+- **IMPORTANT**: Use Lucide React icons throughout the project for consistency. Import specific icons as needed: `import { IconName } from 'lucide-react'`. Icons should use design tokens for colors and have proper hover/focus states.
+- If tokens do not exist, ask the user if the user would like to create them based on variables in Figma or styles in an image.
 - Compenents must meet WCAG 2.1 requirements
 - After all is completed, review again that styles and component structure match Figma or the image, ensure tokens are used in Tailwind classes, and all meets WCAG 2.1 requirements.
 
@@ -52,3 +55,194 @@ Follow these requirements and the process for generating components, patterns, p
     - Tokens are being used in either the Tailwind classes or styles.
     - Components or patterns that already exist are being used.
     - It meets WCAG 2.1 requirements.
+
+## Accessibility Requirements and Guidelines
+
+All components must meet WCAG 2.1 AA standards. Follow these specific guidelines for keyboard navigation and accessibility:
+
+### Required Accessibility Features
+
+#### 1. ARIA Labeling
+- **Icon-only buttons** must have `aria-label` attributes describing their purpose
+- **Form controls** must have proper labels or `aria-labelledby` references
+- **Menu structures** should use semantic roles (`role="menu"`, `role="menuitem"`)
+
+```typescript
+// ✅ Good - Descriptive aria-label with Lucide React icon
+<Button aria-label="User account menu">
+  <User />
+</Button>
+
+// ❌ Bad - No label for screen readers
+<Button>
+  <User />
+</Button>
+```
+
+#### 2. Focus Management
+- **Visible focus indicators** must use design tokens for consistency
+- **Auto-focus** to first interactive element when modals/dropdowns open
+- **Focus return** to trigger element when modals/dropdowns close
+- **Focus trapping** in modals (prevent Tab from leaving modal boundaries)
+
+```typescript
+// Focus management example
+const triggerRef = useRef<HTMLButtonElement>(null);
+const firstItemRef = useRef<HTMLDivElement>(null);
+
+useEffect(() => {
+  if (isOpen) {
+    setTimeout(() => {
+      firstItemRef.current?.focus();
+    }, 100);
+  }
+}, [isOpen]);
+
+// Focus styling with design tokens
+className="focus:ring-2 focus:ring-[var(--color-focus)]"
+```
+
+#### 3. Keyboard Navigation Requirements
+
+##### Dropdown Menus and Popovers
+- **Auto-focus** to first menu item when opened
+- **Arrow keys** for navigation between items (use Shadcn components for built-in support)
+- **Tab boundaries**: Tab/Shift+Tab on first/last items should close menu and return focus
+- **Escape key** closes menu and returns focus to trigger
+- **Enter/Space** activates menu items
+
+```typescript
+// Tab boundary handling
+const handleFirstItemKeyDown = (e: React.KeyboardEvent) => {
+  if (e.key === 'Tab' && e.shiftKey) {
+    e.preventDefault();
+    setIsOpen(false);
+    setTimeout(() => triggerRef.current?.focus(), 100);
+  }
+};
+
+const handleLastItemKeyDown = (e: React.KeyboardEvent) => {
+  if (e.key === 'Tab' && !e.shiftKey) {
+    e.preventDefault();
+    setIsOpen(false);
+    setTimeout(() => triggerRef.current?.focus(), 100);
+  }
+};
+```
+
+##### Modal Dialogs
+- **Focus trap**: Tab cycles only within modal
+- **Escape key** closes modal
+- **Auto-focus** to first interactive element or close button
+- **Focus return** to element that opened modal
+
+##### Form Controls
+- **Tab order** must be logical and predictable
+- **Required fields** must be clearly indicated
+- **Error messages** must be programmatically associated with controls
+
+#### 4. Component-Specific Patterns
+
+##### AccountMenu Example Implementation
+```typescript
+export default function AccountMenu({ isLoggedIn, username, onSignIn, onSignOut, onAccountClick }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const firstItemRef = useRef<HTMLDivElement>(null);
+
+  // Auto-focus management
+  useEffect(() => {
+    if (isOpen) {
+      setTimeout(() => {
+        if (isLoggedIn && firstItemRef.current) {
+          firstItemRef.current.focus();
+        } else if (signInButtonRef.current) {
+          signInButtonRef.current.focus();
+        }
+      }, 100);
+    }
+  }, [isOpen, isLoggedIn]);
+
+  return (
+    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+      <DropdownMenuTrigger asChild>
+        <Button
+          ref={triggerRef}
+          aria-label="User account menu"
+          className="focus:ring-2 focus:ring-[var(--color-focus)]"
+        >
+          <User />
+        </Button>
+      </DropdownMenuTrigger>
+      
+      <DropdownMenuContent>
+        <DropdownMenuItem 
+          ref={firstItemRef}
+          onKeyDown={handleFirstItemKeyDown}
+          className="focus:bg-[var(--color-background-yellow)]"
+        >
+          Account Settings
+        </DropdownMenuItem>
+        
+        <DropdownMenuItem 
+          onKeyDown={handleLastItemKeyDown}
+          className="focus:bg-[var(--color-background-yellow)]"
+        >
+          Sign Out
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+```
+
+### Testing Checklist
+
+Before completing any component, verify:
+
+- [ ] **Keyboard-only navigation** - All functionality accessible without mouse
+- [ ] **Screen reader testing** - Test with VoiceOver (Mac) or NVDA (Windows)
+- [ ] **Focus indicators** - All interactive elements have visible focus states
+- [ ] **Tab order** - Logical progression through interactive elements
+- [ ] **ARIA labels** - Icon buttons and complex controls have descriptive labels
+- [ ] **Color contrast** - Meets WCAG AA standards (4.5:1 for normal text)
+- [ ] **Design token usage** - All focus/hover states use design tokens
+
+### Common Patterns
+
+#### Pattern: Menu with Tab Boundaries
+```typescript
+// Use for: Dropdown menus, context menus, account menus
+const handleTabBoundary = (isFirst: boolean, isLast: boolean) => (e: React.KeyboardEvent) => {
+  if ((e.key === 'Tab' && e.shiftKey && isFirst) || 
+      (e.key === 'Tab' && !e.shiftKey && isLast)) {
+    e.preventDefault();
+    setIsOpen(false);
+    setTimeout(() => triggerRef.current?.focus(), 100);
+  }
+};
+```
+
+#### Pattern: Modal Focus Trap
+```typescript
+// Use for: Modal dialogs, overlays
+const trapFocus = (e: React.KeyboardEvent) => {
+  if (e.key === 'Tab') {
+    const focusableElements = modal.current?.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    const firstElement = focusableElements?.[0] as HTMLElement;
+    const lastElement = focusableElements?.[focusableElements.length - 1] as HTMLElement;
+    
+    if (e.shiftKey && document.activeElement === firstElement) {
+      e.preventDefault();
+      lastElement?.focus();
+    } else if (!e.shiftKey && document.activeElement === lastElement) {
+      e.preventDefault();
+      firstElement?.focus();
+    }
+  }
+};
+```
+
+These patterns ensure consistent, accessible user experiences across all components while meeting WCAG 2.1 requirements.

@@ -2,6 +2,8 @@
 
 Based on: `front-end-prd.mdc` and `design-requirements-prd.mdc`
 
+**📋 ACCESSIBILITY REQUIREMENTS**: All components must follow the comprehensive accessibility guidelines documented in the **"Accessibility Requirements and Guidelines"** section of `front-end-prd.mdc`. This includes specific patterns for dropdown menus, focus management, keyboard navigation, and WCAG 2.1 compliance.
+
 ## Relevant Files
 
 ### Core Setup
@@ -25,6 +27,7 @@ Based on: `front-end-prd.mdc` and `design-requirements-prd.mdc`
 - `src/components/IngredientsList.test.tsx` - Unit tests for IngredientsList
 - `src/components/CookingSteps.tsx` - Step-by-step cooking instructions component
 - `src/components/CookingSteps.test.tsx` - Unit tests for CookingSteps
+- `src/components/Drawer.tsx` - Mobile navigation drawer component
 
 ### Patterns
 - `src/components/patterns/HeroSection.tsx` - Hero banner pattern
@@ -46,120 +49,153 @@ Based on: `front-end-prd.mdc` and `design-requirements-prd.mdc`
 - `src/hooks/useRecipeSearch.ts` - Custom hook for recipe search functionality
 - `src/hooks/useRecipeFilter.ts` - Custom hook for recipe filtering
 
-### Notes
-- All components must be accessible (WCAG 2.1 compliant)
-- Use design tokens in Tailwind classes instead of hardcoded values
-- Components should be dynamic with props from content.json
+### ⚠️ CRITICAL REQUIREMENTS
+- **🔥 IMPORTANT**: Use Shadcn components whenever possible for consistency and customization
+- **🔥 IMPORTANT**: ALL styling must use design tokens in Tailwind classes (e.g., `bg-[var(--color-primary)]`) - NO hardcoded values
+- **🔥 IMPORTANT**: Components must be dynamic with props from content.json
+- **🔥 IMPORTANT**: Use Lucide React icons throughout the project for consistency - Import specific icons as needed: `import { IconName } from 'lucide-react'`
+- **🔥 IMPORTANT**: All components must be accessible (WCAG 2.1 compliant) - Follow the detailed accessibility patterns documented in `front-end-prd.mdc`
+- **🔥 IMPORTANT**: Implement proper focus management, keyboard navigation, and ARIA labeling as specified in the accessibility guidelines
 - Mobile-first responsive design throughout
 - Test with keyboard navigation and screen readers
 
 ## Tasks
 
-- [ ] 1.0 Setup and Foundation
-  - [ ] 1.1 Update design tokens in `tokens.css` based on design requirements (corrected secondary color #8B1300, button styles, ingredients background #FFF9E8)
-  - [ ] 1.2 Update TypeScript tokens file to match design requirements
+- [x] 1.0 Setup and Foundation
+  - [x] 1.1 Update design tokens in `tokens.css` based on design requirements (corrected secondary color #8B1300, button styles, ingredients background #FFF9E8)
+  - [x] 1.2 Update TypeScript tokens file to match design requirements
   - [ ] 1.3 Create content.json structure with sample recipe data, categories, and UI content
-  - [ ] 1.4 Install and configure Shadcn UI components
+  - [x] 1.4 Install and configure Shadcn UI components
   - [ ] 1.5 Create TypeScript interfaces for recipe and content data structures
   - [ ] 1.6 Verify Google Fonts (Lexend, Madimi One) are properly imported and applied
+  - [ ] 1.7 **IMPORTANT**: Review all existing components to ensure Shadcn components are used wherever possible
+  - [ ] 1.8 **IMPORTANT**: Audit all styling to replace hardcoded values with design tokens in Tailwind classes
 
 - [ ] 2.0 Core Components Development
   - [ ] 2.1 Create RecipeCard component with dynamic props from content.json
-    - [ ] 2.1.1 Implement card layout with recipe image, title, cuisine type, prep time
-    - [ ] 2.1.2 Add hover states using design tokens
-    - [ ] 2.1.3 Ensure WCAG 2.1 compliance (proper alt text, keyboard focus, color contrast)
-    - [ ] 2.1.4 Use Tailwind classes with design tokens (no hardcoded colors)
-    - [ ] 2.1.5 Write comprehensive unit tests
+    - [ ] 2.1.1 **IMPORTANT**: Use Shadcn Card component as base structure
+    - [ ] 2.1.2 Implement card layout with recipe image, title, cuisine type, prep time
+    - [ ] 2.1.3 **IMPORTANT**: Use Lucide React icons for any icons (Heart, Star, etc.)
+    - [ ] 2.1.4 Add hover states using design tokens in Tailwind classes (e.g., `hover:bg-[var(--color-button-hover)]`)
+    - [ ] 2.1.5 Ensure WCAG 2.1 compliance (proper alt text, keyboard focus, color contrast)
+    - [ ] 2.1.6 **IMPORTANT**: Verify NO hardcoded colors - only design tokens in Tailwind classes
+    - [ ] 2.1.7 Write comprehensive unit tests
   - [ ] 2.2 Create SearchBar component with ingredient search functionality
-    - [ ] 2.2.1 Implement search input with proper ARIA labels
-    - [ ] 2.2.2 Add clear button and search suggestions
-    - [ ] 2.2.3 Apply focus styles using design tokens
-    - [ ] 2.2.4 Ensure keyboard navigation works properly
-    - [ ] 2.2.5 Write unit tests for search functionality
+    - [ ] 2.2.1 **IMPORTANT**: Use Shadcn Input component as base
+    - [ ] 2.2.2 Implement search input with proper ARIA labels
+    - [ ] 2.2.3 **IMPORTANT**: Use Shadcn Button component for search button with Lucide React Search icon
+    - [ ] 2.2.4 Apply focus styles using design tokens (e.g., `focus:ring-[var(--color-focus)]`)
+    - [ ] 2.2.5 Ensure keyboard navigation works properly
+    - [ ] 2.2.6 **IMPORTANT**: Verify all styling uses design tokens in Tailwind classes
+    - [ ] 2.2.7 Write unit tests for search functionality
   - [ ] 2.3 Create FilterPanel component for cuisine and dietary filtering
-    - [ ] 2.3.1 Implement filter checkboxes and dropdowns
-    - [ ] 2.3.2 Add clear filters functionality
-    - [ ] 2.3.3 Ensure proper ARIA attributes for screen readers
-    - [ ] 2.3.4 Apply design tokens for interactive states
-    - [ ] 2.3.5 Write unit tests for filter logic
+    - [ ] 2.3.1 **IMPORTANT**: Use Shadcn Checkbox and Select components
+    - [ ] 2.3.2 Implement filter checkboxes and dropdowns
+    - [ ] 2.3.3 **IMPORTANT**: Use Shadcn Button component for clear filters functionality
+    - [ ] 2.3.4 Ensure proper ARIA attributes for screen readers
+    - [ ] 2.3.5 Apply design tokens for interactive states (e.g., `hover:bg-[var(--color-background-yellow)]`)
+    - [ ] 2.3.6 **IMPORTANT**: Audit all styling for design token usage
+    - [ ] 2.3.7 Write unit tests for filter logic
   - [ ] 2.4 Create CategoryCard component for cuisine browsing
-    - [ ] 2.4.1 Design card layout with cuisine image and name
-    - [ ] 2.4.2 Add recipe count badge
-    - [ ] 2.4.3 Implement hover and focus states
-    - [ ] 2.4.4 Ensure accessibility with proper roles and labels
-    - [ ] 2.4.5 Write unit tests
+    - [ ] 2.4.1 **IMPORTANT**: Use Shadcn Card component as base
+    - [ ] 2.4.2 Design card layout with cuisine image and name
+    - [ ] 2.4.3 **IMPORTANT**: Use Shadcn Badge component for recipe count
+    - [ ] 2.4.4 Implement hover and focus states using design tokens
+    - [ ] 2.4.5 Ensure accessibility with proper roles and labels
+    - [ ] 2.4.6 **IMPORTANT**: Verify design token usage in all styles
+    - [ ] 2.4.7 Write unit tests
   - [ ] 2.5 Create IngredientsList component with yellow background styling
-    - [ ] 2.5.1 Format ingredients with quantities and measurements
-    - [ ] 2.5.2 Apply #FFF9E8 background color token
-    - [ ] 2.5.3 Add proper semantic HTML structure
-    - [ ] 2.5.4 Ensure screen reader compatibility
-    - [ ] 2.5.5 Write unit tests
+    - [ ] 2.5.1 **IMPORTANT**: Consider using Shadcn components for list structure
+    - [ ] 2.5.2 Format ingredients with quantities and measurements
+    - [ ] 2.5.3 Apply background using design token: `bg-[var(--color-background-yellow)]`
+    - [ ] 2.5.4 Add proper semantic HTML structure
+    - [ ] 2.5.5 Ensure screen reader compatibility
+    - [ ] 2.5.6 **IMPORTANT**: Verify all styling uses design tokens
+    - [ ] 2.5.7 Write unit tests
   - [ ] 2.6 Create CookingSteps component with step-by-step layout
-    - [ ] 2.6.1 Number each cooking step clearly
-    - [ ] 2.6.2 Use large, readable typography for mobile cooking
-    - [ ] 2.6.3 Add proper heading hierarchy
-    - [ ] 2.6.4 Ensure keyboard navigation between steps
-    - [ ] 2.6.5 Write unit tests
+    - [ ] 2.6.1 **IMPORTANT**: Use Shadcn components for step numbering and layout
+    - [ ] 2.6.2 Number each cooking step clearly
+    - [ ] 2.6.3 Use large, readable typography with design tokens (e.g., `text-[var(--font-size-lg)]`)
+    - [ ] 2.6.4 Add proper heading hierarchy
+    - [ ] 2.6.5 Ensure keyboard navigation between steps
+    - [ ] 2.6.6 **IMPORTANT**: Verify design token usage throughout
+    - [ ] 2.6.7 Write unit tests
 
 - [ ] 3.0 Pattern Development
   - [ ] 3.1 Create HeroSection pattern for homepage
-    - [ ] 3.1.1 Design hero layout with search prominence
-    - [ ] 3.1.2 Add compelling headline and description from content.json
-    - [ ] 3.1.3 Integrate SearchBar component
-    - [ ] 3.1.4 Ensure mobile-first responsive design
-    - [ ] 3.1.5 Apply proper heading hierarchy (h1)
+    - [ ] 3.1.1 **IMPORTANT**: Use Shadcn components for layout structure
+    - [ ] 3.1.2 Design hero layout with search prominence
+    - [ ] 3.1.3 Add compelling headline and description from content.json
+    - [ ] 3.1.4 Integrate SearchBar component (built with Shadcn)
+    - [ ] 3.1.5 Ensure mobile-first responsive design
+    - [ ] 3.1.6 Apply proper heading hierarchy (h1) with design tokens
+    - [ ] 3.1.7 **IMPORTANT**: Audit all styling for design token usage
   - [ ] 3.2 Create RecipeGrid pattern for recipe listings
-    - [ ] 3.2.1 Implement responsive grid layout using CSS Grid/Flexbox
-    - [ ] 3.2.2 Integrate RecipeCard components
-    - [ ] 3.2.3 Add loading states and empty states
-    - [ ] 3.2.4 Ensure keyboard navigation between cards
-    - [ ] 3.2.5 Add proper ARIA landmarks
+    - [ ] 3.2.1 **IMPORTANT**: Consider Shadcn components for grid structure
+    - [ ] 3.2.2 Implement responsive grid layout using CSS Grid/Flexbox with design tokens
+    - [ ] 3.2.3 Integrate RecipeCard components (built with Shadcn)
+    - [ ] 3.2.4 Add loading states and empty states using Shadcn components
+    - [ ] 3.2.5 Ensure keyboard navigation between cards
+    - [ ] 3.2.6 Add proper ARIA landmarks
+    - [ ] 3.2.7 **IMPORTANT**: Verify design token usage in all grid styling
   - [ ] 3.3 Create CategorySection pattern for homepage browsing
-    - [ ] 3.3.1 Design section with category cards grid
-    - [ ] 3.3.2 Add section heading from content.json
-    - [ ] 3.3.3 Implement CategoryCard grid layout
-    - [ ] 3.3.4 Ensure responsive behavior across breakpoints
-    - [ ] 3.3.5 Add proper semantic structure
+    - [ ] 3.3.1 **IMPORTANT**: Use Shadcn components for section structure
+    - [ ] 3.3.2 Design section with category cards grid
+    - [ ] 3.3.3 Add section heading from content.json with design tokens
+    - [ ] 3.3.4 Implement CategoryCard grid layout (built with Shadcn)
+    - [ ] 3.3.5 Ensure responsive behavior across breakpoints
+    - [ ] 3.3.6 Add proper semantic structure
+    - [ ] 3.3.7 **IMPORTANT**: Audit for design token usage
   - [ ] 3.4 Create SearchFilters pattern combining search and filters
-    - [ ] 3.4.1 Layout SearchBar and FilterPanel together
-    - [ ] 3.4.2 Add responsive behavior (collapse filters on mobile)
-    - [ ] 3.4.3 Implement clear all functionality
-    - [ ] 3.4.4 Ensure proper focus management
-    - [ ] 3.4.5 Add ARIA live regions for filter updates
+    - [ ] 3.4.1 **IMPORTANT**: Use Shadcn components for layout
+    - [ ] 3.4.2 Layout SearchBar and FilterPanel together (both using Shadcn)
+    - [ ] 3.4.3 Add responsive behavior (collapse filters on mobile)
+    - [ ] 3.4.4 Implement clear all functionality with Shadcn Button
+    - [ ] 3.4.5 Ensure proper focus management
+    - [ ] 3.4.6 Add ARIA live regions for filter updates
+    - [ ] 3.4.7 **IMPORTANT**: Verify design token usage throughout
 
 - [ ] 4.0 Page Development
   - [ ] 4.1 Build Homepage (src/app/page.tsx)
-    - [ ] 4.1.1 Implement HeroSection pattern
-    - [ ] 4.1.2 Add CategorySection pattern for cuisine browsing
-    - [ ] 4.1.3 Include featured recipes section using RecipeGrid
-    - [ ] 4.1.4 Load all content from content.json dynamically
+    - [ ] 4.1.1 Implement HeroSection pattern (with Shadcn components)
+    - [ ] 4.1.2 Add CategorySection pattern for cuisine browsing (with Shadcn components)
+    - [ ] 4.1.3 Include featured recipes section using RecipeGrid (with Shadcn components)
+    - [ ] 4.1.4 **IMPORTANT**: Load all content from content.json dynamically
     - [ ] 4.1.5 Ensure proper page structure with landmarks
     - [ ] 4.1.6 Add skip-to-content link for accessibility
     - [ ] 4.1.7 Test mobile responsiveness thoroughly
+    - [ ] 4.1.8 **IMPORTANT**: Verify all page styling uses design tokens
   - [ ] 4.2 Build Recipe Detail Page (src/app/recipe/[id]/page.tsx)
-    - [ ] 4.2.1 Create layout with recipe title, image, and metadata
-    - [ ] 4.2.2 Integrate IngredientsList component
-    - [ ] 4.2.3 Integrate CookingSteps component
-    - [ ] 4.2.4 Add breadcrumb navigation
-    - [ ] 4.2.5 Implement dynamic data loading from content.json
-    - [ ] 4.2.6 Ensure proper heading hierarchy (h1 for recipe title)
-    - [ ] 4.2.7 Add recipe stats (prep time, cook time, servings)
-    - [ ] 4.2.8 Test with screen readers
+    - [ ] 4.2.1 **IMPORTANT**: Use Shadcn components for page layout
+    - [ ] 4.2.2 Create layout with recipe title, image, and metadata
+    - [ ] 4.2.3 Integrate IngredientsList component (using Shadcn components)
+    - [ ] 4.2.4 Integrate CookingSteps component (using Shadcn components)
+    - [ ] 4.2.5 Add breadcrumb navigation with Shadcn Breadcrumb component
+    - [ ] 4.2.6 **IMPORTANT**: Implement dynamic data loading from content.json
+    - [ ] 4.2.7 Ensure proper heading hierarchy (h1 for recipe title) with design tokens
+    - [ ] 4.2.8 Add recipe stats (prep time, cook time, servings) using Shadcn components
+    - [ ] 4.2.9 Test with screen readers
+    - [ ] 4.2.10 **IMPORTANT**: Audit all styling for design token usage
   - [ ] 4.3 Build Search Results Page (src/app/search/page.tsx)
-    - [ ] 4.3.1 Implement SearchFilters pattern
-    - [ ] 4.3.2 Add RecipeGrid pattern for results
-    - [ ] 4.3.3 Show search results count and query
-    - [ ] 4.3.4 Handle no results state
-    - [ ] 4.3.5 Implement pagination if needed
-    - [ ] 4.3.6 Add proper page title and meta description
-    - [ ] 4.3.7 Ensure all functionality works without JavaScript (progressive enhancement)
+    - [ ] 4.3.1 **IMPORTANT**: Use Shadcn components for page structure
+    - [ ] 4.3.2 Implement SearchFilters pattern (built with Shadcn)
+    - [ ] 4.3.3 Add RecipeGrid pattern for results (built with Shadcn)
+    - [ ] 4.3.4 Show search results count and query with design tokens
+    - [ ] 4.3.5 Handle no results state using Shadcn components
+    - [ ] 4.3.6 Implement pagination if needed with Shadcn Pagination component
+    - [ ] 4.3.7 Add proper page title and meta description
+    - [ ] 4.3.8 **IMPORTANT**: Ensure dynamic content from content.json
+    - [ ] 4.3.9 Ensure all functionality works without JavaScript (progressive enhancement)
+    - [ ] 4.3.10 **IMPORTANT**: Verify design token usage throughout
   - [ ] 4.4 Build Category Page (src/app/category/[cuisine]/page.tsx)
-    - [ ] 4.4.1 Create category-specific recipe listings
-    - [ ] 4.4.2 Add category description from content.json
-    - [ ] 4.4.3 Implement RecipeGrid pattern
-    - [ ] 4.4.4 Add category-specific filtering options
-    - [ ] 4.4.5 Include breadcrumb navigation
-    - [ ] 4.4.6 Ensure dynamic routing works properly
+    - [ ] 4.4.1 **IMPORTANT**: Use Shadcn components for page layout
+    - [ ] 4.4.2 Create category-specific recipe listings
+    - [ ] 4.4.3 **IMPORTANT**: Add category description from content.json
+    - [ ] 4.4.4 Implement RecipeGrid pattern (built with Shadcn)
+    - [ ] 4.4.5 Add category-specific filtering options using Shadcn components
+    - [ ] 4.4.6 Include breadcrumb navigation with Shadcn Breadcrumb component
+    - [ ] 4.4.7 Ensure dynamic routing works properly
+    - [ ] 4.4.8 **IMPORTANT**: Verify design token usage in all styling
 
 - [ ] 5.0 Utility Development and Content Management
   - [ ] 5.1 Create recipe search and filtering utilities
@@ -176,17 +212,21 @@ Based on: `front-end-prd.mdc` and `design-requirements-prd.mdc`
   - [ ] 5.3 Populate content.json with comprehensive recipe data
     - [ ] 5.3.1 Add 20+ sample recipes across different cuisines
     - [ ] 5.3.2 Include proper recipe metadata (times, difficulty, dietary info)
-    - [ ] 5.3.3 Add UI content (headings, descriptions, labels)
+    - [ ] 5.3.3 **IMPORTANT**: Add UI content (headings, descriptions, labels) for dynamic components
     - [ ] 5.3.4 Ensure all content supports accessibility (alt text for images)
 
 - [ ] 6.0 Testing and Quality Assurance
-  - [ ] 6.1 Accessibility Testing (WCAG 2.1 Compliance)
-    - [ ] 6.1.1 Test with keyboard navigation only
+  - [ ] 6.1 Accessibility Testing (WCAG 2.1 Compliance) - **REFERENCE**: Follow the comprehensive testing checklist in `front-end-prd.mdc`
+    - [ ] 6.1.1 Test with keyboard navigation only (Tab, Shift+Tab, Enter, Space, Escape, Arrow keys)
     - [ ] 6.1.2 Test with screen reader (VoiceOver/NVDA)
-    - [ ] 6.1.3 Verify color contrast ratios meet AA standards
-    - [ ] 6.1.4 Ensure all interactive elements have focus indicators
-    - [ ] 6.1.5 Check semantic HTML structure
+    - [ ] 6.1.3 Verify color contrast ratios meet AA standards (4.5:1 for normal text, 3:1 for large text)
+    - [ ] 6.1.4 Ensure all interactive elements have focus indicators using design tokens
+    - [ ] 6.1.5 Check semantic HTML structure and proper heading hierarchy
     - [ ] 6.1.6 Validate ARIA labels and landmarks
+    - [ ] 6.1.7 **IMPORTANT**: Test dropdown menus for proper tab boundary handling (see AccountMenu example in `front-end-prd.mdc`)
+    - [ ] 6.1.8 **IMPORTANT**: Verify auto-focus behavior for modals and dynamic content
+    - [ ] 6.1.9 **IMPORTANT**: Test focus trapping and restoration patterns
+    - [ ] 6.1.10 Validate minimum touch target sizes (44px × 44px minimum)
   - [ ] 6.2 Responsive Design Testing
     - [ ] 6.2.1 Test on mobile devices (320px - 640px)
     - [ ] 6.2.2 Test on tablet devices (641px - 1024px)
@@ -195,7 +235,7 @@ Based on: `front-end-prd.mdc` and `design-requirements-prd.mdc`
     - [ ] 6.2.5 Test horizontal scrolling issues
   - [ ] 6.3 Cross-browser Testing
     - [ ] 6.3.1 Test in Chrome, Firefox, Safari, Edge
-    - [ ] 6.3.2 Verify design tokens work across browsers
+    - [ ] 6.3.2 **IMPORTANT**: Verify design tokens work across browsers
     - [ ] 6.3.3 Test JavaScript functionality
     - [ ] 6.3.4 Verify font loading and fallbacks
   - [ ] 6.4 Performance Testing
@@ -206,25 +246,43 @@ Based on: `front-end-prd.mdc` and `design-requirements-prd.mdc`
 
 - [ ] 7.0 Final Review and Documentation
   - [ ] 7.1 Component Review
-    - [ ] 7.1.1 Verify all components use design tokens instead of hardcoded values
-    - [ ] 7.1.2 Ensure components match design requirements
-    - [ ] 7.1.3 Confirm dynamic content loading from content.json
-    - [ ] 7.1.4 Test component props and error handling
+    - [ ] 7.1.1 **IMPORTANT**: Verify ALL components use Shadcn components wherever possible
+    - [ ] 7.1.2 **IMPORTANT**: Verify ALL components use design tokens instead of hardcoded values
+    - [ ] 7.1.3 Ensure components match design requirements
+    - [ ] 7.1.4 **IMPORTANT**: Confirm dynamic content loading from content.json
+    - [ ] 7.1.5 Test component props and error handling
   - [ ] 7.2 Design Token Validation
-    - [ ] 7.2.1 Confirm all colors use correct hex values from design requirements
-    - [ ] 7.2.2 Verify spacing scale is consistently applied
-    - [ ] 7.2.3 Check typography hierarchy uses correct fonts and sizes
-    - [ ] 7.2.4 Ensure focus states use design token colors
-  - [ ] 7.3 Documentation Updates
-    - [ ] 7.3.1 Update component documentation with props and usage examples
-    - [ ] 7.3.2 Document content.json structure and how to add new content
-    - [ ] 7.3.3 Create accessibility compliance checklist
-    - [ ] 7.3.4 Document design token usage guidelines
-  - [ ] 7.4 Production Readiness
-    - [ ] 7.4.1 Run full test suite and ensure 100% pass rate
-    - [ ] 7.4.2 Verify build process works without errors
-    - [ ] 7.4.3 Test production build performance
-    - [ ] 7.4.4 Validate all links and navigation work correctly
+    - [ ] 7.2.1 **IMPORTANT**: Confirm ALL colors use design tokens in Tailwind classes (e.g., `bg-[var(--color-primary)]`)
+    - [ ] 7.2.2 **IMPORTANT**: Verify NO hardcoded hex values remain in codebase
+    - [ ] 7.2.3 Confirm all colors use correct hex values from design requirements
+    - [ ] 7.2.4 Verify spacing scale is consistently applied using tokens
+    - [ ] 7.2.5 Check typography hierarchy uses correct fonts and sizes with tokens
+    - [ ] 7.2.6 Ensure focus states use design token colors
+    - [ ] 7.2.7 **IMPORTANT**: Run automated audit to detect any hardcoded values
+  - [ ] 7.3 Shadcn Component Validation
+    - [ ] 7.3.1 **IMPORTANT**: Audit all components to ensure Shadcn components are used wherever possible
+    - [ ] 7.3.2 **IMPORTANT**: Verify consistent styling patterns across all Shadcn components
+    - [ ] 7.3.3 Document any custom components that couldn't use Shadcn and justify why
+    - [ ] 7.3.4 Ensure all Shadcn components are properly configured with design tokens
+  - [ ] 7.4 Icon Validation
+    - [ ] 7.4.1 **IMPORTANT**: Verify ALL icons use Lucide React - NO custom SVGs remain
+    - [ ] 7.4.2 **IMPORTANT**: Ensure all icons use design tokens for colors (e.g., `color="var(--color-text-heading)"`)
+    - [ ] 7.4.3 Verify proper icon sizing and consistency across components
+    - [ ] 7.4.4 Check that interactive icons have proper hover and focus states
+  - [ ] 7.5 Documentation Updates
+    - [ ] 7.5.1 Update component documentation with props and usage examples
+    - [ ] 7.5.2 **IMPORTANT**: Document content.json structure and how to add new content
+    - [ ] 7.5.3 **IMPORTANT**: Ensure accessibility compliance documentation in `front-end-prd.mdc` is up to date with latest patterns
+    - [ ] 7.5.4 **IMPORTANT**: Document design token usage guidelines and requirements
+    - [ ] 7.5.5 **IMPORTANT**: Document Shadcn component usage patterns and customization guidelines
+    - [ ] 7.5.6 **IMPORTANT**: Document Lucide React icon usage patterns and requirements
+    - [ ] 7.5.7 **IMPORTANT**: Add any new accessibility patterns discovered during development to the requirements documentation
+  - [ ] 7.6 Production Readiness
+    - [ ] 7.6.1 Run full test suite and ensure 100% pass rate
+    - [ ] 7.6.2 Verify build process works without errors
+    - [ ] 7.6.3 Test production build performance
+    - [ ] 7.6.4 Validate all links and navigation work correctly
+    - [ ] 7.6.5 **IMPORTANT**: Final audit - no hardcoded values, all Shadcn components used, all Lucide React icons used, all content dynamic
 
 ## Content.json Structure Requirements
 
@@ -276,19 +334,121 @@ The content.json file should include:
         }
       ]
     }
-  ]
+  ],
+  "ui": {
+    "navigation": {
+      "brand": "string",
+      "menuItems": ["array"]
+    },
+    "buttons": {
+      "login": "string",
+      "search": "string",
+      "clear": "string"
+    },
+    "labels": {
+      "ingredients": "string",
+      "instructions": "string",
+      "prepTime": "string",
+      "cookTime": "string"
+    }
+  }
 }
 ```
 
 ## Design Token Requirements Checklist
 
-- [ ] Primary color: #FF3D4A
-- [ ] Secondary color: #8B1300 (corrected from original)
-- [ ] Background colors: #FFFFFF, #333333, #FFF9E8
-- [ ] Typography: Lexend (body), Madimi One (headings)
-- [ ] Spacing scale: 4px through 120px
-- [ ] Font sizes: 0.625rem through 4rem
-- [ ] Line heights: 100% through 200%
-- [ ] Button styles: Primary (#FF3D4A), Secondary (#FFFFFF with #8B1300 border), Tertiary (transparent)
-- [ ] Focus indicators: #8B1300
-- [ ] Ingredients list background: #FFF9E8 
+- [x] Primary color: #FF3D4A - **MUST** be used as `bg-[var(--color-primary)]`
+- [x] Secondary color: #8B1300 - **MUST** be used as `bg-[var(--color-secondary)]`
+- [x] Background colors: #FFFFFF, #333333, #FFF9E8 - **MUST** use token variables
+- [x] Typography: Lexend (body), Madimi One (headings) - **MUST** use token variables
+- [x] Spacing scale: 4px through 120px - **MUST** use `var(--spacing-*)` tokens
+- [x] Font sizes: 0.625rem through 4rem - **MUST** use `var(--font-size-*)` tokens
+- [x] Line heights: 100% through 200% - **MUST** use `var(--line-height-*)` tokens
+- [x] Button styles: Primary (#FF3D4A), Secondary (#FFFFFF with #8B1300 border), Tertiary (transparent) - **MUST** use token variables
+- [x] Focus indicators: #8B1300 - **MUST** use `focus:ring-[var(--color-focus)]`
+- [x] Ingredients list background: #FFF9E8 - **MUST** use `bg-[var(--color-background-yellow)]`
+- [x] Hover background: #f2f2f2 - **MUST** use `hover:bg-[var(--color-hover-background)]` for all buttons and interactive elements (except text-only anchors)
+
+## 🚨 CRITICAL SUCCESS CRITERIA
+
+### ✅ Before any component is considered complete:
+1. **Shadcn Components**: Must use Shadcn components wherever possible
+2. **Design Tokens**: Must use design tokens in Tailwind classes (e.g., `bg-[var(--color-primary)]`) - NO hardcoded values
+3. **Dynamic Content**: Must load content from content.json
+4. **Lucide React Icons**: Must use Lucide React icons for all icons - NO custom SVGs
+5. **WCAG 2.1**: Must meet accessibility compliance following the patterns documented in `front-end-prd.mdc`
+6. **Responsive**: Must work on all screen sizes
+7. **Testing**: Must have comprehensive tests
+
+### 🔍 Review Checkpoints:
+- After each component: Verify Shadcn usage, design token implementation, and Lucide React icon usage
+- After each pattern: Verify no hardcoded values remain and all icons use Lucide React
+- After each page: Verify dynamic content loading and consistent icon usage
+- Before final: Run automated audit for hardcoded values, missing Shadcn components, and custom SVG icons
+
+```json
+{
+  "homepage": {
+    "hero": {
+      "title": "string",
+      "subtitle": "string",
+      "searchPlaceholder": "string"
+    },
+    "categories": [
+      {
+        "id": "string",
+        "name": "string",
+        "description": "string",
+        "image": "string",
+        "recipeCount": "number"
+      }
+    ],
+    "featuredRecipes": ["recipe-ids"]
+  },
+  "recipes": [
+    {
+      "id": "string",
+      "title": "string",
+      "description": "string",
+      "image": "string",
+      "cuisine": "string",
+      "mealType": "string",
+      "prepTime": "number",
+      "cookTime": "number",
+      "servings": "number",
+      "difficulty": "string",
+      "dietary": ["array"],
+      "ingredients": [
+        {
+          "item": "string",
+          "quantity": "string",
+          "unit": "string"
+        }
+      ],
+      "steps": [
+        {
+          "stepNumber": "number",
+          "instruction": "string"
+        }
+      ]
+    }
+  ],
+  "ui": {
+    "navigation": {
+      "brand": "string",
+      "menuItems": ["array"]
+    },
+    "buttons": {
+      "login": "string",
+      "search": "string",
+      "clear": "string"
+    },
+    "labels": {
+      "ingredients": "string",
+      "instructions": "string",
+      "prepTime": "string",
+      "cookTime": "string"
+    }
+  }
+}
+``` 

@@ -353,7 +353,17 @@
     "buttons": {
       "learnMore": "Learn more",
       "viewRecipe": "View Recipe",
-      "searchRecipes": "Search Recipes"
+      "searchRecipes": "Search Recipes",
+      "signIn": "Sign in",
+      "signOut": "Sign out"
+    },
+    "accountMenu": {
+      "loginPrompt": "Login to your account",
+      "menuItems": {
+        "account": "Account",
+        "security": "Security",
+        "messages": "Messages"
+      }
     },
     "footer": {
       "brand": "Cooking",

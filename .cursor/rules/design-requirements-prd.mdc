@@ -21,7 +21,7 @@ Colors in the project's theme should use these hex codes and for these suggested
 - Color: `#000000`. Use: All paragraph text
 - Color: `#8B1300`. Use: Anchors
 - Color: `#FF3D4A`. Use: Anchors on hover
-- Color: `#8B1300`. Use: Hover on buttons
+- Color: `#f2f2f2`. Use: Hover background color for all buttons and interactive elements (except text-only anchors)
 - Color: `#FF3D4A`. Use: Primary button background color
 - Color: `#FF3D4A`. Use: Primary button border color
 - Color: `#FFFFFF`. Use: Secondary button background color
@@ -52,6 +52,18 @@ Font families should include these and imported from Google Fonts. The font and 
 - Font: `Lexend`. Use: Body text
 - Font: `Madimi One`. Use: All headings, logo text
 
+### Icons
+
+All icons throughout the project should use Lucide React for consistency and maintainability.
+- **Icon Library**: `lucide-react` (already installed)
+- **Usage**: Import specific icons as needed: `import { IconName } from 'lucide-react'`
+- **Styling**: Icons should use design tokens for colors: `color="var(--color-text-heading)"`
+- **Interactive Icons**: Icons in buttons must have proper hover and focus states using design tokens
+- **Examples**: 
+  - Navigation: `Menu`, `Search`, `User`
+  - Content: `Heart`, `Share`, `Printer`, `Star`, `Home`
+  - UI Controls: `ChevronRight`, `Check`, `Circle`
+- **Consistency**: Replace any custom SVG icons with Lucide React equivalents where possible
 
 ## Accessibility
 

@@ -9,7 +9,7 @@ export default function RecipeListItem({ recipe }: RecipeListItemProps) {
     <li className="w-full">
       <a 
         href={`/recipe/${recipe.id}`}
-        className="flex flex-row gap-2 items-start w-full hover:bg-gray-50 p-2 rounded-md transition-colors group"
+        className="flex flex-row gap-2 items-start w-full hover:bg-[var(--color-hover-background)] p-2 rounded-md transition-colors group"
         aria-label={`View recipe for ${recipe.title}`}
       >
         {/* Recipe image */}

@@ -22,6 +22,7 @@ export const colors = {
   // Interactive Colors
   link: '#8B1300',
   linkHover: '#FF3D4A',
+  hoverBackground: '#f2f2f2',
   buttonHover: '#8B1300',
   focus: '#8B1300',
   
@@ -121,18 +122,18 @@ export const buttons = {
   primary: {
     background: colors.primary,
     text: colors.textOnDark,
-    hover: colors.buttonHover,
+    hover: colors.hoverBackground,
   },
   secondary: {
     background: colors.background,
     text: colors.secondary,
     border: colors.secondary,
-    hover: colors.primary,
+    hover: colors.hoverBackground,
   },
   tertiary: {
     background: 'transparent',
     text: colors.secondary,
-    hover: colors.backgroundYellow,
+    hover: colors.hoverBackground,
   },
 } as const;
 

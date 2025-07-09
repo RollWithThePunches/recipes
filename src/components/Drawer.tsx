@@ -104,7 +104,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ children, onClick }) => (
     variant="ghost"
     size="default"
     onClick={onClick}
-    className="w-full justify-between text-left h-auto bg-[var(--color-background)] text-[var(--color-text-heading)] hover:bg-[var(--color-button-hover)] hover:text-[var(--color-text-on-dark)] transition-colors duration-150"
+                className="w-full justify-between text-left h-auto bg-[var(--color-background)] text-[var(--color-text-heading)] hover:bg-[var(--color-hover-background)] hover:text-[var(--color-text-heading)] transition-colors duration-150"
     style={{ 
       fontFamily: 'var(--font-family-body)',
       padding: 'var(--spacing-sm) var(--spacing-md)',
@@ -186,7 +186,7 @@ export const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose, className = '' 
               variant="ghost"
               size="icon"
               onClick={onClose}
-              className="w-8 h-8 text-[var(--color-text-heading)] hover:bg-[var(--color-button-hover)] hover:text-[var(--color-text-on-dark)] transition-colors duration-150"
+              className="w-8 h-8 text-[var(--color-text-heading)] hover:bg-[var(--color-hover-background)] hover:text-[var(--color-text-heading)] transition-colors duration-150"
               style={{
                 padding: 'var(--spacing-sm)',
               }}
