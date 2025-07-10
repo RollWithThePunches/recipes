@@ -33,7 +33,7 @@
     "featuredRecipes": ["barbacoa-tacos", "char-burgers", "lime-corn", "margaritas"],
     "sections": {
       "summerRecipes": {
-        "title": "Summer lovin' recipes",
+        "title": "Hot summer recipes",
         "recipes": [
           {
             "id": "char-burgers",
