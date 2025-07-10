@@ -109,7 +109,7 @@ export default function RecipeClientPage({ recipeData, breadcrumbItems }: Recipe
     <div ref={pageRef} className="max-w-3xl mx-auto p-[var(--spacing-lg)] md:p-[var(--spacing-xl)]">
       {/* Breadcrumb */}
       <div className="mb-[var(--spacing-lg)]">
-        <Breadcrumb items={breadcrumbItems} />
+        <Breadcrumb items={breadcrumbItems} showHomeIcon={false} />
       </div>
 
       {/* Recipe Header */}
@@ -182,7 +182,7 @@ export default function RecipeClientPage({ recipeData, breadcrumbItems }: Recipe
 
       {/* Recipe Image */}
       <div className="mb-[var(--spacing-xl)]">
-        <div className="relative w-full h-[400px] overflow-hidden rounded-lg">
+        <div className="relative w-full h-[400px] overflow-hidden">
           <Image
             src={recipeData.image}
             alt={recipeData.title}
@@ -195,7 +195,7 @@ export default function RecipeClientPage({ recipeData, breadcrumbItems }: Recipe
 
       {/* Recipe Stats and Ingredients */}
       <div 
-        className="mb-[var(--spacing-xl)] p-[var(--spacing-xl)] gap-[var(--spacing-xl)] flex flex-col rounded-lg"
+        className="mb-[var(--spacing-xl)] p-[var(--spacing-xl)] gap-[var(--spacing-xl)] flex flex-col"
         style={{ backgroundColor: '#fff9e8' }}
       >
         {/* Recipe Stats */}
