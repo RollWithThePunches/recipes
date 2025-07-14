@@ -344,6 +344,29 @@
       ]
     }
   ],
+  "categories": {
+    "mexican": {
+      "id": "mexican",
+      "name": "Mexican",
+      "description": "Authentic Mexican flavors and recipes",
+      "navigation": {
+        "title": "What are you in the mood for?",
+        "mealTypes": [
+          { "id": "appetizers", "name": "Appetizers", "href": "/category/mexican?type=appetizers" },
+          { "id": "sides", "name": "Sides", "href": "/category/mexican?type=sides" },
+          { "id": "soups", "name": "Soups", "href": "/category/mexican?type=soups" },
+          { "id": "main-dish", "name": "Main dish", "href": "/category/mexican?type=main-dish" },
+          { "id": "desserts", "name": "Desserts", "href": "/category/mexican?type=desserts" },
+          { "id": "drinks", "name": "Drinks", "href": "/category/mexican?type=drinks" }
+        ]
+      },
+      "featuredRecipe": "barbacoa-tacos",
+      "exploreSection": {
+        "title": "Explore more Mexican food",
+        "recipes": ["lime-corn", "margaritas", "barbacoa-tacos"]
+      }
+    }
+  },
   "ui": {
     "navigation": {
       "brand": "Cooking",

@@ -70,8 +70,38 @@ export interface UI {
   footer: FooterUI;
 }
 
+export interface MealType {
+  id: string;
+  name: string;
+  href: string;
+}
+
+export interface CategoryNavigation {
+  title: string;
+  mealTypes: MealType[];
+}
+
+export interface ExploreSection {
+  title: string;
+  recipes: string[];
+}
+
+export interface CategoryPage {
+  id: string;
+  name: string;
+  description: string;
+  navigation: CategoryNavigation;
+  featuredRecipe: string;
+  exploreSection: ExploreSection;
+}
+
+export interface Categories {
+  [key: string]: CategoryPage;
+}
+
 export interface ContentData {
   homepage: Homepage;
   recipes: Recipe[];
+  categories: Categories;
   ui: UI;
 } 

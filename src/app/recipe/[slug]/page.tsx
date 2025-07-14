@@ -52,15 +52,35 @@ function formatTime(minutes: number): string {
   }
 }
 
-// Helper function to get breadcrumb items based on cuisine
-function getBreadcrumbItems(cuisine: string): BreadcrumbItem[] {
+// Helper function to get breadcrumb items based on cuisine and meal type
+function getBreadcrumbItems(cuisine: string, mealType: string): BreadcrumbItem[] {
+  // Map internal mealType values to display names
+  const mealTypeDisplayNames: Record<string, string> = {
+    'dinner': 'Main dish',
+    'appetizer': 'Appetizers',
+    'side': 'Sides', 
+    'soup': 'Soups',
+    'dessert': 'Desserts',
+    'drink': 'Drinks'
+  };
+
   const baseItems: BreadcrumbItem[] = [
-    { label: "Home", href: "/" },
-    { label: "Recipes", href: "/recipes" }
+    { label: "Home", href: "/" }
   ];
 
   if (cuisine) {
-    baseItems.push({ label: cuisine, href: `/category/${cuisine.toLowerCase()}` });
+    baseItems.push({ 
+      label: cuisine, 
+      href: `/category/${cuisine.toLowerCase()}` 
+    });
+  }
+
+  if (mealType) {
+    const displayMealType = mealTypeDisplayNames[mealType] || mealType;
+    baseItems.push({ 
+      label: displayMealType, 
+      isCurrentPage: true 
+    });
   }
 
   return baseItems;
@@ -103,7 +123,7 @@ export default async function RecipePage({ params }: RecipePageProps) {
     dietary: recipe.dietary
   };
 
-  const breadcrumbItems = getBreadcrumbItems(recipe.cuisine);
+  const breadcrumbItems = getBreadcrumbItems(recipe.cuisine, recipe.mealType);
 
   return <RecipeClientPage recipeData={recipeData} breadcrumbItems={breadcrumbItems} />;
 }
