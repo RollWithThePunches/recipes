@@ -52,9 +52,9 @@ function formatTime(minutes: number): string {
   }
 }
 
-// Helper function to get breadcrumb items based on cuisine and meal type
-function getBreadcrumbItems(cuisine: string, mealType: string): BreadcrumbItem[] {
-  // Map internal mealType values to display names
+// Helper function to get breadcrumb items based on cuisine, meal type, and recipe title
+function getBreadcrumbItems(cuisine: string, mealType: string, recipeTitle: string): BreadcrumbItem[] {
+  // Map internal mealType values to display names and URL paths
   const mealTypeDisplayNames: Record<string, string> = {
     'dinner': 'Main dish',
     'appetizer': 'Appetizers',
@@ -62,6 +62,15 @@ function getBreadcrumbItems(cuisine: string, mealType: string): BreadcrumbItem[]
     'soup': 'Soups',
     'dessert': 'Desserts',
     'drink': 'Drinks'
+  };
+
+  const mealTypeUrlPaths: Record<string, string> = {
+    'dinner': 'main-dish',
+    'appetizer': 'appetizers',
+    'side': 'sides',
+    'soup': 'soups',
+    'dessert': 'desserts',
+    'drink': 'drinks'
   };
 
   const baseItems: BreadcrumbItem[] = [
@@ -77,11 +86,18 @@ function getBreadcrumbItems(cuisine: string, mealType: string): BreadcrumbItem[]
 
   if (mealType) {
     const displayMealType = mealTypeDisplayNames[mealType] || mealType;
+    const urlPath = mealTypeUrlPaths[mealType] || mealType;
     baseItems.push({ 
       label: displayMealType, 
-      isCurrentPage: true 
+      href: `/category/${cuisine.toLowerCase()}/${urlPath}` 
     });
   }
+
+  // Add recipe title as the final breadcrumb item
+  baseItems.push({
+    label: recipeTitle,
+    isCurrentPage: true
+  });
 
   return baseItems;
 }
@@ -123,7 +139,7 @@ export default async function RecipePage({ params }: RecipePageProps) {
     dietary: recipe.dietary
   };
 
-  const breadcrumbItems = getBreadcrumbItems(recipe.cuisine, recipe.mealType);
+  const breadcrumbItems = getBreadcrumbItems(recipe.cuisine, recipe.mealType, recipe.title);
 
   return <RecipeClientPage recipeData={recipeData} breadcrumbItems={breadcrumbItems} />;
 }

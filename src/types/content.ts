@@ -86,6 +86,13 @@ export interface ExploreSection {
   recipes: string[];
 }
 
+export interface Subcategory {
+  id: string;
+  name: string;
+  description: string;
+  recipes: string[];
+}
+
 export interface CategoryPage {
   id: string;
   name: string;
@@ -93,6 +100,7 @@ export interface CategoryPage {
   navigation: CategoryNavigation;
   featuredRecipe: string;
   exploreSection: ExploreSection;
+  subcategories: Record<string, Subcategory>;
 }
 
 export interface Categories {
