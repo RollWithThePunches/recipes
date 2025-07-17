@@ -51,7 +51,7 @@ export default async function SubcategoryPage({ params }: SubcategoryPageProps) 
       {/* Main Content */}
       <div className="w-full">
         {/* Page Container */}
-        <div className="w-full max-w-[1024px] mx-auto px-4 sm:px-6 lg:px-0 py-12">
+        <div className="w-full max-w-[1024px] mx-auto" style={{ paddingLeft: 'var(--spacing-md)', paddingRight: 'var(--spacing-md)', paddingTop: 'var(--spacing-4xl)', paddingBottom: 'var(--spacing-3xl)', display: 'flex', flexDirection: 'column', gap: 'var(--spacing-4xl)' }}>
           <div className="flex flex-col gap-12">
             
             {/* Page Title Container */}
@@ -105,7 +105,7 @@ export default async function SubcategoryPage({ params }: SubcategoryPageProps) 
                   </div>
                 </Suspense>
               ) : (
-                <div className="text-center py-12">
+                <div className="text-center" style={{ paddingTop: 'var(--spacing-3xl)', paddingBottom: 'var(--spacing-3xl)' }}>
                   <p className="text-[var(--color-text-body)] text-lg mb-4">
                     No recipes found for {subcategoryData.name.toLowerCase()} in {categoryData.name.toLowerCase()} cuisine.
                   </p>

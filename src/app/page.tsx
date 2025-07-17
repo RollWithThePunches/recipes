@@ -12,9 +12,9 @@ export default function HomePage() {
   return (
     <div className="bg-white">
       {/* Main Content */}
-      <div className="w-full">
+      <div className="w-full" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-4xl)' }}>
         {/* Hero Section */}
-        <section aria-labelledby="hero-heading">
+        <section aria-labelledby="hero-heading" style={{ paddingTop: 'var(--spacing-4xl)' }}>
           <HeroSection 
             hero={content.homepage.hero}
             summerRecipes={content.homepage.sections.summerRecipes}
@@ -24,8 +24,8 @@ export default function HomePage() {
         {/* Popular Now Section with yellow background */}
         <section 
           aria-labelledby="popular-heading" 
-          className="py-8"
-          style={{ backgroundColor: 'var(--color-background-yellow)' }}
+          className=""
+          style={{ backgroundColor: 'var(--color-background-yellow)', paddingTop: 'var(--spacing-xl)', paddingBottom: 'var(--spacing-xl)' }}
         >
           <div className="w-full max-w-[1024px] mx-auto px-4 sm:px-6 lg:px-0">
             <div className="flex flex-col gap-6">
@@ -51,7 +51,7 @@ export default function HomePage() {
         </section>
         
         {/* Featured Recipe Sections */}
-        <section aria-labelledby="featured-heading" className="py-10 px-4 sm:px-6 lg:px-0">
+        <section aria-labelledby="featured-heading" className="" style={{ paddingBottom: 'var(--spacing-2xl)', paddingLeft: 'var(--spacing-md)', paddingRight: 'var(--spacing-md)' }}>
           <div className="max-w-[1024px] mx-auto space-y-10">
             {/* First featured recipe (left image) */}
             <FeaturedRecipeSection 

@@ -106,14 +106,14 @@ export default function RecipeClientPage({ recipeData, breadcrumbItems }: Recipe
   };
 
   return (
-    <div ref={pageRef} className="max-w-3xl mx-auto p-[var(--spacing-lg)] md:p-[var(--spacing-xl)]">
+    <div ref={pageRef} className="max-w-3xl mx-auto p-[var(--spacing-lg)] md:p-[var(--spacing-xl)]" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-3xl)', paddingTop: 'var(--spacing-4xl)' }}>
       {/* Breadcrumb */}
-      <div className="mb-[var(--spacing-lg)]">
+      <div>
         <Breadcrumb items={breadcrumbItems} showHomeIcon={false} />
       </div>
 
       {/* Recipe Header */}
-      <div className="mb-[var(--spacing-xl)]">
+      <div>
         <h1 className="text-[var(--font-size-4xl)] font-bold text-[var(--color-text-heading)] mb-[var(--spacing-md)] font-[var(--font-family-heading)]">
           {recipeData.title}
         </h1>
@@ -175,13 +175,13 @@ export default function RecipeClientPage({ recipeData, breadcrumbItems }: Recipe
         </div>
 
         {/* Description */}
-        <p className="text-[var(--color-text-body)] text-[var(--font-size-base)] leading-[var(--line-height-normal)] font-[var(--font-family-body)] mb-[var(--spacing-xl)]">
+        <p className="text-[var(--color-text-body)] text-[var(--font-size-base)] leading-[var(--line-height-normal)] font-[var(--font-family-body)]">
           {recipeData.description}
         </p>
       </div>
 
       {/* Recipe Image */}
-      <div className="mb-[var(--spacing-xl)]">
+      <div>
         <div className="relative w-full h-[400px] overflow-hidden">
           <Image
             src={recipeData.image}
@@ -195,8 +195,8 @@ export default function RecipeClientPage({ recipeData, breadcrumbItems }: Recipe
 
       {/* Recipe Stats and Ingredients */}
       <div 
-        className="mb-[var(--spacing-xl)] p-[var(--spacing-xl)] gap-[var(--spacing-xl)] flex flex-col"
-        style={{ backgroundColor: '#fff9e8' }}
+        className="p-[var(--spacing-xl)] flex flex-col"
+        style={{ backgroundColor: '#fff9e8', gap: 'var(--spacing-3xl)' }}
       >
         {/* Recipe Stats */}
         <RecipeStats
@@ -220,7 +220,7 @@ export default function RecipeClientPage({ recipeData, breadcrumbItems }: Recipe
       {/* Directions */}
       <RecipeDirections 
         steps={recipeData.directions}
-        className="mb-[var(--spacing-xl)]"
+        className=""
       />
 
       {/* Footer Actions */}

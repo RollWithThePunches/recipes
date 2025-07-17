@@ -87,11 +87,12 @@ interface CategoryNavigationProps {
 function CategoryNavigation({ title, mealTypes, currentType }: CategoryNavigationProps) {
   return (
     <div 
-      className="w-full bg-[var(--color-background-yellow)] py-6"
+      className="w-full bg-[var(--color-background-yellow)]"
+      style={{ paddingTop: 'var(--spacing-lg)', paddingBottom: 'var(--spacing-lg)' }}
       role="navigation"
       aria-label="Category meal types"
     >
-      <div className="w-full max-w-[1024px] mx-auto px-4 sm:px-6 lg:px-0">
+      <div className="w-full max-w-[1024px] mx-auto" style={{ paddingLeft: 'var(--spacing-md)', paddingRight: 'var(--spacing-md)', paddingTop: 'var(--spacing-3xl)', paddingBottom: 'var(--spacing-3xl)' }}>
         <div className="flex flex-col gap-6 items-center">
           <h2 
             className="text-center text-[var(--color-text-heading)]"
@@ -167,7 +168,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
       {/* Main Content */}
       <div className="w-full">
         {/* Page Container */}
-        <div className="w-full max-w-[1024px] mx-auto px-4 sm:px-6 lg:px-0 py-12">
+        <div className="w-full max-w-[1024px] mx-auto" style={{ paddingLeft: 'var(--spacing-md)', paddingRight: 'var(--spacing-md)', paddingTop: 'var(--spacing-3xl)', paddingBottom: 'var(--spacing-3xl)', display: 'flex', flexDirection: 'column', gap: 'var(--spacing-4xl)' }}>
           <div className="flex flex-col gap-12">
             
             {/* Breadcrumb Navigation */}

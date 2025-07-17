@@ -8,7 +8,7 @@ interface HeroSectionProps {
 
 export default function HeroSection({ hero, summerRecipes }: HeroSectionProps) {
   return (
-    <div className="py-12 px-4 sm:px-6 lg:px-0">
+    <div className="px-4sm:px-6 lg:px-0">
       <div className="flex flex-col gap-10 items-center w-full max-w-[1024px] mx-auto">
         {/* Main hero content */}
         <div className="flex flex-col md:flex-row gap-6 items-start w-full">
