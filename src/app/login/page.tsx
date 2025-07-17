@@ -1,0 +1,28 @@
+import { Button } from '@/components/ui/button';
+
+export default function LoginPage() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-[var(--color-background)]">
+      <div className="w-full max-w-md border border-[var(--color-text-heading)] rounded-lg shadow-md bg-white flex flex-col gap-[var(--spacing-lg)] items-center" style={{ padding: 'var(--spacing-xl)' }}>
+        <h1 className="font-semibold text-[var(--color-text-heading)] w-full text-left mb-[var(--spacing-md)]" style={{ fontSize: 'var(--font-size-3xl)', fontFamily: 'var(--font-family-body)' }}>
+          Sign in to your account
+        </h1>
+        <form className="flex flex-col gap-[var(--spacing-lg)] w-full" autoComplete="off" aria-label="Sign in form">
+          <div className="flex flex-col gap-[var(--spacing-xs)] w-full">
+            <label htmlFor="username" className="font-semibold text-[var(--color-text-body)] text-[var(--font-size-base)]">Username</label>
+            <input id="username" name="username" type="text" autoComplete="username" required className="h-10 rounded-lg border border-[var(--color-text-heading)] px-3 focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)] bg-[var(--color-background)]" />
+          </div>
+          <div className="flex flex-col gap-[var(--spacing-xs)] w-full">
+            <label htmlFor="password" className="font-semibold text-[var(--color-text-body)] text-[var(--font-size-base)]">Password</label>
+            <input id="password" name="password" type="password" autoComplete="current-password" required className="h-10 rounded-lg border border-[var(--color-text-heading)] px-3 focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)] bg-[var(--color-background)]" />
+          </div>
+          <div className="w-full flex justify-end">
+            <Button type="submit" className="bg-[var(--color-primary)] font-semibold text-[var(--font-size-base)] rounded-lg py-2 mt-2 hover:bg-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-focus)] transition-colors" style={{ color: 'var(--color-text-on-dark)', width: 'fit-content' }}>
+              Sign in
+            </Button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+} 
