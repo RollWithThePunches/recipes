@@ -15,20 +15,20 @@ interface BreadcrumbProps {
   className?: string;
 }
 
-export default function Breadcrumb({ 
-  items, 
-  showHomeIcon = true, 
-  className = "" 
+export default function Breadcrumb({
+  items,
+  showHomeIcon = true,
+  className = "",
 }: BreadcrumbProps) {
   return (
-    <nav 
-      aria-label="Breadcrumb navigation" 
+    <nav
+      aria-label="Breadcrumb navigation"
       className={`flex items-center gap-[var(--spacing-xs)] text-sm ${className}`}
     >
       <ul className="flex items-center gap-[var(--spacing-xs)] list-none">
         {showHomeIcon && (
           <li className="flex items-center">
-            <Link 
+            <Link
               href="/"
               className="flex items-center text-[var(--color-secondary)] hover:text-[var(--color-link-hover)] transition-colors duration-[var(--transition-fast)]"
               aria-label="Home"
@@ -36,15 +36,17 @@ export default function Breadcrumb({
               <Home className="w-4 h-4" />
             </Link>
             {items.length > 0 && (
-              <span className="mx-[var(--spacing-sm)] text-[var(--color-text-body)] font-normal">/</span>
+              <span className="mx-[var(--spacing-sm)] text-[var(--color-text-body)] font-normal">
+                /
+              </span>
             )}
           </li>
         )}
-        
+
         {items.map((item, index) => {
           const isLast = index === items.length - 1;
           const isCurrent = item.isCurrentPage || isLast;
-          
+
           return (
             <li key={index} className="flex items-center">
               {item.href && !isCurrent ? (
@@ -55,10 +57,10 @@ export default function Breadcrumb({
                   {item.label}
                 </Link>
               ) : (
-                <span 
+                <span
                   className={`${
-                    isCurrent 
-                      ? "text-[var(--color-text-body)] font-semibold" 
+                    isCurrent
+                      ? "text-[var(--color-text-body)] font-semibold"
                       : "text-[var(--color-secondary)] font-medium"
                   }`}
                   aria-current={isCurrent ? "page" : undefined}
@@ -66,9 +68,11 @@ export default function Breadcrumb({
                   {item.label}
                 </span>
               )}
-              
+
               {!isLast && (
-                <span className="mx-[var(--spacing-sm)] text-[var(--color-text-body)] font-normal">/</span>
+                <span className="mx-[var(--spacing-sm)] text-[var(--color-text-body)] font-normal">
+                  /
+                </span>
               )}
             </li>
           );
@@ -81,18 +85,19 @@ export default function Breadcrumb({
 // Utility function to create breadcrumb items from a path
 export function createBreadcrumbsFromPath(
   pathname: string,
-  labelMap?: Record<string, string>
+  labelMap?: Record<string, string>,
 ): BreadcrumbItem[] {
-  const segments = pathname.split('/').filter(segment => segment !== '');
-  
+  const segments = pathname.split("/").filter((segment) => segment !== "");
+
   return segments.map((segment, index) => {
-    const href = '/' + segments.slice(0, index + 1).join('/');
-    const label = labelMap?.[segment] || segment.charAt(0).toUpperCase() + segment.slice(1);
-    
+    const href = "/" + segments.slice(0, index + 1).join("/");
+    const label =
+      labelMap?.[segment] || segment.charAt(0).toUpperCase() + segment.slice(1);
+
     return {
       label,
       href,
-      isCurrentPage: index === segments.length - 1
+      isCurrentPage: index === segments.length - 1,
     };
   });
-} 
+}

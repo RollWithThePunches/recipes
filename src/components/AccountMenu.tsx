@@ -1,16 +1,16 @@
 "use client";
 
-import { useState, useRef, useEffect } from 'react';
-import { User } from 'lucide-react';
+import { useState, useRef, useEffect } from "react";
+import { User } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Button } from '@/components/ui/button';
-import contentData from '@/data/content.json';
-import { ContentData } from '@/types/content';
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import contentData from "@/data/content.json";
+import { ContentData } from "@/types/content";
 
 const content = contentData as ContentData;
 
@@ -86,8 +86,8 @@ export default function AccountMenu({
   // Handle keyboard navigation for the entire dropdown content
   const handleContentKeyDown = (e: React.KeyboardEvent) => {
     setIsKeyboardNavigation(true);
-    
-    if (e.key === 'Escape') {
+
+    if (e.key === "Escape") {
       setIsOpen(false);
       setTimeout(() => {
         avatarButtonRef.current?.focus();
@@ -96,9 +96,9 @@ export default function AccountMenu({
     }
 
     // Handle Tab navigation manually within the dropdown
-    if (e.key === 'Tab') {
+    if (e.key === "Tab") {
       const currentElement = e.target as HTMLElement;
-      
+
       if (!e.shiftKey) {
         // Forward Tab navigation
         if (currentElement === accountItemRef.current) {
@@ -159,23 +159,23 @@ export default function AccountMenu({
           variant="ghost"
           size="icon"
           className={`relative w-6 h-6 rounded-full p-0 border-2 focus:ring-2 focus:ring-[var(--color-focus)] transition-colors duration-150 group ${
-            isLoggedIn 
-              ? 'bg-[var(--color-primary)] border-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:border-[var(--color-primary)] focus:bg-[var(--color-primary)] focus:border-[var(--color-primary)]'
-              : 'bg-[var(--color-background)] border-[var(--color-text-heading)] hover:bg-[var(--color-hover-background)] hover:border-[var(--color-primary)] focus:bg-[var(--color-hover-background)] focus:border-[var(--color-primary)]'
+            isLoggedIn
+              ? "bg-[var(--color-primary)] border-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:border-[var(--color-primary)] focus:bg-[var(--color-primary)] focus:border-[var(--color-primary)]"
+              : "bg-[var(--color-background)] border-[var(--color-text-heading)] hover:bg-[var(--color-hover-background)] hover:border-[var(--color-primary)] focus:bg-[var(--color-hover-background)] focus:border-[var(--color-primary)]"
           }`}
           aria-label="User account menu"
         >
-          <User 
+          <User
             className={`w-4 h-4 transition-colors duration-150 ${
               isLoggedIn
-                ? 'text-white group-hover:text-white'
-                : 'text-[var(--color-text-heading)] group-hover:text-[var(--color-primary)]'
+                ? "text-white group-hover:text-white"
+                : "text-[var(--color-text-heading)] group-hover:text-[var(--color-primary)]"
             }`}
             strokeWidth={3}
           />
         </Button>
       </DropdownMenuTrigger>
-      
+
       <DropdownMenuContent
         className="w-64 bg-[var(--color-background)] rounded-none rounded-b-lg shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] border-0 p-0 data-[state=open]:animate-none data-[state=closed]:animate-none data-[side=bottom]:animate-none data-[side=left]:animate-none data-[side=right]:animate-none data-[side=top]:animate-none"
         align="end"
@@ -184,18 +184,18 @@ export default function AccountMenu({
       >
         {!isLoggedIn ? (
           // Logged out state
-          <div 
+          <div
             className="space-y-6"
-            style={{ 
-              padding: 'var(--spacing-md)',
-              gap: 'var(--spacing-lg)'
+            style={{
+              padding: "var(--spacing-md)",
+              gap: "var(--spacing-lg)",
             }}
           >
-            <div 
+            <div
               className="font-semibold text-[var(--color-text-heading)] leading-none"
-              style={{ 
-                fontFamily: 'var(--font-family-body)',
-                fontSize: 'var(--font-size-md)'
+              style={{
+                fontFamily: "var(--font-family-body)",
+                fontSize: "var(--font-size-md)",
               }}
             >
               {content.ui.accountMenu.loginPrompt}
@@ -205,7 +205,7 @@ export default function AccountMenu({
               variant="default"
               size="default"
               className="w-full"
-              style={{ fontFamily: 'var(--font-family-body)' }}
+              style={{ fontFamily: "var(--font-family-body)" }}
               onClick={handleSignIn}
               onMouseEnter={handleMouseEnter}
             >
@@ -214,67 +214,73 @@ export default function AccountMenu({
           </div>
         ) : (
           // Logged in state
-          <div 
+          <div
             className="space-y-6"
-            style={{ 
-              padding: 'var(--spacing-md)',
-              gap: 'var(--spacing-lg)'
+            style={{
+              padding: "var(--spacing-md)",
+              gap: "var(--spacing-lg)",
             }}
           >
-            <div 
+            <div
               className="font-semibold text-[var(--color-text-heading)] leading-none"
-              style={{ 
-                fontFamily: 'var(--font-family-body)',
-                fontSize: 'var(--font-size-md)'
+              style={{
+                fontFamily: "var(--font-family-body)",
+                fontSize: "var(--font-size-md)",
               }}
             >
-              {username || '<Username>'}
+              {username || "<Username>"}
             </div>
-            
-            <div 
+
+            <div
               className="space-y-1"
-              style={{ 
-                gap: 'var(--spacing-xs)'
+              style={{
+                gap: "var(--spacing-xs)",
               }}
             >
-              <DropdownMenuItem 
+              <DropdownMenuItem
                 ref={accountItemRef}
                 className={`text-[var(--color-text-heading)] hover:bg-[var(--color-hover-background)] hover:text-[var(--color-text-heading)] focus:bg-[var(--color-hover-background)] focus:text-[var(--color-text-heading)] focus:outline-none cursor-pointer transition-colors duration-150 ${
-                  isKeyboardNavigation ? 'focus:ring-2 focus:ring-[var(--color-focus)]' : ''
+                  isKeyboardNavigation
+                    ? "focus:ring-2 focus:ring-[var(--color-focus)]"
+                    : ""
                 }`}
-                style={{ 
-                  fontFamily: 'var(--font-family-body)',
-                  fontSize: 'var(--font-size-md)'
+                style={{
+                  fontFamily: "var(--font-family-body)",
+                  fontSize: "var(--font-size-md)",
                 }}
                 onClick={() => handleMenuItemClick(onAccountClick)}
                 onMouseEnter={handleMouseEnter}
               >
                 {content.ui.accountMenu.menuItems.account}
               </DropdownMenuItem>
-              
-              <DropdownMenuItem 
+
+              <DropdownMenuItem
                 ref={securityItemRef}
                 className={`text-[var(--color-text-heading)] hover:bg-[var(--color-hover-background)] hover:text-[var(--color-text-heading)] focus:bg-[var(--color-hover-background)] focus:text-[var(--color-text-heading)] focus:outline-none cursor-pointer transition-colors duration-150 ${
-                  isKeyboardNavigation ? 'focus:ring-2 focus:ring-[var(--color-focus)]' : ''
+                  isKeyboardNavigation
+                    ? "focus:ring-2 focus:ring-[var(--color-focus)]"
+                    : ""
                 }`}
-                style={{ 
-                  fontFamily: 'var(--font-family-body)',
-                  fontSize: 'var(--font-size-md)'
+                style={{
+                  fontFamily: "var(--font-family-body)",
+                  fontSize: "var(--font-size-md)",
                 }}
                 onClick={() => handleMenuItemClick(onSecurityClick)}
                 onMouseEnter={handleMouseEnter}
               >
                 {content.ui.accountMenu.menuItems.security}
               </DropdownMenuItem>
-              
-              <DropdownMenuItem 
+
+              <DropdownMenuItem
                 ref={messagesItemRef}
                 className={`text-[var(--color-text-heading)] hover:bg-[var(--color-hover-background)] hover:text-[var(--color-text-heading)] focus:bg-[var(--color-hover-background)] focus:text-[var(--color-text-heading)] focus:outline-none cursor-pointer transition-colors duration-150 ${
-                  isKeyboardNavigation ? 'focus:ring-2 focus:ring-[var(--color-focus)]' : ''
+                  isKeyboardNavigation
+                    ? "focus:ring-2 focus:ring-[var(--color-focus)]"
+                    : ""
                 }`}
-                style={{ 
-                  fontFamily: 'var(--font-family-body)',
-                  fontSize: 'var(--font-size-md)'
+                style={{
+                  fontFamily: "var(--font-family-body)",
+                  fontSize: "var(--font-size-md)",
                 }}
                 onClick={() => handleMenuItemClick(onMessagesClick)}
                 onMouseEnter={handleMouseEnter}
@@ -282,13 +288,13 @@ export default function AccountMenu({
                 {content.ui.accountMenu.menuItems.messages}
               </DropdownMenuItem>
             </div>
-            
+
             <Button
               ref={signOutButtonRef}
               variant="default"
               size="default"
               className="w-full"
-              style={{ fontFamily: 'var(--font-family-body)' }}
+              style={{ fontFamily: "var(--font-family-body)" }}
               onClick={handleSignOut}
               onMouseEnter={handleMouseEnter}
             >
@@ -299,4 +305,4 @@ export default function AccountMenu({
       </DropdownMenuContent>
     </DropdownMenu>
   );
-} 
+}

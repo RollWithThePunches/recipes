@@ -18,32 +18,34 @@ export default function RecipeStats({
   cookTime,
   totalTime,
   servings,
-  className = ""
+  className = "",
 }: RecipeStatsProps) {
   const stats: RecipeStat[] = [
     { label: "Prep time", value: prepTime },
     { label: "Cook time", value: cookTime },
     { label: "Total time", value: totalTime },
-    { label: "Servings", value: servings }
+    { label: "Servings", value: servings },
   ];
 
   return (
-    <div className={`grid grid-cols-2 md:grid-cols-4 gap-[var(--spacing-lg)] ${className}`}>
+    <div
+      className={`grid grid-cols-2 md:grid-cols-4 gap-[var(--spacing-lg)] ${className}`}
+    >
       {stats.map((stat, index) => (
         <div key={index} className="text-left">
-          <div 
+          <div
             className="font-semibold"
-            style={{ 
-              fontSize: 'var(--font-size-base)', 
-              color: 'var(--color-text-body)' 
+            style={{
+              fontSize: "var(--font-size-base)",
+              color: "var(--color-text-body)",
             }}
           >
             {stat.label}
           </div>
-          <div 
-            style={{ 
-              fontSize: 'var(--font-size-base)', 
-              color: 'var(--color-text-body)' 
+          <div
+            style={{
+              fontSize: "var(--font-size-base)",
+              color: "var(--color-text-body)",
             }}
           >
             {stat.value}
@@ -52,4 +54,4 @@ export default function RecipeStats({
       ))}
     </div>
   );
-} 
+}

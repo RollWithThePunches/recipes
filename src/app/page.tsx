@@ -1,9 +1,9 @@
-import { Suspense } from 'react';
-import contentData from '@/data/content.json';
-import HeroSection from '@/components/patterns/HeroSection';
-import RecipeGrid from '@/components/patterns/RecipeGrid';
-import FeaturedRecipeSection from '@/components/patterns/FeaturedRecipeSection';
-import { ContentData } from '@/types/content';
+import { Suspense } from "react";
+import contentData from "@/data/content.json";
+import HeroSection from "@/components/patterns/HeroSection";
+import RecipeGrid from "@/components/patterns/RecipeGrid";
+import FeaturedRecipeSection from "@/components/patterns/FeaturedRecipeSection";
+import { ContentData } from "@/types/content";
 
 // Cast the imported JSON to our content type
 const content = contentData as ContentData;
@@ -12,56 +12,78 @@ export default function HomePage() {
   return (
     <div className="bg-white">
       {/* Main Content */}
-      <div className="w-full" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-4xl)' }}>
+      <div
+        className="w-full"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "var(--spacing-4xl)",
+        }}
+      >
         {/* Hero Section */}
-        <section aria-labelledby="hero-heading" style={{ paddingTop: 'var(--spacing-4xl)' }}>
-          <HeroSection 
+        <section
+          aria-labelledby="hero-heading"
+          style={{ paddingTop: "var(--spacing-4xl)" }}
+        >
+          <HeroSection
             hero={content.homepage.hero}
             summerRecipes={content.homepage.sections.summerRecipes}
           />
         </section>
-        
+
         {/* Popular Now Section with yellow background */}
-        <section 
-          aria-labelledby="popular-heading" 
+        <section
+          aria-labelledby="popular-heading"
           className=""
-          style={{ backgroundColor: 'var(--color-background-yellow)', paddingTop: 'var(--spacing-xl)', paddingBottom: 'var(--spacing-xl)' }}
+          style={{
+            backgroundColor: "var(--color-background-yellow)",
+            paddingTop: "var(--spacing-xl)",
+            paddingBottom: "var(--spacing-xl)",
+          }}
         >
           <div className="w-full max-w-[1024px] mx-auto px-4 sm:px-6 lg:px-0">
             <div className="flex flex-col gap-6">
-              <h2 
+              <h2
                 id="popular-heading"
                 className="text-4xl text-[var(--color-text-heading)]"
-                style={{ 
-                  fontFamily: 'var(--font-family-heading)',
-                  fontSize: 'var(--font-size-4xl)'
+                style={{
+                  fontFamily: "var(--font-family-heading)",
+                  fontSize: "var(--font-size-4xl)",
                 }}
               >
                 {content.homepage.sections.popularNow.title}
               </h2>
-              
+
               <Suspense fallback={<div>Loading popular recipes...</div>}>
-                <RecipeGrid 
-                  recipes={content.homepage.featuredRecipes.slice(0, 3)} 
+                <RecipeGrid
+                  recipes={content.homepage.featuredRecipes.slice(0, 3)}
                   recipeData={content.recipes}
                 />
               </Suspense>
             </div>
           </div>
         </section>
-        
+
         {/* Featured Recipe Sections */}
-        <section aria-labelledby="featured-heading" className="" style={{ paddingBottom: 'var(--spacing-2xl)', paddingLeft: 'var(--spacing-md)', paddingRight: 'var(--spacing-md)' }}>
+        <section
+          aria-labelledby="featured-heading"
+          className=""
+          style={{
+            paddingBottom: "var(--spacing-2xl)",
+            paddingLeft: "var(--spacing-md)",
+            paddingRight: "var(--spacing-md)",
+          }}
+        >
           <div className="max-w-[1024px] mx-auto space-y-10">
             {/* First featured recipe (left image) */}
-            <FeaturedRecipeSection 
-              recipe={content.recipes.find(r => r.id === 'barbacoa-tacos')!}
+            <FeaturedRecipeSection
+              recipe={content.recipes.find((r) => r.id === "barbacoa-tacos")!}
               imagePosition="left"
             />
-            
+
             {/* Second featured recipe (right image) */}
-            <FeaturedRecipeSection 
-              recipe={content.recipes.find(r => r.id === 'barbacoa-tacos')!}
+            <FeaturedRecipeSection
+              recipe={content.recipes.find((r) => r.id === "barbacoa-tacos")!}
               imagePosition="right"
             />
           </div>

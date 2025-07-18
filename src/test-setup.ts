@@ -1,4 +1,4 @@
-import '@testing-library/jest-dom';
+import "@testing-library/jest-dom";
 
 // Extend expect with custom matchers for accessibility testing
 declare global {
@@ -8,4 +8,4 @@ declare global {
       toHaveNoViolations(): R;
     }
   }
-} 
+}

@@ -19,7 +19,7 @@ export interface Recipe {
   prepTime: number;
   cookTime: number;
   servings: number;
-  difficulty: 'easy' | 'medium' | 'hard';
+  difficulty: "easy" | "medium" | "hard";
   dietary: string[];
   ingredients: Ingredient[];
   steps: CookingStep[];
@@ -41,4 +41,4 @@ export interface Category {
   description: string;
   image: string;
   recipeCount: number;
-} 
+}

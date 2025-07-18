@@ -17,7 +17,10 @@ interface RecipeClientPageProps {
   breadcrumbItems: BreadcrumbItem[];
 }
 
-export default function RecipeClientPage({ recipeData, breadcrumbItems }: RecipeClientPageProps) {
+export default function RecipeClientPage({
+  recipeData,
+  breadcrumbItems,
+}: RecipeClientPageProps) {
   const [isFavorited, setIsFavorited] = useState(false);
   const [isCapturing, setIsCapturing] = useState(false);
   const pageRef = useRef<HTMLDivElement>(null);
@@ -25,7 +28,10 @@ export default function RecipeClientPage({ recipeData, breadcrumbItems }: Recipe
   const handleFavoriteToggle = () => {
     setIsFavorited(!isFavorited);
     // TODO: Implement actual favorite persistence logic
-    console.log(`Recipe ${isFavorited ? 'removed from' : 'added to'} favorites:`, recipeData.title);
+    console.log(
+      `Recipe ${isFavorited ? "removed from" : "added to"} favorites:`,
+      recipeData.title,
+    );
   };
 
   const handlePrintScreenshot = async () => {
@@ -33,60 +39,67 @@ export default function RecipeClientPage({ recipeData, breadcrumbItems }: Recipe
 
     try {
       setIsCapturing(true);
-      
+
       // Create canvas from the page content with improved settings to handle color issues
       const canvas = await html2canvas(pageRef.current, {
         scale: 2, // Higher resolution
         useCORS: true,
         allowTaint: true,
-        backgroundColor: '#ffffff',
+        backgroundColor: "#ffffff",
         width: pageRef.current.scrollWidth,
         height: pageRef.current.scrollHeight,
         scrollX: 0,
         scrollY: 0,
         ignoreElements: (element) => {
           // Skip elements that might cause color parsing issues
-          return element.classList?.contains('skip-screenshot') || false;
+          return element.classList?.contains("skip-screenshot") || false;
         },
         onclone: (clonedDoc) => {
           // Convert any problematic CSS custom properties to standard values
-          const elements = clonedDoc.querySelectorAll('*');
+          const elements = clonedDoc.querySelectorAll("*");
           elements.forEach((el) => {
             const style = (el as HTMLElement).style;
             if (style) {
               // Replace CSS custom properties with fallback values
-              if (style.backgroundColor && style.backgroundColor.includes('var(')) {
-                style.backgroundColor = '#fff9e8'; // fallback for yellow background
+              if (
+                style.backgroundColor &&
+                style.backgroundColor.includes("var(")
+              ) {
+                style.backgroundColor = "#fff9e8"; // fallback for yellow background
               }
-              if (style.color && style.color.includes('var(')) {
-                style.color = '#333333'; // fallback for text color
+              if (style.color && style.color.includes("var(")) {
+                style.color = "#333333"; // fallback for text color
               }
             }
           });
-        }
+        },
       });
 
       // Convert canvas to blob
-      canvas.toBlob((blob) => {
-        if (blob) {
-          // Create download link
-          const url = URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = `${recipeData.title.replace(/[^a-zA-Z0-9]/g, '-')}-recipe.png`;
-          link.style.display = 'none';
-          
-          // Trigger download
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          
-          // Clean up
-          URL.revokeObjectURL(url);
-        }
-      }, 'image/png', 1.0);
+      canvas.toBlob(
+        (blob) => {
+          if (blob) {
+            // Create download link
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = `${recipeData.title.replace(/[^a-zA-Z0-9]/g, "-")}-recipe.png`;
+            link.style.display = "none";
+
+            // Trigger download
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Clean up
+            URL.revokeObjectURL(url);
+          }
+        },
+        "image/png",
+        1.0,
+      );
     } catch (error) {
-      console.error('Error capturing screenshot:', error);
+      console.error("Error capturing screenshot:", error);
       // TODO: Show user-friendly error message
     } finally {
       setIsCapturing(false);
@@ -95,18 +108,27 @@ export default function RecipeClientPage({ recipeData, breadcrumbItems }: Recipe
 
   const handleShare = () => {
     // TODO: Implement share functionality
-    console.log('Share recipe:', recipeData.title);
+    console.log("Share recipe:", recipeData.title);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent, action: () => void) => {
-    if (e.key === 'Enter' || e.key === ' ') {
+    if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       action();
     }
   };
 
   return (
-    <div ref={pageRef} className="max-w-3xl mx-auto p-[var(--spacing-lg)] md:p-[var(--spacing-xl)]" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-3xl)', paddingTop: 'var(--spacing-4xl)' }}>
+    <div
+      ref={pageRef}
+      className="max-w-3xl mx-auto p-[var(--spacing-lg)] md:p-[var(--spacing-xl)]"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "var(--spacing-3xl)",
+        paddingTop: "var(--spacing-4xl)",
+      }}
+    >
       {/* Breadcrumb */}
       <div>
         <Breadcrumb items={breadcrumbItems} showHomeIcon={false} />
@@ -117,40 +139,46 @@ export default function RecipeClientPage({ recipeData, breadcrumbItems }: Recipe
         <h1 className="text-[var(--font-size-4xl)] font-bold text-[var(--color-text-heading)] mb-[var(--spacing-md)] font-[var(--font-family-heading)]">
           {recipeData.title}
         </h1>
-        
+
         {/* Recipe Meta Information */}
         <div className="flex flex-wrap items-center gap-[var(--spacing-md)] mb-[var(--spacing-lg)] text-[var(--color-text-body)] text-[var(--font-size-sm)]">
           <span className="font-medium">Cuisine: {recipeData.cuisine}</span>
-          <span className="font-medium">Difficulty: {recipeData.difficulty}</span>
+          <span className="font-medium">
+            Difficulty: {recipeData.difficulty}
+          </span>
           {recipeData.dietary.length > 0 && (
-            <span className="font-medium">Dietary: {recipeData.dietary.join(", ")}</span>
+            <span className="font-medium">
+              Dietary: {recipeData.dietary.join(", ")}
+            </span>
           )}
         </div>
-        
+
         {/* Rating and Actions */}
         <div className="flex items-center justify-between mb-[var(--spacing-lg)]">
           <RecipeRating rating={recipeData.rating} />
           <div className="flex items-center gap-[var(--spacing-sm)]">
-            <Button 
-              variant="ghost" 
-              size="icon" 
+            <Button
+              variant="ghost"
+              size="icon"
               onClick={handleFavoriteToggle}
               onKeyDown={(e) => handleKeyDown(e, handleFavoriteToggle)}
-              aria-label={isFavorited ? "Remove from favorites" : "Add to favorites"}
+              aria-label={
+                isFavorited ? "Remove from favorites" : "Add to favorites"
+              }
               aria-pressed={isFavorited}
               className="hover:bg-[var(--color-hover-background)] focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)] transition-colors duration-150"
             >
-              <Heart 
+              <Heart
                 className={`w-5 h-5 transition-all duration-200 ${
-                  isFavorited 
-                    ? 'text-[var(--color-primary)] fill-[var(--color-primary)]' 
-                    : 'text-[var(--color-primary)] hover:fill-[var(--color-primary)]'
+                  isFavorited
+                    ? "text-[var(--color-primary)] fill-[var(--color-primary)]"
+                    : "text-[var(--color-primary)] hover:fill-[var(--color-primary)]"
                 }`}
               />
             </Button>
-            <Button 
-              variant="ghost" 
-              size="icon" 
+            <Button
+              variant="ghost"
+              size="icon"
               onClick={handleShare}
               onKeyDown={(e) => handleKeyDown(e, handleShare)}
               aria-label="Share recipe"
@@ -158,18 +186,24 @@ export default function RecipeClientPage({ recipeData, breadcrumbItems }: Recipe
             >
               <Share className="w-5 h-5 text-[var(--color-text-heading)] hover:text-[var(--color-primary)] transition-colors duration-150" />
             </Button>
-            <Button 
-              variant="ghost" 
-              size="icon" 
+            <Button
+              variant="ghost"
+              size="icon"
               onClick={handlePrintScreenshot}
               onKeyDown={(e) => handleKeyDown(e, handlePrintScreenshot)}
-              aria-label={isCapturing ? "Capturing screenshot..." : "Download recipe screenshot"}
+              aria-label={
+                isCapturing
+                  ? "Capturing screenshot..."
+                  : "Download recipe screenshot"
+              }
               disabled={isCapturing}
               className="hover:bg-[var(--color-hover-background)] focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)] transition-colors duration-150 disabled:opacity-50"
             >
-              <Printer className={`w-5 h-5 text-[var(--color-text-heading)] hover:text-[var(--color-primary)] transition-colors duration-150 ${
-                isCapturing ? 'animate-pulse' : ''
-              }`} />
+              <Printer
+                className={`w-5 h-5 text-[var(--color-text-heading)] hover:text-[var(--color-primary)] transition-colors duration-150 ${
+                  isCapturing ? "animate-pulse" : ""
+                }`}
+              />
             </Button>
           </div>
         </div>
@@ -194,9 +228,9 @@ export default function RecipeClientPage({ recipeData, breadcrumbItems }: Recipe
       </div>
 
       {/* Recipe Stats and Ingredients */}
-      <div 
+      <div
         className="p-[var(--spacing-xl)] flex flex-col"
-        style={{ backgroundColor: '#fff9e8', gap: 'var(--spacing-3xl)' }}
+        style={{ backgroundColor: "#fff9e8", gap: "var(--spacing-3xl)" }}
       >
         {/* Recipe Stats */}
         <RecipeStats
@@ -208,56 +242,61 @@ export default function RecipeClientPage({ recipeData, breadcrumbItems }: Recipe
         />
 
         {/* Ingredients */}
-        <IngredientsList 
+        <IngredientsList
           ingredients={recipeData.ingredients.map((ing) => ({
             amount: ing.amount,
-            item: ing.item
+            item: ing.item,
           }))}
           className=""
         />
       </div>
 
       {/* Directions */}
-      <RecipeDirections 
-        steps={recipeData.directions}
-        className=""
-      />
+      <RecipeDirections steps={recipeData.directions} className="" />
 
       {/* Footer Actions */}
       <div className="flex items-center justify-center gap-[var(--spacing-lg)] pt-[var(--spacing-xl)] border-t border-gray-200">
-        <Button 
-          variant="ghost" 
-          size="icon" 
+        <Button
+          variant="ghost"
+          size="icon"
           onClick={handleFavoriteToggle}
           onKeyDown={(e) => handleKeyDown(e, handleFavoriteToggle)}
-          aria-label={isFavorited ? "Remove from favorites" : "Add to favorites"}
+          aria-label={
+            isFavorited ? "Remove from favorites" : "Add to favorites"
+          }
           aria-pressed={isFavorited}
           className="hover:bg-[var(--color-hover-background)] focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)] transition-colors duration-150"
         >
-          <Heart 
+          <Heart
             className={`w-6 h-6 transition-all duration-200 ${
-              isFavorited 
-                ? 'text-[var(--color-primary)] fill-[var(--color-primary)]' 
-                : 'text-[var(--color-primary)] hover:fill-[var(--color-primary)]'
+              isFavorited
+                ? "text-[var(--color-primary)] fill-[var(--color-primary)]"
+                : "text-[var(--color-primary)] hover:fill-[var(--color-primary)]"
             }`}
           />
         </Button>
-        <Button 
-          variant="ghost" 
-          size="icon" 
+        <Button
+          variant="ghost"
+          size="icon"
           onClick={handlePrintScreenshot}
           onKeyDown={(e) => handleKeyDown(e, handlePrintScreenshot)}
-          aria-label={isCapturing ? "Capturing screenshot..." : "Download recipe screenshot"}
+          aria-label={
+            isCapturing
+              ? "Capturing screenshot..."
+              : "Download recipe screenshot"
+          }
           disabled={isCapturing}
           className="hover:bg-[var(--color-hover-background)] focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)] transition-colors duration-150 disabled:opacity-50"
         >
-          <Printer className={`w-6 h-6 text-[var(--color-text-heading)] hover:text-[var(--color-primary)] transition-colors duration-150 ${
-            isCapturing ? 'animate-pulse' : ''
-          }`} />
+          <Printer
+            className={`w-6 h-6 text-[var(--color-text-heading)] hover:text-[var(--color-primary)] transition-colors duration-150 ${
+              isCapturing ? "animate-pulse" : ""
+            }`}
+          />
         </Button>
-        <Button 
-          variant="ghost" 
-          size="icon" 
+        <Button
+          variant="ghost"
+          size="icon"
           onClick={handleShare}
           onKeyDown={(e) => handleKeyDown(e, handleShare)}
           aria-label="Share recipe"
@@ -268,4 +307,4 @@ export default function RecipeClientPage({ recipeData, breadcrumbItems }: Recipe
       </div>
     </div>
   );
-} 
+}

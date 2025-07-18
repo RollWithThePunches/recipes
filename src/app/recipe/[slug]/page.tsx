@@ -45,58 +45,60 @@ function formatTime(minutes: number): string {
     const hours = Math.floor(minutes / 60);
     const remainingMinutes = minutes % 60;
     if (remainingMinutes === 0) {
-      return `${hours} hr${hours > 1 ? 's' : ''}`;
+      return `${hours} hr${hours > 1 ? "s" : ""}`;
     } else {
-      return `${hours} hr${hours > 1 ? 's' : ''} ${remainingMinutes} mins`;
+      return `${hours} hr${hours > 1 ? "s" : ""} ${remainingMinutes} mins`;
     }
   }
 }
 
 // Helper function to get breadcrumb items based on cuisine, meal type, and recipe title
-function getBreadcrumbItems(cuisine: string, mealType: string, recipeTitle: string): BreadcrumbItem[] {
+function getBreadcrumbItems(
+  cuisine: string,
+  mealType: string,
+  recipeTitle: string,
+): BreadcrumbItem[] {
   // Map internal mealType values to display names and URL paths
   const mealTypeDisplayNames: Record<string, string> = {
-    'dinner': 'Main dish',
-    'appetizer': 'Appetizers',
-    'side': 'Sides', 
-    'soup': 'Soups',
-    'dessert': 'Desserts',
-    'drink': 'Drinks'
+    dinner: "Main dish",
+    appetizer: "Appetizers",
+    side: "Sides",
+    soup: "Soups",
+    dessert: "Desserts",
+    drink: "Drinks",
   };
 
   const mealTypeUrlPaths: Record<string, string> = {
-    'dinner': 'main-dish',
-    'appetizer': 'appetizers',
-    'side': 'sides',
-    'soup': 'soups',
-    'dessert': 'desserts',
-    'drink': 'drinks'
+    dinner: "main-dish",
+    appetizer: "appetizers",
+    side: "sides",
+    soup: "soups",
+    dessert: "desserts",
+    drink: "drinks",
   };
 
-  const baseItems: BreadcrumbItem[] = [
-    { label: "Home", href: "/" }
-  ];
+  const baseItems: BreadcrumbItem[] = [{ label: "Home", href: "/" }];
 
   if (cuisine) {
-    baseItems.push({ 
-      label: cuisine, 
-      href: `/category/${cuisine.toLowerCase()}` 
+    baseItems.push({
+      label: cuisine,
+      href: `/category/${cuisine.toLowerCase()}`,
     });
   }
 
   if (mealType) {
     const displayMealType = mealTypeDisplayNames[mealType] || mealType;
     const urlPath = mealTypeUrlPaths[mealType] || mealType;
-    baseItems.push({ 
-      label: displayMealType, 
-      href: `/category/${cuisine.toLowerCase()}/${urlPath}` 
+    baseItems.push({
+      label: displayMealType,
+      href: `/category/${cuisine.toLowerCase()}/${urlPath}`,
     });
   }
 
   // Add recipe title as the final breadcrumb item
   baseItems.push({
     label: recipeTitle,
-    isCurrentPage: true
+    isCurrentPage: true,
   });
 
   return baseItems;
@@ -105,9 +107,9 @@ function getBreadcrumbItems(cuisine: string, mealType: string, recipeTitle: stri
 export default async function RecipePage({ params }: RecipePageProps) {
   // Await the params since they're a Promise in Next.js 15
   const { slug } = await params;
-  
+
   // Find the recipe in content.json
-  const recipe = content.recipes.find(r => r.id === slug);
+  const recipe = content.recipes.find((r) => r.id === slug);
 
   if (!recipe) {
     notFound();
@@ -124,24 +126,33 @@ export default async function RecipePage({ params }: RecipePageProps) {
       prepTime: formatTime(recipe.prepTime),
       cookTime: formatTime(recipe.cookTime),
       totalTime: formatTime(recipe.prepTime + recipe.cookTime),
-      servings: recipe.servings.toString()
+      servings: recipe.servings.toString(),
     },
-    ingredients: recipe.ingredients.map(ing => ({
+    ingredients: recipe.ingredients.map((ing) => ({
       amount: `${ing.quantity} ${ing.unit}`.trim(),
-      item: ing.item
+      item: ing.item,
     })),
-    directions: recipe.steps.map(step => ({
+    directions: recipe.steps.map((step) => ({
       stepNumber: step.stepNumber,
-      instruction: step.instruction
+      instruction: step.instruction,
     })),
     cuisine: recipe.cuisine,
     difficulty: recipe.difficulty,
-    dietary: recipe.dietary
+    dietary: recipe.dietary,
   };
 
-  const breadcrumbItems = getBreadcrumbItems(recipe.cuisine, recipe.mealType, recipe.title);
+  const breadcrumbItems = getBreadcrumbItems(
+    recipe.cuisine,
+    recipe.mealType,
+    recipe.title,
+  );
 
-  return <RecipeClientPage recipeData={recipeData} breadcrumbItems={breadcrumbItems} />;
+  return (
+    <RecipeClientPage
+      recipeData={recipeData}
+      breadcrumbItems={breadcrumbItems}
+    />
+  );
 }
 
-export type { TransformedRecipeData }; 
+export type { TransformedRecipeData };

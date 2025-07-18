@@ -10,9 +10,9 @@ interface IngredientsListProps {
   className?: string;
 }
 
-export default function IngredientsList({ 
-  ingredients, 
-  className = "" 
+export default function IngredientsList({
+  ingredients,
+  className = "",
 }: IngredientsListProps) {
   return (
     <div className={`${className}`}>
@@ -21,8 +21,13 @@ export default function IngredientsList({
       </h2>
       <ul className="space-y-[var(--spacing-sm)] list-none">
         {ingredients.map((ingredient, index) => (
-          <li key={index} className="flex text-[var(--color-text-body)] text-[var(--font-size-base)] leading-[var(--line-height-normal)]">
-            <span className="text-[var(--color-primary)] mr-[var(--spacing-sm)] font-bold">•</span>
+          <li
+            key={index}
+            className="flex text-[var(--color-text-body)] text-[var(--font-size-base)] leading-[var(--line-height-normal)]"
+          >
+            <span className="text-[var(--color-primary)] mr-[var(--spacing-sm)] font-bold">
+              •
+            </span>
             <span>
               {ingredient.amount} {ingredient.item}
             </span>
@@ -31,4 +36,4 @@ export default function IngredientsList({
       </ul>
     </div>
   );
-} 
+}

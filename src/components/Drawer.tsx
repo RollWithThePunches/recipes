@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { useEffect, useRef } from 'react';
-import { Button } from './ui/button';
+import React, { useEffect, useRef } from "react";
+import { Button } from "./ui/button";
 
 interface DrawerProps {
   isOpen: boolean;
@@ -10,7 +10,7 @@ interface DrawerProps {
 }
 
 // Icon components
-const CloseIcon: React.FC<{ className?: string }> = ({ className = '' }) => (
+const CloseIcon: React.FC<{ className?: string }> = ({ className = "" }) => (
   <svg
     width="24"
     height="24"
@@ -30,7 +30,7 @@ const CloseIcon: React.FC<{ className?: string }> = ({ className = '' }) => (
   </svg>
 );
 
-const SearchIcon: React.FC<{ className?: string }> = ({ className = '' }) => (
+const SearchIcon: React.FC<{ className?: string }> = ({ className = "" }) => (
   <svg
     width="24"
     height="24"
@@ -45,7 +45,9 @@ const SearchIcon: React.FC<{ className?: string }> = ({ className = '' }) => (
   </svg>
 );
 
-const ChevronRightIcon: React.FC<{ className?: string }> = ({ className = '' }) => (
+const ChevronRightIcon: React.FC<{ className?: string }> = ({
+  className = "",
+}) => (
   <svg
     width="24"
     height="24"
@@ -72,13 +74,13 @@ const SearchBar: React.FC = () => (
       type="text"
       placeholder="What are looking to cook?"
       className="w-full rounded-lg text-base font-normal focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)] focus:border-transparent transition-colors duration-150"
-      style={{ 
-        fontFamily: 'var(--font-family-body)',
-        padding: 'var(--spacing-sm) var(--spacing-md)',
-        paddingRight: '2.5rem',
-        border: '1px solid var(--color-background-dark)',
-        color: 'var(--color-text-heading)',
-        backgroundColor: 'var(--color-background)',
+      style={{
+        fontFamily: "var(--font-family-body)",
+        padding: "var(--spacing-sm) var(--spacing-md)",
+        paddingRight: "2.5rem",
+        border: "1px solid var(--color-background-dark)",
+        color: "var(--color-text-heading)",
+        backgroundColor: "var(--color-background)",
       }}
       aria-label="Search recipes"
     />
@@ -104,10 +106,10 @@ const MenuItem: React.FC<MenuItemProps> = ({ children, onClick }) => (
     variant="ghost"
     size="default"
     onClick={onClick}
-                className="w-full justify-between text-left h-auto bg-[var(--color-background)] text-[var(--color-text-heading)] hover:bg-[var(--color-hover-background)] hover:text-[var(--color-text-heading)] transition-colors duration-150"
-    style={{ 
-      fontFamily: 'var(--font-family-body)',
-      padding: 'var(--spacing-sm) var(--spacing-md)',
+    className="w-full justify-between text-left h-auto bg-[var(--color-background)] text-[var(--color-text-heading)] hover:bg-[var(--color-hover-background)] hover:text-[var(--color-text-heading)] transition-colors duration-150"
+    style={{
+      fontFamily: "var(--font-family-body)",
+      padding: "var(--spacing-sm) var(--spacing-md)",
     }}
   >
     <span className="text-current">{children}</span>
@@ -115,7 +117,11 @@ const MenuItem: React.FC<MenuItemProps> = ({ children, onClick }) => (
   </Button>
 );
 
-export const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose, className = '' }) => {
+export const Drawer: React.FC<DrawerProps> = ({
+  isOpen,
+  onClose,
+  className = "",
+}) => {
   const drawerRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -129,25 +135,25 @@ export const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose, className = '' 
   // Handle escape key
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && isOpen) {
+      if (event.key === "Escape" && isOpen) {
         onClose();
       }
     };
 
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
   }, [isOpen, onClose]);
 
   // Prevent body scroll when drawer is open
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
 
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     };
   }, [isOpen]);
 
@@ -163,7 +169,7 @@ export const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose, className = '' 
   return (
     <div
       className={`fixed inset-0 z-50 ${className}`}
-      style={{ backgroundColor: 'var(--color-background-overlay)' }}
+      style={{ backgroundColor: "var(--color-background-overlay)" }}
       onClick={handleOverlayClick}
       role="dialog"
       aria-modal="true"
@@ -173,14 +179,23 @@ export const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose, className = '' 
         ref={drawerRef}
         className="flex flex-col h-full w-full max-w-sm border-r"
         style={{
-          backgroundColor: 'var(--color-background)',
-          borderColor: 'var(--card-border)',
+          backgroundColor: "var(--color-background)",
+          borderColor: "var(--card-border)",
         }}
         role="document"
       >
         {/* Header */}
-        <div className="flex flex-col gap-6" style={{ padding: 'var(--spacing-lg) var(--spacing-xl) var(--spacing-xl) var(--spacing-xl)' }}>
-          <div className="flex items-center" style={{ gap: 'var(--spacing-xl)' }}>
+        <div
+          className="flex flex-col gap-6"
+          style={{
+            padding:
+              "var(--spacing-lg) var(--spacing-xl) var(--spacing-xl) var(--spacing-xl)",
+          }}
+        >
+          <div
+            className="flex items-center"
+            style={{ gap: "var(--spacing-xl)" }}
+          >
             <Button
               ref={closeButtonRef as React.RefObject<HTMLButtonElement>}
               variant="ghost"
@@ -188,7 +203,7 @@ export const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose, className = '' 
               onClick={onClose}
               className="w-8 h-8 text-[var(--color-text-heading)] hover:bg-[var(--color-hover-background)] hover:text-[var(--color-text-heading)] transition-colors duration-150"
               style={{
-                padding: 'var(--spacing-sm)',
+                padding: "var(--spacing-sm)",
               }}
               aria-label="Close navigation menu"
             >
@@ -197,9 +212,9 @@ export const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose, className = '' 
             <h1
               id="drawer-title"
               className="font-normal text-[var(--color-primary)]"
-              style={{ 
-                fontFamily: 'var(--font-family-heading)',
-                fontSize: 'var(--font-size-3xl)'
+              style={{
+                fontFamily: "var(--font-family-heading)",
+                fontSize: "var(--font-size-3xl)",
               }}
             >
               Cooking
@@ -209,31 +224,35 @@ export const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose, className = '' 
         </div>
 
         {/* Navigation Menu */}
-        <nav className="flex-1" style={{ padding: '0 var(--spacing-xl)' }} aria-label="Main navigation">
-          <div className="flex flex-col" style={{ gap: 'var(--spacing-sm)' }}>
-            <MenuItem onClick={() => console.log('Meals clicked')}>
+        <nav
+          className="flex-1"
+          style={{ padding: "0 var(--spacing-xl)" }}
+          aria-label="Main navigation"
+        >
+          <div className="flex flex-col" style={{ gap: "var(--spacing-sm)" }}>
+            <MenuItem onClick={() => console.log("Meals clicked")}>
               Meals
             </MenuItem>
-            <MenuItem onClick={() => console.log('Ingredients clicked')}>
+            <MenuItem onClick={() => console.log("Ingredients clicked")}>
               Ingredients
             </MenuItem>
-            <MenuItem onClick={() => console.log('Culture clicked')}>
+            <MenuItem onClick={() => console.log("Culture clicked")}>
               Culture
             </MenuItem>
-            <MenuItem onClick={() => console.log('Occasions clicked')}>
+            <MenuItem onClick={() => console.log("Occasions clicked")}>
               Occasions
             </MenuItem>
           </div>
         </nav>
 
         {/* Footer */}
-        <div style={{ padding: 'var(--spacing-xl)' }}>
+        <div style={{ padding: "var(--spacing-xl)" }}>
           <Button
             variant="default"
             size="default"
             className="w-full"
-            style={{ fontFamily: 'var(--font-family-body)' }}
-            onClick={() => console.log('Login clicked')}
+            style={{ fontFamily: "var(--font-family-body)" }}
+            onClick={() => console.log("Login clicked")}
           >
             Login
           </Button>
@@ -243,4 +262,4 @@ export const Drawer: React.FC<DrawerProps> = ({ isOpen, onClose, className = '' 
   );
 };
 
-export default Drawer; 
+export default Drawer;
