@@ -63,6 +63,18 @@ export interface AccountMenuUI {
   };
 }
 
+export interface AccountSection {
+  favorites: RecipeCard[];
+  quickActions: {
+    label: string;
+    href: string;
+  }[];
+  navigationItems: {
+    id: string;
+    label: string;
+  }[];
+}
+
 export interface UI {
   navigation: NavigationUI;
   buttons: ButtonsUI;
@@ -111,5 +123,6 @@ export interface ContentData {
   homepage: Homepage;
   recipes: Recipe[];
   categories: Categories;
+  account: AccountSection;
   ui: UI;
 }

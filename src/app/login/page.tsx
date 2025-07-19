@@ -1,9 +1,61 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useToast } from "@/components/ui/toast-provider";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function LoginPage() {
+  const { showToast } = useToast();
+  const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const formData = new FormData(e.currentTarget);
+    const loginData = {
+      username: formData.get('username') as string,
+      password: formData.get('password') as string,
+    };
+
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(loginData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Login failed');
+      }
+
+      // Show success toast
+      showToast("Login successful! Welcome back.");
+
+      // Store login state and user data from database response
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("username", result.user.username);
+      localStorage.setItem("firstName", result.user.firstName);
+      
+      // Redirect to account page
+      router.push("/account");
+    } catch (error) {
+      console.error('Login error:', error);
+      showToast(error instanceof Error ? error.message : 'Login failed');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-[var(--color-background)]">
       <div
@@ -23,6 +75,7 @@ export default function LoginPage() {
           className="flex flex-col gap-[var(--spacing-lg)] w-full"
           autoComplete="off"
           aria-label="Sign in form"
+          onSubmit={handleSubmit}
         >
           <div className="flex flex-col gap-[var(--spacing-xs)] w-full">
             <Label htmlFor="username">Username</Label>
@@ -52,8 +105,9 @@ export default function LoginPage() {
                 color: "var(--color-text-on-dark)",
                 width: "fit-content",
               }}
+              disabled={isSubmitting}
             >
-              Sign in
+              {isSubmitting ? "Signing in..." : "Sign in"}
             </Button>
           </div>
         </form>

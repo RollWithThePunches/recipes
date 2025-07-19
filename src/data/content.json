@@ -405,6 +405,64 @@
       }
     }
   },
+  "account": {
+    "favorites": [
+      {
+        "id": "margaritas",
+        "title": "Margaritas",
+        "description": "Fresh lime juice, tequila, and triple sec blended with ice creates the perfect margarita.",
+        "image": "/assets/mixed-drinks.jpg"
+      },
+      {
+        "id": "barbacoa-tacos",
+        "title": "Burritos",
+        "description": "These barbacoa tacos are packed with smoky shredded beef that's perfectly tender.",
+        "image": "/assets/fh-tacos-3784500610.jpg"
+      },
+      {
+        "id": "char-burgers",
+        "title": "Burritos",
+        "description": "These feature a seared exterior with grill marks and smoky flavor.",
+        "image": "/assets/burgers.jpg"
+      }
+    ],
+    "quickActions": [
+      {
+        "label": "Account information",
+        "href": "#account-info"
+      },
+      {
+        "label": "Change login",
+        "href": "#change-login"
+      },
+      {
+        "label": "Security",
+        "href": "#security"
+      }
+    ],
+    "navigationItems": [
+      {
+        "id": "account-info",
+        "label": "Account information"
+      },
+      {
+        "id": "your-recipes",
+        "label": "Your recipes"
+      },
+      {
+        "id": "favorites",
+        "label": "Favorites"
+      },
+      {
+        "id": "security",
+        "label": "Security and privacy"
+      },
+      {
+        "id": "help",
+        "label": "Help and support"
+      }
+    ]
+  },
   "ui": {
     "navigation": {
       "brand": "Cooking",

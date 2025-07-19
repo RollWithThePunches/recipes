@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Menu, Search, X } from "lucide-react";
+import { useRouter, usePathname } from "next/navigation";
 import contentData from "@/data/content.json";
 import { ContentData } from "@/types/content";
 import Drawer from "./Drawer";
@@ -10,13 +11,15 @@ import AccountMenu from "./AccountMenu";
 const content = contentData as ContentData;
 
 export default function Header() {
+  const router = useRouter();
+  const pathname = usePathname();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchButtonRef = useRef<HTMLButtonElement>(null);
-  const username = "John Doe";
+  const [firstName, setFirstName] = useState<string>("");
 
   // Focus management for search
   useEffect(() => {
@@ -24,6 +27,24 @@ export default function Header() {
       searchInputRef.current.focus();
     }
   }, [isSearchVisible]);
+
+  // Check if user is logged in based on localStorage and current route
+  useEffect(() => {
+    // Check if user has logged in before (stored in localStorage)
+    const hasLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    const storedFirstName = localStorage.getItem("firstName") || "";
+    
+    // User is logged in if they have logged in before OR if they're on the account page
+    if (hasLoggedIn || pathname === "/account") {
+      setIsLoggedIn(true);
+      setFirstName(storedFirstName);
+      // Ensure localStorage is set to true
+      localStorage.setItem("isLoggedIn", "true");
+    } else {
+      setIsLoggedIn(false);
+      setFirstName("");
+    }
+  }, [pathname]);
 
   const handleDrawerToggle = () => {
     setIsDrawerOpen(!isDrawerOpen);
@@ -68,25 +89,38 @@ export default function Header() {
   };
 
   const handleSignIn = () => {
-    setIsLoggedIn(true);
-    console.log("Sign in clicked");
+    // Navigate to login page instead of just setting state
+    router.push("/login");
   };
 
   const handleSignOut = () => {
     setIsLoggedIn(false);
+    setFirstName("");
+    // Clear login state from localStorage
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("username");
+    localStorage.removeItem("firstName");
     console.log("Sign out clicked");
+    // Redirect to home page after sign out
+    router.push("/");
   };
 
   const handleAccountClick = () => {
     console.log("Account clicked");
+    // Navigate to account page
+    router.push("/account");
   };
 
   const handleSecurityClick = () => {
     console.log("Security clicked");
+    // Navigate to security page (if it exists)
+    // router.push("/security");
   };
 
   const handleMessagesClick = () => {
     console.log("Messages clicked");
+    // Navigate to messages page (if it exists)
+    // router.push("/messages");
   };
 
   return (
@@ -184,15 +218,15 @@ export default function Header() {
             </div>
 
             {/* Account Menu */}
-            <AccountMenu
-              isLoggedIn={isLoggedIn}
-              username={username}
-              onSignIn={handleSignIn}
-              onSignOut={handleSignOut}
-              onAccountClick={handleAccountClick}
-              onSecurityClick={handleSecurityClick}
-              onMessagesClick={handleMessagesClick}
-            />
+                    <AccountMenu
+          isLoggedIn={isLoggedIn}
+          username={firstName}
+          onSignIn={handleSignIn}
+          onSignOut={handleSignOut}
+          onAccountClick={handleAccountClick}
+          onSecurityClick={handleSecurityClick}
+          onMessagesClick={handleMessagesClick}
+        />
           </div>
         </div>
       </div>

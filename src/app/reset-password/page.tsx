@@ -17,16 +17,40 @@ export default function ResetPasswordPage() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form processing
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    const formData = new FormData(e.currentTarget);
+    const resetData = {
+      username: formData.get('username') as string,
+      currentPassword: formData.get('currentPassword') as string,
+      newPassword: formData.get('newPassword') as string,
+      confirmNewPassword: formData.get('confirmNewPassword') as string,
+    };
 
-    // Show success toast
-    showToast(
-      "Your password has been reset successfully. You can now sign in with your new password.",
-    );
+    try {
+      const response = await fetch('/api/auth/reset-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(resetData),
+      });
 
-    // Redirect to login page
-    router.push("/login");
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to reset password');
+      }
+
+      // Show success toast
+      showToast("Your password has been reset successfully. You can now sign in with your new password.");
+
+      // Redirect to login page
+      router.push("/login");
+    } catch (error) {
+      console.error('Password reset error:', error);
+      showToast(error instanceof Error ? error.message : 'Failed to reset password');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -58,6 +82,18 @@ export default function ResetPasswordPage() {
               name="username"
               type="text"
               autoComplete="username"
+              required
+            />
+          </div>
+
+          {/* Current password field */}
+          <div className="flex flex-col gap-[var(--spacing-xs)] w-full">
+            <Label htmlFor="currentPassword">Current password*</Label>
+            <Input
+              id="currentPassword"
+              name="currentPassword"
+              type="password"
+              autoComplete="current-password"
               required
             />
           </div>

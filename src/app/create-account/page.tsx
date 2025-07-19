@@ -16,14 +16,42 @@ export default function CreateAccountPage() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form processing
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    const formData = new FormData(e.currentTarget);
+    const userData = {
+      email: formData.get('email') as string,
+      username: formData.get('username') as string,
+      firstName: formData.get('firstName') as string,
+      lastName: formData.get('lastName') as string,
+      password: formData.get('password') as string,
+      confirmPassword: formData.get('confirmPassword') as string,
+    };
 
-    // Show success toast
-    showToast("Your account was created. Sign in to view your account");
+    try {
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
 
-    // Redirect to login page
-    router.push("/login");
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to create account');
+      }
+
+      // Show success toast
+      showToast("Your account was created. Sign in to view your account");
+
+      // Redirect to login page
+      router.push("/login");
+    } catch (error) {
+      console.error('Registration error:', error);
+      showToast(error instanceof Error ? error.message : 'Failed to create account');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -73,6 +101,18 @@ export default function CreateAccountPage() {
                 />
               </div>
             </div>
+          </div>
+
+          {/* Email field */}
+          <div className="flex flex-col gap-[var(--spacing-xs)] w-full">
+            <Label htmlFor="email">Email*</Label>
+            <Input
+              id="email"
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+            />
           </div>
 
           {/* Username field */}
