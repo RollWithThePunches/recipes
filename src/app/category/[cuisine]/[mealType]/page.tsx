@@ -10,10 +10,10 @@ import RecipeCard from "@/components/RecipeCard";
 const content = contentData as ContentData;
 
 interface SubcategoryPageProps {
-  params: {
+  params: Promise<{
     cuisine: string;
     mealType: string;
-  };
+  }>;
 }
 
 export default async function SubcategoryPage({

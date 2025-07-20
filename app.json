@@ -1,0 +1,30 @@
+{
+  "name": "cooking-recipes",
+  "description": "Recipe Browser App with User Authentication",
+  "repository": "https://github.com/RollWithThePunches/recipes",
+  "logo": "https://node-js-sample.herokuapp.com/node.png",
+  "keywords": ["node", "nextjs", "recipes", "cooking"],
+  "env": {
+    "NODE_ENV": {
+      "description": "Environment setting",
+      "value": "production"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "scripts": {
+    "postdeploy": "npx prisma generate && npx prisma db push"
+  },
+  "addons": [
+    "heroku-postgresql:essential-0"
+  ]
+} 

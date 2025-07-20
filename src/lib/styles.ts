@@ -182,7 +182,7 @@ export const animations = {
   },
 };
 
-export default {
+const styleUtils = {
   tokens,
   styles,
   classNames,
@@ -197,3 +197,5 @@ export default {
   getTransition,
   cssVar,
 };
+
+export default styleUtils;

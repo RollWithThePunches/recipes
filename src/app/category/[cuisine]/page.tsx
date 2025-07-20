@@ -12,12 +12,12 @@ import { Button } from "@/components/ui/button";
 const content = contentData as ContentData;
 
 interface CategoryPageProps {
-  params: {
+  params: Promise<{
     cuisine: string;
-  };
-  searchParams: {
+  }>;
+  searchParams: Promise<{
     type?: string;
-  };
+  }>;
 }
 
 // Featured Recipe Component

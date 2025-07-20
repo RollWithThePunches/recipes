@@ -44,6 +44,7 @@ describe("Header Accessibility", () => {
       const { testNVDA } = renderWithA11y(<Header />);
 
       const searchButton = screen.getByRole("button", { name: /open search/i });
+      expect(searchButton).toBeInTheDocument();
       await testNVDA("open search, button");
     });
 
@@ -53,6 +54,7 @@ describe("Header Accessibility", () => {
       const menuButton = screen.getByRole("button", {
         name: /open navigation menu/i,
       });
+      expect(menuButton).toBeInTheDocument();
       await testNVDA("open navigation menu, button");
     });
 
@@ -79,6 +81,7 @@ describe("Header Accessibility", () => {
       const searchInput = screen.getByRole("textbox", {
         name: /search recipes/i,
       });
+      expect(searchInput).toBeInTheDocument();
       await testNVDA("search recipes, textbox");
     });
 

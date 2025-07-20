@@ -5,9 +5,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/toast-provider";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 
-export default function CreateAccountPage() {
+function CreateAccountForm() {
   const { showToast } = useToast();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -182,5 +182,13 @@ export default function CreateAccountPage() {
         </form>
       </div>
     </div>
+  );
+}
+
+export default function CreateAccountPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CreateAccountForm />
+    </Suspense>
   );
 }
