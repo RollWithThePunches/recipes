@@ -4,13 +4,17 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/toast-provider";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 export default function CreateAccountPage() {
   const { showToast } = useToast();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Get the redirect URL from query parameters
+  const redirectTo = searchParams.get('redirectTo') || '/account';
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -26,7 +30,15 @@ export default function CreateAccountPage() {
       confirmPassword: formData.get('confirmPassword') as string,
     };
 
+    console.log('Frontend: Form submitted with data:', { 
+      email: userData.email, 
+      username: userData.username, 
+      firstName: userData.firstName, 
+      lastName: userData.lastName 
+    });
+
     try {
+      console.log('Frontend: Making fetch request to /api/auth/register');
       const response = await fetch('/api/auth/register', {
         method: 'POST',
         headers: {
@@ -36,16 +48,18 @@ export default function CreateAccountPage() {
       });
 
       const result = await response.json();
+      console.log('Frontend: Response received:', { status: response.status, result });
 
       if (!response.ok) {
         throw new Error(result.error || 'Failed to create account');
       }
 
+      console.log('Frontend: Account created successfully, showing toast');
       // Show success toast
       showToast("Your account was created. Sign in to view your account");
 
-      // Redirect to login page
-      router.push("/login");
+      // Redirect to login page with the original redirect parameter
+      router.push(`/login?redirectTo=${encodeURIComponent(redirectTo)}`);
     } catch (error) {
       console.error('Registration error:', error);
       showToast(error instanceof Error ? error.message : 'Failed to create account');

@@ -9,8 +9,11 @@ import RecipeRating from "@/components/RecipeRating";
 import RecipeStats from "@/components/RecipeStats";
 import IngredientsList from "@/components/IngredientsList";
 import RecipeDirections from "@/components/RecipeDirections";
+import FavoritesModal from "@/components/FavoritesModal";
 import html2canvas from "html2canvas";
 import { TransformedRecipeData } from "./page";
+import { useFavorites } from "@/hooks/useFavorites";
+import { useAuth } from "@/hooks/useAuth";
 
 interface RecipeClientPageProps {
   recipeData: TransformedRecipeData;
@@ -21,17 +24,39 @@ export default function RecipeClientPage({
   recipeData,
   breadcrumbItems,
 }: RecipeClientPageProps) {
-  const [isFavorited, setIsFavorited] = useState(false);
   const [isCapturing, setIsCapturing] = useState(false);
+  const [showFavoritesModal, setShowFavoritesModal] = useState(false);
   const pageRef = useRef<HTMLDivElement>(null);
+  const { isFavorite, toggleFavorite } = useFavorites();
+  const { isLoggedIn } = useAuth();
 
-  const handleFavoriteToggle = () => {
-    setIsFavorited(!isFavorited);
-    // TODO: Implement actual favorite persistence logic
-    console.log(
-      `Recipe ${isFavorited ? "removed from" : "added to"} favorites:`,
-      recipeData.title,
-    );
+  const handleFavoriteToggle = async () => {
+    console.log('Heart button clicked - isLoggedIn:', isLoggedIn);
+    console.log('localStorage isLoggedIn:', localStorage.getItem('isLoggedIn'));
+    console.log('localStorage userId:', localStorage.getItem('userId'));
+    
+    // Check if user is logged in
+    if (!isLoggedIn) {
+      console.log('User not logged in, showing modal');
+      setShowFavoritesModal(true);
+      return;
+    }
+
+    const recipeForFavorites = {
+      id: recipeData.id,
+      title: recipeData.title,
+      description: recipeData.description,
+      image: recipeData.image,
+      cuisine: recipeData.cuisine
+    };
+    
+    const success = await toggleFavorite(recipeForFavorites);
+    if (success) {
+      console.log(
+        `Recipe ${isFavorite(recipeData.id) ? "removed from" : "added to"} favorites:`,
+        recipeData.title,
+      );
+    }
   };
 
   const handlePrintScreenshot = async () => {
@@ -163,14 +188,14 @@ export default function RecipeClientPage({
               onClick={handleFavoriteToggle}
               onKeyDown={(e) => handleKeyDown(e, handleFavoriteToggle)}
               aria-label={
-                isFavorited ? "Remove from favorites" : "Add to favorites"
+                isFavorite(recipeData.id) ? "Remove from favorites" : "Add to favorites"
               }
-              aria-pressed={isFavorited}
+              aria-pressed={isFavorite(recipeData.id)}
               className="hover:bg-[var(--color-hover-background)] focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)] transition-colors duration-150"
             >
               <Heart
                 className={`w-5 h-5 transition-all duration-200 ${
-                  isFavorited
+                  isFavorite(recipeData.id)
                     ? "text-[var(--color-primary)] fill-[var(--color-primary)]"
                     : "text-[var(--color-primary)] hover:fill-[var(--color-primary)]"
                 }`}
@@ -262,14 +287,14 @@ export default function RecipeClientPage({
           onClick={handleFavoriteToggle}
           onKeyDown={(e) => handleKeyDown(e, handleFavoriteToggle)}
           aria-label={
-            isFavorited ? "Remove from favorites" : "Add to favorites"
+            isFavorite(recipeData.id) ? "Remove from favorites" : "Add to favorites"
           }
-          aria-pressed={isFavorited}
+          aria-pressed={isFavorite(recipeData.id)}
           className="hover:bg-[var(--color-hover-background)] focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)] transition-colors duration-150"
         >
           <Heart
             className={`w-6 h-6 transition-all duration-200 ${
-              isFavorited
+              isFavorite(recipeData.id)
                 ? "text-[var(--color-primary)] fill-[var(--color-primary)]"
                 : "text-[var(--color-primary)] hover:fill-[var(--color-primary)]"
             }`}
@@ -305,6 +330,12 @@ export default function RecipeClientPage({
           <Share className="w-6 h-6 text-[var(--color-text-heading)] hover:text-[var(--color-primary)] transition-colors duration-150" />
         </Button>
       </div>
+
+      {/* Favorites Modal */}
+      <FavoritesModal 
+        isOpen={showFavoritesModal} 
+        onClose={() => setShowFavoritesModal(false)} 
+      />
     </div>
   );
 }

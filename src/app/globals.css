@@ -189,7 +189,7 @@
   }
   
   h2 {
-    font-size: var(--font-size-3xl);
+    font-size: var(--font-size-xl);
   }
   
   h3 {
@@ -298,7 +298,7 @@
     }
     
     h2 {
-      font-size: var(--font-size-2xl);
+      font-size: var(--font-size-lg);
     }
     
     h3 {

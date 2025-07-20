@@ -244,19 +244,43 @@ Based on: `front-end-prd.mdc` and `design-requirements-prd.mdc`
     - [ ] 6.4.3 Test with slow network connections
     - [ ] 6.4.4 Verify lazy loading implementation
 
-- [ ] 7.0 Final Review and Documentation
-  - [ ] 7.1 Component Review
-    - [ ] 7.1.1 **IMPORTANT**: Verify ALL components use Shadcn components wherever possible
-    - [ ] 7.1.2 **IMPORTANT**: Verify ALL components use design tokens instead of hardcoded values
-    - [ ] 7.1.3 Ensure components match design requirements
-    - [ ] 7.1.4 **IMPORTANT**: Confirm dynamic content loading from content.json
-    - [ ] 7.1.5 Test component props and error handling
-  - [ ] 7.2 Design Token Validation
-    - [ ] 7.2.1 **IMPORTANT**: Confirm ALL colors use design tokens in Tailwind classes (e.g., `bg-[var(--color-primary)]`)
-    - [ ] 7.2.2 **IMPORTANT**: Verify NO hardcoded hex values remain in codebase
-    - [ ] 7.2.3 Confirm all colors use correct hex values from design requirements
-    - [ ] 7.2.4 Verify spacing scale is consistently applied using tokens
-    - [ ] 7.2.5 Check typography hierarchy uses correct fonts and sizes with tokens
+- [x] 7.0 Authentication and Login Routing System
+  - [x] 7.1 Implement Login Routing Functionality
+    - [x] 7.1.1 Update login page to accept `redirectTo` query parameter
+    - [x] 7.1.2 Modify Header component to pass current pathname when navigating to login
+    - [x] 7.1.3 Update Drawer component to include currentPath prop and pass redirect parameter
+    - [x] 7.1.4 Update create-account page to handle redirectTo parameter
+    - [x] 7.1.5 Update reset-password page to handle redirectTo parameter
+    - [x] 7.1.6 Update cross-page links to preserve redirect parameters
+    - [x] 7.1.7 Fix sign out functionality to stay on current page instead of redirecting to home
+  - [x] 7.2 Authentication Flow Integration
+    - [x] 7.2.1 Ensure AccountMenu component works with updated sign-in flow
+    - [x] 7.2.2 Test redirect functionality across all authentication entry points
+    - [x] 7.2.3 Verify URL encoding handles special characters correctly
+    - [x] 7.2.4 Test fallback behavior when no redirect parameter is provided
+    - [x] 7.2.5 Validate user experience across different page types (home, recipe, category)
+  - [x] 7.3 Favorites Modal Implementation
+    - [x] 7.3.1 Create FavoritesModal component following Figma design
+    - [x] 7.3.2 Implement modal that appears when non-logged-in users try to favorite recipes
+    - [x] 7.3.3 Add sign-in and create-account navigation with redirect back to recipe page
+    - [x] 7.3.4 Integrate modal with RecipeClientPage component
+    - [x] 7.3.5 Create useAuth hook for client-side authentication state
+    - [x] 7.3.6 Ensure modal follows accessibility guidelines and design tokens
+    - [x] 7.3.7 Write comprehensive unit tests for modal functionality
+
+- [ ] 8.0 Final Review and Documentation
+  - [ ] 8.1 Component Review
+    - [ ] 8.1.1 **IMPORTANT**: Verify ALL components use Shadcn components wherever possible
+    - [ ] 8.1.2 **IMPORTANT**: Verify ALL components use design tokens instead of hardcoded values
+    - [ ] 8.1.3 Ensure components match design requirements
+    - [ ] 8.1.4 **IMPORTANT**: Confirm dynamic content loading from content.json
+    - [ ] 8.1.5 Test component props and error handling
+  - [ ] 8.2 Design Token Validation
+    - [ ] 8.2.1 **IMPORTANT**: Confirm ALL colors use design tokens in Tailwind classes (e.g., `bg-[var(--color-primary)]`)
+    - [ ] 8.2.2 **IMPORTANT**: Verify NO hardcoded hex values remain in codebase
+    - [ ] 8.2.3 Confirm all colors use correct hex values from design requirements
+    - [ ] 8.2.4 Verify spacing scale is consistently applied using tokens
+    - [ ] 8.2.5 Check typography hierarchy uses correct fonts and sizes with tokens
     - [ ] 7.2.6 Ensure focus states use design token colors
     - [ ] 7.2.7 **IMPORTANT**: Run automated audit to detect any hardcoded values
   - [ ] 7.3 Shadcn Component Validation

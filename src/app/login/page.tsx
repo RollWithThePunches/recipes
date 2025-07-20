@@ -5,13 +5,17 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/toast-provider";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 export default function LoginPage() {
   const { showToast } = useToast();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Get the redirect URL from query parameters
+  const redirectTo = searchParams.get('redirectTo') || '/account';
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -43,11 +47,12 @@ export default function LoginPage() {
 
       // Store login state and user data from database response
       localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("userId", result.user.id);
       localStorage.setItem("username", result.user.username);
       localStorage.setItem("firstName", result.user.firstName);
       
-      // Redirect to account page
-      router.push("/account");
+      // Redirect to the original page or account page as fallback
+      router.push(redirectTo);
     } catch (error) {
       console.error('Login error:', error);
       showToast(error instanceof Error ? error.message : 'Login failed');
@@ -115,14 +120,14 @@ export default function LoginPage() {
         {/* Links container */}
         <div className="w-full flex items-center justify-between text-[var(--font-size-base)] text-[var(--color-secondary)]">
           <Link
-            href="/reset-password"
+            href={`/reset-password?redirectTo=${encodeURIComponent(redirectTo)}`}
             className="underline decoration-solid underline-offset-2 hover:text-[var(--color-primary)] transition-colors"
             style={{ fontFamily: "var(--font-family-body)" }}
           >
             Forgot your password?
           </Link>
           <Link
-            href="/create-account"
+            href={`/create-account?redirectTo=${encodeURIComponent(redirectTo)}`}
             className="underline decoration-solid underline-offset-2 hover:text-[var(--color-primary)] transition-colors"
             style={{ fontFamily: "var(--font-family-body)" }}
           >

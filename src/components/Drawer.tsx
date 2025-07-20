@@ -1,12 +1,14 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 
 interface DrawerProps {
   isOpen: boolean;
   onClose: () => void;
   className?: string;
+  currentPath?: string;
 }
 
 // Icon components
@@ -121,9 +123,11 @@ export const Drawer: React.FC<DrawerProps> = ({
   isOpen,
   onClose,
   className = "",
+  currentPath = "/",
 }) => {
   const drawerRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const router = useRouter();
 
   // Focus management
   useEffect(() => {
@@ -164,12 +168,14 @@ export const Drawer: React.FC<DrawerProps> = ({
     }
   };
 
-  if (!isOpen) return null;
-
   return (
     <div
       className={`fixed inset-0 z-50 ${className}`}
-      style={{ backgroundColor: "var(--color-background-overlay)" }}
+      style={{ 
+        backgroundColor: "var(--color-background-overlay)",
+        opacity: isOpen ? 1 : 0,
+        pointerEvents: isOpen ? "auto" : "none",
+      }}
       onClick={handleOverlayClick}
       role="dialog"
       aria-modal="true"
@@ -177,24 +183,20 @@ export const Drawer: React.FC<DrawerProps> = ({
     >
       <div
         ref={drawerRef}
-        className="flex flex-col h-full w-full max-w-sm border-r"
+        className="flex flex-col h-full w-full max-w-sm border-r transition-transform duration-250 ease-in"
         style={{
           backgroundColor: "var(--color-background)",
           borderColor: "var(--card-border)",
+          transform: isOpen ? "translateX(0)" : "translateX(-100%)",
         }}
         role="document"
       >
         {/* Header */}
         <div
-          className="flex flex-col gap-6"
-          style={{
-            padding:
-              "var(--spacing-lg) var(--spacing-xl) var(--spacing-xl) var(--spacing-xl)",
-          }}
-        >
-          <div
-            className="flex items-center"
-            style={{ gap: "var(--spacing-xl)" }}
+            className="flex items-center px-[var(--spacing-lg)] align-center pl-[var(--spacing-xl)] gap-[var(--spacing-sm)]"
+            style={{
+              height: "59px",
+            }}
           >
             <Button
               ref={closeButtonRef as React.RefObject<HTMLButtonElement>}
@@ -220,6 +222,13 @@ export const Drawer: React.FC<DrawerProps> = ({
               Cooking
             </h1>
           </div>
+        <div
+          className="flex flex-col gap-6"
+          style={{
+            padding:
+              "var(--spacing-lg) var(--spacing-xl) var(--spacing-xl) var(--spacing-xl)",
+          }}
+        >
           <SearchBar />
         </div>
 
@@ -247,15 +256,15 @@ export const Drawer: React.FC<DrawerProps> = ({
 
         {/* Footer */}
         <div style={{ padding: "var(--spacing-xl)" }}>
-          <Button
-            variant="default"
-            size="default"
-            className="w-full"
-            style={{ fontFamily: "var(--font-family-body)" }}
-            onClick={() => console.log("Login clicked")}
-          >
-            Login
-          </Button>
+                      <Button
+              variant="default"
+              size="default"
+              className="w-full"
+              style={{ fontFamily: "var(--font-family-body)" }}
+              onClick={() => router.push(`/login?redirectTo=${encodeURIComponent(currentPath)}`)}
+            >
+              Login
+            </Button>
         </div>
       </div>
     </div>

@@ -55,7 +55,7 @@ The Recipe Browser App is a cooking application designed to help users learn new
 
 ## Non-Goals (Out of Scope)
 
-1. User account creation and authentication
+1. ~~User account creation and authentication~~ **UPDATED**: Basic authentication is now implemented
 2. Recipe favoriting/bookmarking functionality
 3. User-generated recipe content or submissions
 4. Recipe rating and review system
@@ -84,6 +84,32 @@ The Recipe Browser App is a cooking application designed to help users learn new
 - Component-based architecture for recipe cards and detail views
 - Consider performance optimization for recipe list rendering
 - Plan for future API integration for recipe data
+
+## Authentication and User Experience
+
+### Login Routing System
+The application implements a sophisticated login routing system that enhances user experience:
+
+1. **Context-Aware Sign In**: When users click "Sign In" from any page (home, recipe, category, etc.), the system captures their current location
+2. **Seamless Return**: After successful authentication, users are automatically redirected back to their original page
+3. **Cross-Page Consistency**: The redirect functionality works across all authentication flows:
+   - Sign in from header account menu
+   - Sign in from mobile drawer navigation
+   - Account creation flow
+   - Password reset flow
+4. **Stay-in-Place Sign Out**: When users sign out, they remain on their current page rather than being redirected to the home page
+
+### Implementation Details
+- Uses query parameters (`redirectTo`) to track the original page URL
+- URL encoding ensures special characters in page paths are handled correctly
+- Fallback to `/account` page if no redirect parameter is provided
+- Maintains user context throughout the authentication journey
+- Preserves user's browsing position for a seamless experience
+
+### User Flow Examples
+- User browsing `/recipe/tacos` → clicks "Sign In" → redirected to `/login?redirectTo=%2Frecipe%2Ftacos` → after login → returns to `/recipe/tacos`
+- User on `/category/mexican` → clicks "Sign In" → redirected to `/login?redirectTo=%2Fcategory%2Fmexican` → after login → returns to `/category/mexican`
+- User signs out from any page → stays on current page without navigation
 
 ## Success Metrics
 

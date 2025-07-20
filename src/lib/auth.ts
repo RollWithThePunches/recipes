@@ -42,6 +42,8 @@ export async function comparePassword(password: string, hash: string): Promise<b
 export async function createUser(userData: CreateUserData): Promise<UserWithoutPassword> {
   const { email, username, firstName, lastName, password } = userData
 
+  console.log('createUser called with:', { email, username, firstName, lastName })
+
   // Check if user already exists
   const existingUser = await prisma.user.findFirst({
     where: {
@@ -53,6 +55,7 @@ export async function createUser(userData: CreateUserData): Promise<UserWithoutP
   })
 
   if (existingUser) {
+    console.log('User already exists:', existingUser.email)
     throw new Error('User with this email or username already exists')
   }
 
@@ -60,6 +63,7 @@ export async function createUser(userData: CreateUserData): Promise<UserWithoutP
   const hashedPassword = await hashPassword(password)
 
   // Create the user
+  console.log('Creating user in database...')
   const user = await prisma.user.create({
     data: {
       email,
@@ -82,6 +86,7 @@ export async function createUser(userData: CreateUserData): Promise<UserWithoutP
     }
   })
 
+  console.log('User created in database:', user.id, user.email)
   return user
 }
 

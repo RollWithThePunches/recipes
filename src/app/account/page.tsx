@@ -8,12 +8,14 @@ import contentData from "@/data/content.json";
 import { ContentData } from "@/types/content";
 import Link from "next/link";
 import Image from "next/image";
+import { useFavorites } from "@/hooks/useFavorites";
 
 const content = contentData as ContentData;
 
 export default function AccountPage() {
   const [activeSection, setActiveSection] = useState("account-info");
   const [firstName, setFirstName] = useState<string>("");
+  const { getSortedFavorites, isLoading: favoritesLoading } = useFavorites();
 
   // Get firstName from localStorage on component mount
   useEffect(() => {
@@ -30,7 +32,7 @@ export default function AccountPage() {
   ];
 
   const quickActions = content.account?.quickActions || [];
-  const favoriteRecipes = content.account?.favorites || [];
+  const favoriteRecipes = getSortedFavorites();
 
   return (
     <div className="min-h-screen bg-[var(--color-background)] flex flex-col">
@@ -113,32 +115,41 @@ export default function AccountPage() {
                   View all
                 </Link>
               </div>
-              <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start md:items-center">
-                {favoriteRecipes.map((recipe) => (
-                  <Card
-                    key={recipe.id}
-                    className="w-full md:w-80 shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)] hover:shadow-[0px_4px_8px_0px_rgba(0,0,0,0.3)] transition-shadow"
-                  >
-                    <div className="h-[203px] w-full rounded-t-lg overflow-hidden">
-                      <Image
-                        src={recipe.image}
-                        alt={recipe.title}
-                        width={320}
-                        height={203}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <CardContent className="p-[14px]">
-                      <h3 
-                        className="text-[var(--color-text-body)] text-base font-semibold"
-                        style={{ fontFamily: "var(--font-family-body)" }}
-                      >
-                        {recipe.title}
-                      </h3>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
+              {favoritesLoading ? (
+                <div className="flex items-center justify-center h-32">
+                  <p className="text-[var(--color-text-body)]">Loading favorites...</p>
+                </div>
+              ) : favoriteRecipes.length > 0 ? (
+                <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start md:items-center">
+                  {favoriteRecipes.map((recipe) => (
+                    <Link key={recipe.id} href={`/recipe/${recipe.id}`}>
+                      <Card className="w-full md:w-80 shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)] hover:shadow-[0px_4px_8px_0px_rgba(0,0,0,0.3)] transition-shadow cursor-pointer">
+                        <div className="h-[203px] w-full rounded-t-lg overflow-hidden">
+                          <Image
+                            src={recipe.image}
+                            alt={recipe.title}
+                            width={320}
+                            height={203}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <CardContent className="p-[14px]">
+                          <h3 
+                            className="text-[var(--color-text-body)] text-base font-semibold"
+                            style={{ fontFamily: "var(--font-family-body)" }}
+                          >
+                            {recipe.title}
+                          </h3>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <div className="flex items-center justify-center h-32">
+                  <p className="text-[var(--color-text-body)]">No favorites yet. Start adding recipes to see them here!</p>
+                </div>
+              )}
             </section>
 
             {/* Your Recipes Section */}

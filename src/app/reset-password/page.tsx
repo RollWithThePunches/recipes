@@ -4,14 +4,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/toast-provider";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useState } from "react";
 
 export default function ResetPasswordPage() {
   const { showToast } = useToast();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Get the redirect URL from query parameters
+  const redirectTo = searchParams.get('redirectTo') || '/account';
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -43,8 +47,8 @@ export default function ResetPasswordPage() {
       // Show success toast
       showToast("Your password has been reset successfully. You can now sign in with your new password.");
 
-      // Redirect to login page
-      router.push("/login");
+      // Redirect to login page with the original redirect parameter
+      router.push(`/login?redirectTo=${encodeURIComponent(redirectTo)}`);
     } catch (error) {
       console.error('Password reset error:', error);
       showToast(error instanceof Error ? error.message : 'Failed to reset password');
@@ -124,7 +128,7 @@ export default function ResetPasswordPage() {
 
           {/* Button container */}
           <div className="w-full flex gap-[var(--spacing-md)] justify-end">
-            <Link href="/login">
+            <Link href={`/login?redirectTo=${encodeURIComponent(redirectTo)}`}>
               <Button
                 type="button"
                 variant="secondary"

@@ -89,8 +89,9 @@ export default function Header() {
   };
 
   const handleSignIn = () => {
-    // Navigate to login page instead of just setting state
-    router.push("/login");
+    // Navigate to login page with current path as redirect parameter
+    const currentPath = pathname === '/login' ? '/' : pathname;
+    router.push(`/login?redirectTo=${encodeURIComponent(currentPath)}`);
   };
 
   const handleSignOut = () => {
@@ -98,11 +99,17 @@ export default function Header() {
     setFirstName("");
     // Clear login state from localStorage
     localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userId");
     localStorage.removeItem("username");
     localStorage.removeItem("firstName");
-    console.log("Sign out clicked");
-    // Redirect to home page after sign out
-    router.push("/");
+    console.log("Sign out clicked - localStorage cleared");
+    console.log("After sign out - isLoggedIn:", localStorage.getItem("isLoggedIn"));
+    console.log("After sign out - userId:", localStorage.getItem("userId"));
+    
+    // Dispatch custom event to notify other components
+    window.dispatchEvent(new Event('localStorageChange'));
+    
+    // Don't redirect - user stays on current page
   };
 
   const handleAccountClick = () => {
@@ -125,13 +132,13 @@ export default function Header() {
 
   return (
     <header
-      className="relative w-full h-[60px] bg-white border-b border-solid border-[var(--color-text-heading)]"
+      className="relative w-full h-[60px] border-b border-solid bg-[var(--color-background)] border-[var(--color-gray)]"
       role="banner"
     >
       <div className="flex flex-row items-center h-full">
-        <div className="flex flex-row items-center justify-between px-4 w-full h-full">
+        <div className="flex flex-row items-center justify-between w-full h-full px-[var(--spacing-xl)]">
           {/* Left section with hamburger and brand */}
-          <div className="flex flex-row items-center gap-6">
+          <div className="flex flex-row items-center gap-[var(--spacing-lg)]">
             {/* Hamburger menu button */}
             <button
               className="w-6 h-6 shrink-0 flex items-center justify-center hover:bg-[var(--color-hover-background)] focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)] rounded transition-colors duration-150 group"
@@ -155,7 +162,7 @@ export default function Header() {
           </div>
 
           {/* Right section with search and profile */}
-          <div className="flex flex-row items-center gap-4">
+          <div className="flex flex-row items-center gap-[var(--spacing-lg)]">
             {/* Search section */}
             <div className="relative flex items-center">
               {/* Expandable search form */}
@@ -175,11 +182,13 @@ export default function Header() {
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onKeyDown={handleSearchKeyDown}
                     placeholder={content.ui.navigation.searchPlaceholder}
-                    className="w-full h-8 pl-3 pr-16 text-[var(--color-text-body)] bg-white border border-[var(--color-text-heading)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)] focus:border-[var(--color-focus)] transition-colors duration-150"
+                    className="w-full h-8 text-[var(--color-text-body)] bg-white border border-[var(--color-text-heading)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)] focus:border-[var(--color-focus)] transition-colors duration-150"
                     aria-label="Search recipes"
                     style={{
                       fontFamily: "var(--font-family-body)",
                       fontSize: "var(--font-size-sm)",
+                      paddingLeft: "var(--spacing-md)",
+                      paddingRight: "var(--spacing-xl)",
                     }}
                   />
 
@@ -232,7 +241,7 @@ export default function Header() {
       </div>
 
       {/* Drawer Component */}
-      <Drawer isOpen={isDrawerOpen} onClose={handleDrawerClose} />
+      <Drawer isOpen={isDrawerOpen} onClose={handleDrawerClose} currentPath={pathname} />
     </header>
   );
 }

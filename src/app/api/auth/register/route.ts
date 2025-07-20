@@ -6,8 +6,11 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const { email, username, firstName, lastName, password, confirmPassword } = body
 
+    console.log('Registration attempt:', { email, username, firstName, lastName })
+
     // Validate required fields
     if (!email || !username || !firstName || !lastName || !password) {
+      console.log('Validation failed: missing required fields')
       return NextResponse.json(
         { error: 'All fields are required' },
         { status: 400 }
@@ -58,7 +61,9 @@ export async function POST(request: NextRequest) {
     }
 
     // Create the user
+    console.log('Attempting to create user in database...')
     const user = await createUser(userData)
+    console.log('User created successfully:', user.id)
 
     return NextResponse.json(
       { 
