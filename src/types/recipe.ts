@@ -11,6 +11,7 @@ export interface CookingStep {
 
 export interface Recipe {
   id: string;
+  slug: string;
   title: string;
   description: string;
   image: string;
@@ -19,10 +20,12 @@ export interface Recipe {
   prepTime: number;
   cookTime: number;
   servings: number;
-  difficulty: "easy" | "medium" | "hard";
+  difficulty: string;
   dietary: string[];
   ingredients: Ingredient[];
   steps: CookingStep[];
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface RecipeCard {

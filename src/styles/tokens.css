@@ -80,7 +80,7 @@
   
   /* Cards */
   --card-background: var(--color-background);
-  --card-border: #E5E5E5;
+  --card-border: var(--color-gray);
   --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   --card-shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.15);
   

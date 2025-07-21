@@ -1,10 +1,7 @@
 import { notFound } from "next/navigation";
-import contentData from "@/data/content.json";
-import { ContentData } from "@/types/content";
 import RecipeClientPage from "./RecipeClientPage";
 import { BreadcrumbItem } from "@/components/Breadcrumb";
-
-const content = contentData as ContentData;
+import { getRecipeBySlug } from "@/lib/recipes";
 
 interface RecipePageProps {
   params: Promise<{
@@ -108,8 +105,8 @@ export default async function RecipePage({ params }: RecipePageProps) {
   // Await the params since they're a Promise in Next.js 15
   const { slug } = await params;
 
-  // Find the recipe in content.json
-  const recipe = content.recipes.find((r) => r.id === slug);
+  // Find the recipe in database
+  const recipe = await getRecipeBySlug(slug);
 
   if (!recipe) {
     notFound();

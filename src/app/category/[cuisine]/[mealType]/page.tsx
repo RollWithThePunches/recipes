@@ -5,6 +5,7 @@ import contentData from "@/data/content.json";
 import { ContentData } from "@/types/content";
 import Breadcrumb, { BreadcrumbItem } from "@/components/Breadcrumb";
 import RecipeCard from "@/components/RecipeCard";
+import { getRecipesByIds } from "@/lib/recipes";
 
 // Cast the imported JSON to our content type
 const content = contentData as ContentData;
@@ -37,9 +38,7 @@ export default async function SubcategoryPage({
   }
 
   // Get recipes for this subcategory
-  const subcategoryRecipes = content.recipes.filter((recipe) =>
-    subcategoryData.recipes.includes(recipe.id),
-  );
+  const subcategoryRecipes = await getRecipesByIds(subcategoryData.recipes);
 
   // Create breadcrumbs
   const breadcrumbItems: BreadcrumbItem[] = [

@@ -30,6 +30,7 @@ Colors in the project's theme should use these hex codes and for these suggested
 - Color: `transparent`. Use: Tertiary button border color
 - Color: `#8B1300`. Use: Focus outlines or borders
 - Color: `#FFF9E8`. Use: Background color for ingredients and stats list
+- Color: `#ccc`. Use: Card borders and general gray elements
 
 ### Spacing
 

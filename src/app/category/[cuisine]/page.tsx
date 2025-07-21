@@ -7,6 +7,7 @@ import { Recipe } from "@/types/recipe";
 import Breadcrumb, { BreadcrumbItem } from "@/components/Breadcrumb";
 import RecipeCard from "@/components/RecipeCard";
 import { Button } from "@/components/ui/button";
+import { getRecipesByIds } from "@/lib/recipes";
 
 // Cast the imported JSON to our content type
 const content = contentData as ContentData;
@@ -159,18 +160,15 @@ export default async function CategoryPage({
   }
 
   // Get featured recipe
-  const featuredRecipe = content.recipes.find(
-    (recipe) => recipe.id === categoryData.featuredRecipe,
-  );
+  const featuredRecipes = await getRecipesByIds([categoryData.featuredRecipe]);
+  const featuredRecipe = featuredRecipes[0];
 
   if (!featuredRecipe) {
     notFound();
   }
 
   // Get explore section recipes
-  const exploreRecipes = content.recipes.filter((recipe) =>
-    categoryData.exploreSection.recipes.includes(recipe.id),
-  );
+  const exploreRecipes = await getRecipesByIds(categoryData.exploreSection.recipes);
 
   // Filter recipes by meal type if specified
   const filteredRecipes = type

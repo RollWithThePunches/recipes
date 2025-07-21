@@ -181,6 +181,7 @@ export default function AccountMenu({
         align="end"
         sideOffset={17}
         onKeyDown={handleContentKeyDown}
+        tabIndex={isOpen ? 0 : -1}
       >
         {!isLoggedIn ? (
           // Logged out state
@@ -208,6 +209,7 @@ export default function AccountMenu({
               style={{ fontFamily: "var(--font-family-body)" }}
               onClick={handleSignIn}
               onMouseEnter={handleMouseEnter}
+              tabIndex={isOpen ? 0 : -1}
             >
               {content.ui.buttons.signIn}
             </Button>
@@ -250,6 +252,7 @@ export default function AccountMenu({
                 }}
                 onClick={() => handleMenuItemClick(onAccountClick)}
                 onMouseEnter={handleMouseEnter}
+                tabIndex={isOpen ? 0 : -1}
               >
                 {content.ui.accountMenu.menuItems.account}
               </DropdownMenuItem>
@@ -267,6 +270,7 @@ export default function AccountMenu({
                 }}
                 onClick={() => handleMenuItemClick(onSecurityClick)}
                 onMouseEnter={handleMouseEnter}
+                tabIndex={isOpen ? 0 : -1}
               >
                 {content.ui.accountMenu.menuItems.security}
               </DropdownMenuItem>
@@ -284,6 +288,7 @@ export default function AccountMenu({
                 }}
                 onClick={() => handleMenuItemClick(onMessagesClick)}
                 onMouseEnter={handleMouseEnter}
+                tabIndex={isOpen ? 0 : -1}
               >
                 {content.ui.accountMenu.menuItems.messages}
               </DropdownMenuItem>
@@ -297,6 +302,7 @@ export default function AccountMenu({
               style={{ fontFamily: "var(--font-family-body)" }}
               onClick={handleSignOut}
               onMouseEnter={handleMouseEnter}
+              tabIndex={isOpen ? 0 : -1}
             >
               {content.ui.buttons.signOut}
             </Button>

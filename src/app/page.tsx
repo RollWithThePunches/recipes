@@ -4,11 +4,16 @@ import HeroSection from "@/components/patterns/HeroSection";
 import RecipeGrid from "@/components/patterns/RecipeGrid";
 import FeaturedRecipeSection from "@/components/patterns/FeaturedRecipeSection";
 import { ContentData } from "@/types/content";
+import { getRecipesByIds } from "@/lib/recipes";
 
 // Cast the imported JSON to our content type
 const content = contentData as ContentData;
 
-export default function HomePage() {
+export default async function HomePage() {
+  // Fetch recipes from database
+  const featuredRecipes = await getRecipesByIds(content.homepage.featuredRecipes);
+  const barbacoaRecipe = await getRecipesByIds(["barbacoa-tacos"]);
+
   return (
     <div className="bg-white">
       {/* Main Content */}
@@ -57,7 +62,7 @@ export default function HomePage() {
               <Suspense fallback={<div>Loading popular recipes...</div>}>
                 <RecipeGrid
                   recipes={content.homepage.featuredRecipes.slice(0, 3)}
-                  recipeData={content.recipes}
+                  recipeData={featuredRecipes}
                 />
               </Suspense>
             </div>
@@ -77,13 +82,13 @@ export default function HomePage() {
           <div className="max-w-[1024px] mx-auto space-y-10">
             {/* First featured recipe (left image) */}
             <FeaturedRecipeSection
-              recipe={content.recipes.find((r) => r.id === "barbacoa-tacos")!}
+              recipe={barbacoaRecipe[0]}
               imagePosition="left"
             />
 
             {/* Second featured recipe (right image) */}
             <FeaturedRecipeSection
-              recipe={content.recipes.find((r) => r.id === "barbacoa-tacos")!}
+              recipe={barbacoaRecipe[0]}
               imagePosition="right"
             />
           </div>

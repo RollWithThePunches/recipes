@@ -37,7 +37,7 @@ export default function AccountPage() {
   return (
     <div className="min-h-screen bg-[var(--color-background)] flex flex-col">
       {/* Main Content */}
-      <main className="flex-1 flex flex-col lg:flex-row items-start justify-start p-0">
+      <div className="flex-1 flex flex-col lg:flex-row items-start justify-start p-0">
         {/* Side Navigation */}
         <nav
           className="flex flex-col gap-[var(--spacing-sm)] p-6 w-full lg:w-[352px] lg:shrink-0"
@@ -65,7 +65,7 @@ export default function AccountPage() {
         </nav>
 
         {/* Main Content Area */}
-        <div className="flex flex-col gap-6 p-6 lg:p-0 flex-1 lg:max-w-[1024px]">
+        <div className="flex flex-col gap-6 p-6 lg:p-0 flex-1 w-full lg:max-w-[1024px]">
           {/* Welcome Header */}
           <h1 
             className="text-[var(--color-text-body)] leading-none text-4xl font-bold"
@@ -120,10 +120,10 @@ export default function AccountPage() {
                   <p className="text-[var(--color-text-body)]">Loading favorites...</p>
                 </div>
               ) : favoriteRecipes.length > 0 ? (
-                <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start md:items-center">
+                <div className="flex flex-wrap gap-6 items-start">
                   {favoriteRecipes.map((recipe) => (
                     <Link key={recipe.id} href={`/recipe/${recipe.id}`}>
-                      <Card className="w-full md:w-80 shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)] hover:shadow-[0px_4px_8px_0px_rgba(0,0,0,0.3)] transition-shadow cursor-pointer">
+                      <Card className="w-full sm:w-[calc(50%-12px)] lg:w-80 shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)] hover:shadow-[0px_4px_8px_0px_rgba(0,0,0,0.3)] transition-shadow cursor-pointer">
                         <div className="h-[203px] w-full rounded-t-lg overflow-hidden">
                           <Image
                             src={recipe.image}
@@ -161,7 +161,8 @@ export default function AccountPage() {
               >
                 Your recipes
               </h2>
-              <Card className="w-full md:w-80 h-[188px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)] hover:shadow-[0px_4px_8px_0px_rgba(0,0,0,0.3)] transition-shadow">
+              <div className="flex flex-wrap gap-6">
+                <Card className="w-full sm:w-[calc(50%-12px)] lg:w-80 h-[188px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)] hover:shadow-[0px_4px_8px_0px_rgba(0,0,0,0.3)] transition-shadow">
                 <CardContent className="flex flex-col items-center justify-center h-full p-[14px]">
                   <div className="flex flex-row gap-2 items-center">
                     <span 
@@ -174,10 +175,11 @@ export default function AccountPage() {
                   </div>
                 </CardContent>
               </Card>
+              </div>
             </section>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 } 

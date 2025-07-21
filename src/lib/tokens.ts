@@ -25,6 +25,7 @@ export const colors = {
   hoverBackground: "#f2f2f2",
   buttonHover: "#8B1300",
   focus: "#8B1300",
+  gray: "#ccc",
 
   // Footer
   footerBackground: "#333333",
@@ -37,7 +38,7 @@ export const colors = {
 
   // Card Colors
   cardBackground: "#FFFFFF",
-  cardBorder: "#E5E5E5",
+  cardBorder: "#ccc",
 } as const;
 
 export const spacing = {

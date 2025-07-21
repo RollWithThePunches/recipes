@@ -23,6 +23,8 @@
     "db:studio": "prisma studio",
     "db:reset": "prisma db push --force-reset",
     "db:setup": "node scripts/setup-database.js",
+    "db:populate-recipes": "node scripts/populate-recipes.js",
+    "db:create-test-users": "node scripts/create-test-user.js",
     "postinstall": "prisma generate"
   },
   "dependencies": {

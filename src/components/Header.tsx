@@ -173,6 +173,9 @@ export default function Header() {
                     ? "w-[300px] opacity-100"
                     : "w-0 opacity-0 overflow-hidden"
                 }`}
+                style={{
+                  visibility: isSearchVisible ? "visible" : "hidden",
+                }}
               >
                 <div className="relative w-full">
                   <input
@@ -184,6 +187,7 @@ export default function Header() {
                     placeholder={content.ui.navigation.searchPlaceholder}
                     className="w-full h-8 text-[var(--color-text-body)] bg-white border border-[var(--color-text-heading)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)] focus:border-[var(--color-focus)] transition-colors duration-150"
                     aria-label="Search recipes"
+                    tabIndex={isSearchVisible ? 0 : -1}
                     style={{
                       fontFamily: "var(--font-family-body)",
                       fontSize: "var(--font-size-sm)",
@@ -198,6 +202,7 @@ export default function Header() {
                     onClick={handleClearSearch}
                     className="absolute right-8 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center hover:bg-[var(--color-hover-background)] focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)] rounded transition-colors duration-150 group"
                     aria-label="Close search"
+                    tabIndex={isSearchVisible ? 0 : -1}
                   >
                     <X className="w-5 h-5 text-[var(--color-text-heading)] group-hover:text-[var(--color-primary)] transition-colors duration-150" />
                   </button>
@@ -207,6 +212,7 @@ export default function Header() {
                     type="submit"
                     className="absolute right-1 top-1/2 transform -translate-y-1/2 w-6 h-6 flex items-center justify-center hover:bg-[var(--color-hover-background)] focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)] rounded transition-colors duration-150 group"
                     aria-label="Submit search"
+                    tabIndex={isSearchVisible ? 0 : -1}
                   >
                     <Search className="w-5 h-5 text-[var(--color-text-heading)] group-hover:text-[var(--color-primary)] transition-colors duration-150" />
                   </button>

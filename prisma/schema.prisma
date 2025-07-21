@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "darwin", "darwin-arm64"]
 }
 
 datasource db {
@@ -22,6 +23,28 @@ model User {
   favorites Favorite[]
 
   @@map("users")
+}
+
+model Recipe {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  description String
+  image       String
+  cuisine     String
+  mealType    String
+  prepTime    Int
+  cookTime    Int
+  servings    Int
+  difficulty  String
+  dietary     String[]
+  ingredients Json
+  steps       Json
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+
+  @@map("recipes")
 }
 
 model Favorite {

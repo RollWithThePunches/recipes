@@ -384,12 +384,14 @@ The content.json file should include:
 - [x] Primary color: #FF3D4A - **MUST** be used as `bg-[var(--color-primary)]`
 - [x] Secondary color: #8B1300 - **MUST** be used as `bg-[var(--color-secondary)]`
 - [x] Background colors: #FFFFFF, #333333, #FFF9E8 - **MUST** use token variables
+- [x] Gray color: #ccc - **MUST** be used as `var(--color-gray)` for card borders and general gray elements
 - [x] Typography: Lexend (body), Madimi One (headings) - **MUST** use token variables
 - [x] Spacing scale: 4px through 120px - **MUST** use `var(--spacing-*)` tokens
 - [x] Font sizes: 0.625rem through 4rem - **MUST** use `var(--font-size-*)` tokens
 - [x] Line heights: 100% through 200% - **MUST** use `var(--line-height-*)` tokens
 - [x] Button styles: Primary (#FF3D4A), Secondary (#FFFFFF with #8B1300 border), Tertiary (transparent) - **MUST** use token variables
 - [x] Focus indicators: #8B1300 - **MUST** use `focus:ring-[var(--color-focus)]`
+- [x] Card borders: #ccc - **MUST** use `var(--card-border)` which references `var(--color-gray)`
 - [x] Ingredients list background: #FFF9E8 - **MUST** use `bg-[var(--color-background-yellow)]`
 - [x] Hover background: #f2f2f2 - **MUST** use `hover:bg-[var(--color-hover-background)]` for all buttons and interactive elements (except text-only anchors)
 

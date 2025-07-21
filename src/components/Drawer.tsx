@@ -70,7 +70,7 @@ const ChevronRightIcon: React.FC<{ className?: string }> = ({
 );
 
 // Search bar component
-const SearchBar: React.FC = () => (
+const SearchBar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => (
   <div className="relative">
     <input
       type="text"
@@ -85,12 +85,14 @@ const SearchBar: React.FC = () => (
         backgroundColor: "var(--color-background)",
       }}
       aria-label="Search recipes"
+      tabIndex={isOpen ? 0 : -1}
     />
     <Button
       variant="ghost"
       size="icon"
       className="absolute right-2 top-1/2 transform -translate-y-1/2 w-8 h-8 text-[var(--color-text-heading)] hover:text-[var(--color-link-hover)] transition-colors duration-150"
       aria-label="Search"
+      tabIndex={isOpen ? 0 : -1}
     >
       <SearchIcon className="w-6 h-6" />
     </Button>
@@ -101,9 +103,10 @@ const SearchBar: React.FC = () => (
 interface MenuItemProps {
   children: React.ReactNode;
   onClick?: () => void;
+  isOpen: boolean;
 }
 
-const MenuItem: React.FC<MenuItemProps> = ({ children, onClick }) => (
+const MenuItem: React.FC<MenuItemProps> = ({ children, onClick, isOpen }) => (
   <Button
     variant="ghost"
     size="default"
@@ -113,6 +116,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ children, onClick }) => (
       fontFamily: "var(--font-family-body)",
       padding: "var(--spacing-sm) var(--spacing-md)",
     }}
+    tabIndex={isOpen ? 0 : -1}
   >
     <span className="text-current">{children}</span>
     <ChevronRightIcon className="w-8 h-8 text-current" />
@@ -180,6 +184,7 @@ export const Drawer: React.FC<DrawerProps> = ({
       role="dialog"
       aria-modal="true"
       aria-labelledby="drawer-title"
+      tabIndex={isOpen ? 0 : -1}
     >
       <div
         ref={drawerRef}
@@ -208,6 +213,7 @@ export const Drawer: React.FC<DrawerProps> = ({
                 padding: "var(--spacing-sm)",
               }}
               aria-label="Close navigation menu"
+              tabIndex={isOpen ? 0 : -1}
             >
               <CloseIcon className="w-6 h-6" />
             </Button>
@@ -229,7 +235,7 @@ export const Drawer: React.FC<DrawerProps> = ({
               "var(--spacing-lg) var(--spacing-xl) var(--spacing-xl) var(--spacing-xl)",
           }}
         >
-          <SearchBar />
+          <SearchBar isOpen={isOpen} />
         </div>
 
         {/* Navigation Menu */}
@@ -239,16 +245,16 @@ export const Drawer: React.FC<DrawerProps> = ({
           aria-label="Main navigation"
         >
           <div className="flex flex-col" style={{ gap: "var(--spacing-sm)" }}>
-            <MenuItem onClick={() => console.log("Meals clicked")}>
+            <MenuItem onClick={() => console.log("Meals clicked")} isOpen={isOpen}>
               Meals
             </MenuItem>
-            <MenuItem onClick={() => console.log("Ingredients clicked")}>
+            <MenuItem onClick={() => console.log("Ingredients clicked")} isOpen={isOpen}>
               Ingredients
             </MenuItem>
-            <MenuItem onClick={() => console.log("Culture clicked")}>
+            <MenuItem onClick={() => console.log("Culture clicked")} isOpen={isOpen}>
               Culture
             </MenuItem>
-            <MenuItem onClick={() => console.log("Occasions clicked")}>
+            <MenuItem onClick={() => console.log("Occasions clicked")} isOpen={isOpen}>
               Occasions
             </MenuItem>
           </div>
@@ -256,12 +262,13 @@ export const Drawer: React.FC<DrawerProps> = ({
 
         {/* Footer */}
         <div style={{ padding: "var(--spacing-xl)" }}>
-                      <Button
+            <Button
               variant="default"
               size="default"
               className="w-full"
               style={{ fontFamily: "var(--font-family-body)" }}
               onClick={() => router.push(`/login?redirectTo=${encodeURIComponent(currentPath)}`)}
+              tabIndex={isOpen ? 0 : -1}
             >
               Login
             </Button>

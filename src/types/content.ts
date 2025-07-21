@@ -1,4 +1,4 @@
-import { Recipe, Category, RecipeCard } from "./recipe";
+import { Category, RecipeCard } from "./recipe";
 
 export interface HeroSection {
   title: string;
@@ -121,7 +121,6 @@ export interface Categories {
 
 export interface ContentData {
   homepage: Homepage;
-  recipes: Recipe[];
   categories: Categories;
   account: AccountSection;
   ui: UI;

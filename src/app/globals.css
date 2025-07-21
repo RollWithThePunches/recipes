@@ -1,5 +1,4 @@
-/* Google Fonts Import */
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Madimi+One&display=swap');
+/* Font variables from Next.js font optimization */
 
 /* Design Tokens */
 @import "../styles/tokens.css";
@@ -139,7 +138,7 @@
   
   /* Typography */
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-family-heading);
+    font-family: var(--font-madimi-one);
     color: var(--color-text-heading);
     line-height: var(--line-height-snug);
   }
@@ -169,7 +168,7 @@
   }
   
   p, span, div, li {
-    font-family: var(--font-family-body);
+    font-family: var(--font-lexend);
     color: var(--color-text-body);
     line-height: var(--line-height-normal);
   }
@@ -201,7 +200,6 @@
   
   /* Remove default button styles */
   button {
-    border: none;
     background: none;
     cursor: pointer;
     font-family: inherit;
