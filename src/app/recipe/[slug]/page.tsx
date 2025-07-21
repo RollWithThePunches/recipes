@@ -11,6 +11,7 @@ interface RecipePageProps {
 
 interface TransformedRecipeData {
   id: string;
+  slug: string;
   title: string;
   description: string;
   rating: number;
@@ -115,6 +116,7 @@ export default async function RecipePage({ params }: RecipePageProps) {
   // Transform the recipe data to match the component expectations
   const recipeData: TransformedRecipeData = {
     id: recipe.id,
+    slug: recipe.slug,
     title: recipe.title,
     description: recipe.description,
     rating: 4, // Default rating - could be added to content.json later

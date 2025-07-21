@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Lexend, Madimi_One } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
+import HeaderWrapper from "@/components/HeaderWrapper";
 import Footer from "@/components/Footer";
 import { ToastProvider } from "@/components/ui/toast-provider";
 
@@ -42,7 +42,7 @@ export default function RootLayout({
             Skip to main content
           </a>
 
-          <Header />
+          <HeaderWrapper />
 
           <main id="main-content" className="flex-1">
             {children}

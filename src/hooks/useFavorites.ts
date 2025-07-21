@@ -28,7 +28,7 @@ export function useFavorites() {
           // Load from database if logged in
           const dbFavorites = await getFavoritesFromDB(userId);
           const transformedFavorites: FavoriteRecipe[] = dbFavorites.map(fav => ({
-            id: fav.recipeId,
+            id: fav.recipeId, // This should be the slug, not the database ID
             title: fav.recipeTitle,
             description: fav.recipeDescription,
             image: fav.recipeImage,

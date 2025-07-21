@@ -66,7 +66,7 @@ npm run db:populate-recipes
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the application.
+Open [xhttp://localhost:3000](http://localhost:3000) to view the application.
 
 ## 🗄️ Database Management
 

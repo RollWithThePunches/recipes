@@ -43,7 +43,7 @@ export default function RecipeClientPage({
     }
 
     const recipeForFavorites = {
-      id: recipeData.id,
+      id: recipeData.slug, // Use slug for favorites
       title: recipeData.title,
       description: recipeData.description,
       image: recipeData.image,
