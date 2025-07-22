@@ -11,7 +11,12 @@ const content = contentData as ContentData;
 
 export default async function HomePage() {
   // Fetch recipes from database
-  const featuredRecipes = await getRecipesByIds(content.homepage.featuredRecipes);
+  const featuredSlugs = content.homepage.featuredRecipes.slice(0, 3);
+  const featuredRecipesRaw = await getRecipesByIds(featuredSlugs);
+  // Sort recipeData to match the order of slugs in featuredSlugs
+  const featuredRecipes = featuredSlugs
+    .map((slug) => featuredRecipesRaw.find((r) => r.slug === slug))
+    .filter((r): r is NonNullable<typeof r> => Boolean(r));
   const barbacoaRecipe = await getRecipesByIds(["barbacoa-tacos"]);
 
   return (
@@ -61,7 +66,7 @@ export default async function HomePage() {
 
               <Suspense fallback={<div>Loading popular recipes...</div>}>
                 <RecipeGrid
-                  recipes={content.homepage.featuredRecipes.slice(0, 3)}
+                  recipes={featuredSlugs}
                   recipeData={featuredRecipes}
                 />
               </Suspense>
