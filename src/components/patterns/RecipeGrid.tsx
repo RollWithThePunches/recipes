@@ -9,7 +9,7 @@ interface RecipeGridProps {
 export default function RecipeGrid({ recipes, recipeData }: RecipeGridProps) {
   // Get the full recipe data for the provided recipe IDs
   const fullRecipes = recipes
-    .map((recipeId) => recipeData.find((recipe) => recipe.id === recipeId))
+    .map((recipeSlug) => recipeData.find((recipe) => recipe.slug === recipeSlug))
     .filter(Boolean) as Recipe[];
 
   return (
