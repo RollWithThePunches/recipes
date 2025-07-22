@@ -76,7 +76,7 @@ export default function HeroSection({ hero, summerRecipes }: HeroSectionProps) {
             {/* Recipe list items */}
             <ul className="flex flex-col gap-4 md:gap-6 w-full list-none p-0 m-0">
               {summerRecipes.recipes.map((recipe) => (
-                <RecipeListItem key={recipe.id} recipe={recipe} />
+                <RecipeListItem key={recipe.id} recipe={{ ...recipe, slug: recipe.id }} />
               ))}
             </ul>
           </div>
