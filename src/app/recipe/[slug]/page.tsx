@@ -127,12 +127,12 @@ export default async function RecipePage({ params }: RecipePageProps) {
       totalTime: formatTime(recipe.prepTime + recipe.cookTime),
       servings: recipe.servings.toString(),
     },
-    ingredients: recipe.ingredients.map((ing: any) => ({
+    ingredients: recipe.ingredients.map((ing: { amount?: string; unit?: string; name?: string }) => ({
       amount: ing.amount ? `${ing.amount} ${ing.unit}`.trim() : '',
       item: ing.name || '',
     })),
     directions: Array.isArray(recipe.steps)
-      ? recipe.steps.map((step: any, idx: number) =>
+      ? recipe.steps.map((step: string | { stepNumber?: number; instruction?: string }, idx: number) =>
           typeof step === 'string'
             ? { stepNumber: idx + 1, instruction: step }
             : { stepNumber: step.stepNumber || idx + 1, instruction: step.instruction || String(step) }
