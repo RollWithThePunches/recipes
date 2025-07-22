@@ -36,6 +36,7 @@ export interface RecipeCard {
   cuisine?: string;
   prepTime?: number;
   difficulty?: string;
+  slug?: string;
 }
 
 export interface Category {
