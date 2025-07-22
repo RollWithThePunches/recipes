@@ -7,6 +7,7 @@ import contentData from "@/data/content.json";
 import { ContentData } from "@/types/content";
 import Drawer from "./Drawer";
 import AccountMenu from "./AccountMenu";
+import SearchResults from "./SearchResults";
 
 const content = contentData as ContentData;
 
@@ -65,6 +66,11 @@ export default function Header() {
     if (searchButtonRef.current) {
       searchButtonRef.current.focus();
     }
+  };
+
+  const handleSearchResultClick = () => {
+    setIsSearchVisible(false);
+    setSearchQuery("");
   };
 
   const handleSearchSubmit = (e: React.FormEvent) => {
@@ -217,6 +223,13 @@ export default function Header() {
                     <Search className="w-5 h-5 text-[var(--color-text-heading)] group-hover:text-[var(--color-primary)] transition-colors duration-150" />
                   </button>
                 </div>
+
+                {/* Search Results Dropdown */}
+                <SearchResults
+                  query={searchQuery}
+                  isVisible={isSearchVisible && searchQuery.trim().length > 0}
+                  onResultClick={handleSearchResultClick}
+                />
               </form>
 
               {/* Search toggle button - only visible when search is closed */}
