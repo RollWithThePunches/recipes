@@ -127,14 +127,17 @@ export default async function RecipePage({ params }: RecipePageProps) {
       totalTime: formatTime(recipe.prepTime + recipe.cookTime),
       servings: recipe.servings.toString(),
     },
-    ingredients: recipe.ingredients.map((ing) => ({
-      amount: `${ing.quantity} ${ing.unit}`.trim(),
-      item: ing.item,
+    ingredients: recipe.ingredients.map((ing: any) => ({
+      amount: ing.amount ? `${ing.amount} ${ing.unit}`.trim() : '',
+      item: ing.name || '',
     })),
-    directions: recipe.steps.map((step) => ({
-      stepNumber: step.stepNumber,
-      instruction: step.instruction,
-    })),
+    directions: Array.isArray(recipe.steps)
+      ? recipe.steps.map((step: any, idx: number) =>
+          typeof step === 'string'
+            ? { stepNumber: idx + 1, instruction: step }
+            : { stepNumber: step.stepNumber || idx + 1, instruction: step.instruction || String(step) }
+        )
+      : [],
     cuisine: recipe.cuisine,
     difficulty: recipe.difficulty,
     dietary: recipe.dietary,
