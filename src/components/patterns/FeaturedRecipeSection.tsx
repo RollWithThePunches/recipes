@@ -51,7 +51,7 @@ export default function FeaturedRecipeSection({
           {recipe.description}
         </p>
         <a
-          href={`/recipe/${recipe.id}`}
+          href={`/recipe/${recipe.slug}`}
           className="text-base text-[var(--color-secondary)] underline hover:text-[var(--color-primary)] transition-colors"
           style={{
             fontFamily: "var(--font-family-body)",

@@ -42,8 +42,11 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { userId, recipeId, recipeTitle, recipeDescription, recipeImage, recipeCuisine } = body;
 
+    console.log('POST /api/favorites - Request body:', { userId, recipeId, recipeTitle, recipeDescription, recipeImage, recipeCuisine });
+
     // Validate required fields
     if (!userId || !recipeId || !recipeTitle || !recipeDescription || !recipeImage) {
+      console.log('POST /api/favorites - Missing required fields:', { userId, recipeId, recipeTitle, recipeDescription, recipeImage });
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
@@ -56,11 +59,14 @@ export async function POST(request: NextRequest) {
     });
 
     if (!user) {
+      console.log('POST /api/favorites - User not found:', userId);
       return NextResponse.json(
         { error: 'User not found' },
         { status: 404 }
       );
     }
+
+    console.log('POST /api/favorites - User found:', user.username);
 
     // Check if recipe is already favorited
     const existingFavorite = await prisma.favorite.findUnique({
@@ -73,6 +79,7 @@ export async function POST(request: NextRequest) {
     });
 
     if (existingFavorite) {
+      console.log('POST /api/favorites - Recipe already favorited:', { userId, recipeId });
       return NextResponse.json(
         { error: 'Recipe is already in favorites' },
         { status: 409 }
@@ -91,10 +98,12 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    console.log('POST /api/favorites - Favorite created successfully:', favorite.id);
+
     return NextResponse.json(favorite, { status: 201 });
 
   } catch (error) {
-    console.error('Error adding favorite:', error);
+    console.error('POST /api/favorites - Error adding favorite:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

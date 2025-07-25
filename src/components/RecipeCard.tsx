@@ -42,7 +42,7 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
             {recipe.description}
           </p>
           <a
-            href={`/recipe/${recipe.id}`}
+            href={`/recipe/${recipe.slug}`}
             className="text-sm text-[var(--color-secondary)] underline hover:text-[var(--color-primary)] transition-colors mt-auto"
             style={{
               fontFamily: "var(--font-family-body)",

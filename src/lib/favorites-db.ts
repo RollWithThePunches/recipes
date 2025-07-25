@@ -42,6 +42,8 @@ export async function addToFavoritesDB(
   }
 ): Promise<boolean> {
   try {
+    console.log('addToFavoritesDB - Starting with:', { userId, recipe });
+    
     const response = await fetch('/api/favorites', {
       method: 'POST',
       headers: {
@@ -53,17 +55,26 @@ export async function addToFavoritesDB(
       }),
     });
 
+    console.log('addToFavoritesDB - Response status:', response.status);
+    console.log('addToFavoritesDB - Response ok:', response.ok);
+
     if (!response.ok) {
+      const errorText = await response.text();
+      console.log('addToFavoritesDB - Error response:', errorText);
+      
       if (response.status === 409) {
         // Recipe is already in favorites
+        console.log('addToFavoritesDB - Recipe already in favorites');
         return false;
       }
-      throw new Error(`Failed to add favorite: ${response.statusText}`);
+      throw new Error(`Failed to add favorite: ${response.statusText} - ${errorText}`);
     }
 
+    const result = await response.json();
+    console.log('addToFavoritesDB - Success result:', result);
     return true;
   } catch (error) {
-    console.error('Error adding favorite to database:', error);
+    console.error('addToFavoritesDB - Error adding favorite to database:', error);
     return false;
   }
 }

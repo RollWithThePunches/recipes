@@ -56,9 +56,12 @@ export function useFavorites() {
 
   // Add recipe to favorites
   const addFavorite = useCallback(async (recipe: Omit<FavoriteRecipe, 'addedAt'>) => {
+    console.log('useFavorites.addFavorite - Starting with:', { recipe, isLoggedIn, userId });
+    
     let success = false;
     
     if (isLoggedIn && userId) {
+      console.log('useFavorites.addFavorite - User is logged in, adding to database');
       // Add to database if logged in
       success = await addToFavoritesDB(userId, {
         recipeId: recipe.id,
@@ -67,12 +70,16 @@ export function useFavorites() {
         recipeImage: recipe.image,
         recipeCuisine: recipe.cuisine
       });
+      console.log('useFavorites.addFavorite - Database result:', success);
     } else {
+      console.log('useFavorites.addFavorite - User not logged in, adding to localStorage');
       // Add to localStorage if not logged in
       success = addToFavorites(recipe);
+      console.log('useFavorites.addFavorite - localStorage result:', success);
     }
     
     if (success) {
+      console.log('useFavorites.addFavorite - Success, updating state');
       setFavorites(prev => {
         const newFavorite: FavoriteRecipe = {
           ...recipe,
@@ -80,6 +87,8 @@ export function useFavorites() {
         };
         return [...prev, newFavorite];
       });
+    } else {
+      console.log('useFavorites.addFavorite - Failed to add favorite');
     }
     
     return success;

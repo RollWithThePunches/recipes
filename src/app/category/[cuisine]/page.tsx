@@ -64,7 +64,7 @@ function FeaturedRecipe({ recipe }: FeaturedRecipeProps) {
         </p>
 
         <Link
-          href={`/recipe/${recipe.id}`}
+          href={`/recipe/${recipe.slug}`}
           className="text-[var(--color-link)] hover:text-[var(--color-link-hover)] underline decoration-solid underline-offset-2 text-sm font-light"
           style={{
             fontFamily: "var(--font-family-body)",
