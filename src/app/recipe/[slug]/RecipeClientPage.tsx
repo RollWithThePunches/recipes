@@ -53,7 +53,7 @@ export default function RecipeClientPage({
     const success = await toggleFavorite(recipeForFavorites);
     if (success) {
       console.log(
-        `Recipe ${isFavorite(recipeData.id) ? "removed from" : "added to"} favorites:`,
+        `Recipe ${isFavorite(recipeData.slug) ? "removed from" : "added to"} favorites:`,
         recipeData.title,
       );
     }
@@ -188,14 +188,14 @@ export default function RecipeClientPage({
               onClick={handleFavoriteToggle}
               onKeyDown={(e) => handleKeyDown(e, handleFavoriteToggle)}
               aria-label={
-                isFavorite(recipeData.id) ? "Remove from favorites" : "Add to favorites"
+                isFavorite(recipeData.slug) ? "Remove from favorites" : "Add to favorites"
               }
-              aria-pressed={isFavorite(recipeData.id)}
+              aria-pressed={isFavorite(recipeData.slug)}
               className="hover:bg-[var(--color-hover-background)] focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)] transition-colors duration-150"
             >
               <Heart
                 className={`w-5 h-5 transition-all duration-200 ${
-                  isFavorite(recipeData.id)
+                  isFavorite(recipeData.slug)
                     ? "text-[var(--color-primary)] fill-[var(--color-primary)]"
                     : "text-[var(--color-primary)] hover:fill-[var(--color-primary)]"
                 }`}
@@ -287,14 +287,14 @@ export default function RecipeClientPage({
           onClick={handleFavoriteToggle}
           onKeyDown={(e) => handleKeyDown(e, handleFavoriteToggle)}
           aria-label={
-            isFavorite(recipeData.id) ? "Remove from favorites" : "Add to favorites"
+            isFavorite(recipeData.slug) ? "Remove from favorites" : "Add to favorites"
           }
-          aria-pressed={isFavorite(recipeData.id)}
+          aria-pressed={isFavorite(recipeData.slug)}
           className="hover:bg-[var(--color-hover-background)] focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)] transition-colors duration-150"
         >
           <Heart
             className={`w-6 h-6 transition-all duration-200 ${
-              isFavorite(recipeData.id)
+              isFavorite(recipeData.slug)
                 ? "text-[var(--color-primary)] fill-[var(--color-primary)]"
                 : "text-[var(--color-primary)] hover:fill-[var(--color-primary)]"
             }`}
