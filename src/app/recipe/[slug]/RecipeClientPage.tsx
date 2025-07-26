@@ -171,9 +171,9 @@ export default function RecipeClientPage({
           <span className="font-medium">
             Difficulty: {recipeData.difficulty}
           </span>
-          {recipeData.dietary.length > 0 && (
+          {recipeData.dietary && recipeData.dietary.length > 0 && (
             <span className="font-medium">
-              Dietary: {recipeData.dietary.join(", ")}
+              Dietary: {Array.isArray(recipeData.dietary) ? recipeData.dietary.join(", ") : recipeData.dietary}
             </span>
           )}
         </div>

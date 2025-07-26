@@ -50,7 +50,7 @@ export function ToastProvider({ children }: ToastProviderProps) {
     <ToastContext.Provider value={{ showToast, hideToast }}>
       {children}
       {toast && (
-        <div className="fixed top-4 right-4 z-50 max-w-md">
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 max-w-md">
           <Toast message={toast.message} onClose={hideToast} key={toast.id} />
         </div>
       )}

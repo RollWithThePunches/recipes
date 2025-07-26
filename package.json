@@ -6,7 +6,7 @@
     "node": "18.x"
   },
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -23,9 +23,14 @@
     "db:studio": "prisma studio",
     "db:reset": "prisma db push --force-reset",
     "db:setup": "node scripts/setup-database.js",
-    "db:populate-recipes": "node scripts/populate-recipes.js",
-    "db:create-test-users": "node scripts/create-test-user.js",
-    "postinstall": "prisma generate"
+    "db:local": "node scripts/setup-local-db.js",
+    "db:seed-local": "node scripts/seed-recipes-local.js && node scripts/create-test-user-local.js",
+    "db:sync-to-heroku": "node scripts/sync-db-to-heroku.js",
+    "db:check-users": "node scripts/check-users.js",
+    "db:check-favorites": "node scripts/check-favorites.js",
+    "db:clear-favorites": "node scripts/clear-favorites.js",
+    "deploy": "git push heroku main",
+    "deploy:staging": "git push heroku main && echo 'Deployment to staging completed!'"
   },
   "dependencies": {
     "@prisma/client": "^6.12.0",

@@ -127,22 +127,33 @@ export default async function RecipePage({ params }: RecipePageProps) {
       totalTime: formatTime(recipe.prepTime + recipe.cookTime),
       servings: recipe.servings.toString(),
     },
-    ingredients: Array.isArray(recipe.ingredients) && recipe.ingredients.length > 0
-      ? recipe.ingredients.map((ing: { amount?: string; unit?: string; name?: string; item?: string }) => ({
-          amount: [ing.amount, ing.unit].filter(Boolean).join(' '),
-          item: ing.name || ing.item || '',
-        }))
-      : [],
-    directions: Array.isArray(recipe.steps)
-      ? recipe.steps.map((step: string | { stepNumber?: number; instruction?: string }, idx: number) =>
-          typeof step === 'string'
-            ? { stepNumber: idx + 1, instruction: step }
-            : { stepNumber: step.stepNumber || idx + 1, instruction: step.instruction || String(step) }
-        )
-      : [],
+    ingredients: (() => {
+      const ingredients = typeof recipe.ingredients === 'string' 
+        ? JSON.parse(recipe.ingredients) 
+        : recipe.ingredients;
+      return Array.isArray(ingredients) && ingredients.length > 0
+        ? ingredients.map((ing: { amount?: string; unit?: string; name?: string; item?: string }) => ({
+            amount: [ing.amount, ing.unit].filter(Boolean).join(' '),
+            item: ing.name || ing.item || '',
+          }))
+        : [];
+    })(),
+    directions: (() => {
+      const steps = typeof recipe.steps === 'string' 
+        ? JSON.parse(recipe.steps) 
+        : recipe.steps;
+      return Array.isArray(steps)
+        ? steps.map((step: string | { stepNumber?: number; instruction?: string }, idx: number) =>
+            typeof step === 'string'
+              ? { stepNumber: idx + 1, instruction: step }
+              : { stepNumber: step.stepNumber || idx + 1, instruction: step.instruction || String(step) }
+          )
+        : [];
+    })(),
     cuisine: recipe.cuisine,
     difficulty: recipe.difficulty,
-    dietary: recipe.dietary,
+    dietary: Array.isArray(recipe.dietary) ? recipe.dietary : 
+             (typeof recipe.dietary === 'string' ? JSON.parse(recipe.dietary) : []),
   };
 
   const breadcrumbItems = getBreadcrumbItems(

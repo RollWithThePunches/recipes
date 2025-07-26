@@ -1,0 +1,62 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "darwin", "darwin-arm64"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./prisma/dev.db"
+}
+
+model User {
+  id        String     @id @default(cuid())
+  email     String     @unique
+  username  String     @unique
+  firstName String
+  lastName  String
+  password  String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  avatar    String?
+  bio       String?
+  isActive  Boolean    @default(true)
+  favorites Favorite[]
+
+  @@map("users")
+}
+
+model Recipe {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  description String
+  image       String
+  cuisine     String
+  mealType    String
+  prepTime    Int
+  cookTime    Int
+  servings    Int
+  difficulty  String
+  dietary     String
+  ingredients String
+  steps       String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("recipes")
+}
+
+model Favorite {
+  id                String   @id @default(cuid())
+  userId            String
+  recipeId          String
+  recipeTitle       String
+  recipeDescription String
+  recipeImage       String
+  recipeCuisine     String?
+  addedAt           DateTime @default(now())
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, recipeId])
+  @@map("favorites")
+} 
