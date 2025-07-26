@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 
@@ -70,34 +70,45 @@ const ChevronRightIcon: React.FC<{ className?: string }> = ({
 );
 
 // Search bar component
-const SearchBar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => (
-  <div className="relative">
-    <input
-      type="text"
-      placeholder="What are looking to cook?"
-      className="w-full rounded-lg text-base font-normal focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)] focus:border-transparent transition-colors duration-150"
-      style={{
-        fontFamily: "var(--font-family-body)",
-        padding: "var(--spacing-sm) var(--spacing-md)",
-        paddingRight: "2.5rem",
-        border: "1px solid var(--color-background-dark)",
-        color: "var(--color-text-heading)",
-        backgroundColor: "var(--color-background)",
-      }}
-      aria-label="Search recipes"
-      tabIndex={isOpen ? 0 : -1}
-    />
-    <Button
-      variant="ghost"
-      size="icon"
-      className="absolute right-2 top-1/2 transform -translate-y-1/2 w-8 h-8 text-[var(--color-text-heading)] hover:text-[var(--color-link-hover)] transition-colors duration-150"
-      aria-label="Search"
-      tabIndex={isOpen ? 0 : -1}
-    >
-      <SearchIcon className="w-6 h-6" />
-    </Button>
-  </div>
-);
+const SearchBar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  
+  // Use -1 for server-side rendering to avoid hydration mismatch
+  const tabIndex = mounted ? (isOpen ? 0 : -1) : -1;
+  
+  return (
+    <div className="relative">
+      <input
+        type="text"
+        placeholder="What are looking to cook?"
+        className="w-full rounded-lg text-base font-normal focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)] focus:border-transparent transition-colors duration-150"
+        style={{
+          fontFamily: "var(--font-family-body)",
+          padding: "var(--spacing-sm) var(--spacing-md)",
+          paddingRight: "2.5rem",
+          border: "1px solid var(--color-background-dark)",
+          color: "var(--color-text-heading)",
+          backgroundColor: "var(--color-background)",
+        }}
+        aria-label="Search recipes"
+        tabIndex={tabIndex}
+      />
+      <Button
+        variant="ghost"
+        size="icon"
+        className="absolute right-2 top-1/2 transform -translate-y-1/2 w-8 h-8 text-[var(--color-text-heading)] hover:text-[var(--color-link-hover)] transition-colors duration-150"
+        aria-label="Search"
+        tabIndex={tabIndex}
+      >
+        <SearchIcon className="w-6 h-6" />
+      </Button>
+    </div>
+  );
+};
 
 // Navigation menu item component
 interface MenuItemProps {
@@ -106,22 +117,33 @@ interface MenuItemProps {
   isOpen: boolean;
 }
 
-const MenuItem: React.FC<MenuItemProps> = ({ children, onClick, isOpen }) => (
-  <Button
-    variant="ghost"
-    size="default"
-    onClick={onClick}
-    className="w-full justify-between text-left h-auto bg-[var(--color-background)] text-[var(--color-text-heading)] hover:bg-[var(--color-hover-background)] hover:text-[var(--color-text-heading)] transition-colors duration-150"
-    style={{
-      fontFamily: "var(--font-family-body)",
-      padding: "var(--spacing-sm) var(--spacing-md)",
-    }}
-    tabIndex={isOpen ? 0 : -1}
-  >
-    <span className="text-current">{children}</span>
-    <ChevronRightIcon className="w-8 h-8 text-current" />
-  </Button>
-);
+const MenuItem: React.FC<MenuItemProps> = ({ children, onClick, isOpen }) => {
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  
+  // Use -1 for server-side rendering to avoid hydration mismatch
+  const tabIndex = mounted ? (isOpen ? 0 : -1) : -1;
+  
+  return (
+    <Button
+      variant="ghost"
+      size="default"
+      onClick={onClick}
+      className="w-full justify-between text-left h-auto bg-[var(--color-background)] text-[var(--color-text-heading)] hover:bg-[var(--color-hover-background)] hover:text-[var(--color-text-heading)] transition-colors duration-150"
+      style={{
+        fontFamily: "var(--font-family-body)",
+        padding: "var(--spacing-sm) var(--spacing-md)",
+      }}
+      tabIndex={tabIndex}
+    >
+      <span className="text-current">{children}</span>
+      <ChevronRightIcon className="w-8 h-8 text-current" />
+    </Button>
+  );
+};
 
 export const Drawer: React.FC<DrawerProps> = ({
   isOpen,
@@ -132,6 +154,14 @@ export const Drawer: React.FC<DrawerProps> = ({
   const drawerRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const router = useRouter();
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  
+  // Use -1 for server-side rendering to avoid hydration mismatch
+  const tabIndex = mounted ? (isOpen ? 0 : -1) : -1;
 
   // Focus management
   useEffect(() => {
@@ -184,7 +214,7 @@ export const Drawer: React.FC<DrawerProps> = ({
       role="dialog"
       aria-modal="true"
       aria-labelledby="drawer-title"
-      tabIndex={isOpen ? 0 : -1}
+      tabIndex={tabIndex}
     >
       <div
         ref={drawerRef}
@@ -213,7 +243,7 @@ export const Drawer: React.FC<DrawerProps> = ({
                 padding: "var(--spacing-sm)",
               }}
               aria-label="Close navigation menu"
-              tabIndex={isOpen ? 0 : -1}
+              tabIndex={tabIndex}
             >
               <CloseIcon className="w-6 h-6" />
             </Button>
@@ -268,7 +298,7 @@ export const Drawer: React.FC<DrawerProps> = ({
               className="w-full"
               style={{ fontFamily: "var(--font-family-body)" }}
               onClick={() => router.push(`/login?redirectTo=${encodeURIComponent(currentPath)}`)}
-              tabIndex={isOpen ? 0 : -1}
+              tabIndex={tabIndex}
             >
               Login
             </Button>

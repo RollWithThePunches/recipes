@@ -26,9 +26,11 @@ export function ToastProvider({ children }: ToastProviderProps) {
   const [toast, setToast] = useState<{ message: string; id: number } | null>(
     null,
   );
+  const [idCounter, setIdCounter] = useState(0);
 
   const showToast = (message: string) => {
-    const id = Date.now();
+    const id = idCounter + 1;
+    setIdCounter(id);
     setToast({ message, id });
   };
 

@@ -6,6 +6,20 @@ const prismaClient = prisma as any; // eslint-disable-line @typescript-eslint/no
 
 // Helper function to map database recipe to application Recipe type
 function mapDbRecipeToRecipe(dbRecipe: any): Recipe { // eslint-disable-line @typescript-eslint/no-explicit-any
+  // Ensure dietary is always an array
+  let dietary: string[] = [];
+  if (dbRecipe.dietary) {
+    if (Array.isArray(dbRecipe.dietary)) {
+      dietary = dbRecipe.dietary;
+    } else if (typeof dbRecipe.dietary === 'string') {
+      try {
+        dietary = JSON.parse(dbRecipe.dietary);
+      } catch {
+        dietary = [];
+      }
+    }
+  }
+
   return {
     id: dbRecipe.id,
     slug: dbRecipe.slug,
@@ -18,7 +32,7 @@ function mapDbRecipeToRecipe(dbRecipe: any): Recipe { // eslint-disable-line @ty
     cookTime: dbRecipe.cookTime,
     servings: dbRecipe.servings,
     difficulty: dbRecipe.difficulty,
-    dietary: dbRecipe.dietary,
+    dietary,
     ingredients: dbRecipe.ingredients as unknown as Recipe['ingredients'],
     steps: dbRecipe.steps as unknown as Recipe['steps'],
     createdAt: dbRecipe.createdAt,
@@ -53,7 +67,7 @@ export async function getRecipeBySlug(slug: string): Promise<Recipe | null> {
 export async function getRecipesByCuisine(cuisine: string): Promise<Recipe[]> {
   try {
     const recipes = await prismaClient.recipe.findMany({
-      where: { cuisine: { equals: cuisine, mode: 'insensitive' } },
+      where: { cuisine: { equals: cuisine } },
       orderBy: { title: 'asc' },
     });
     return recipes.map(mapDbRecipeToRecipe);
@@ -66,7 +80,7 @@ export async function getRecipesByCuisine(cuisine: string): Promise<Recipe[]> {
 export async function getRecipesByMealType(mealType: string): Promise<Recipe[]> {
   try {
     const recipes = await prismaClient.recipe.findMany({
-      where: { mealType: { equals: mealType, mode: 'insensitive' } },
+      where: { mealType: { equals: mealType } },
       orderBy: { title: 'asc' },
     });
     return recipes.map(mapDbRecipeToRecipe);
@@ -83,8 +97,8 @@ export async function getRecipesByCuisineAndMealType(
   try {
     const recipes = await prismaClient.recipe.findMany({
       where: {
-        cuisine: { equals: cuisine, mode: 'insensitive' },
-        mealType: { equals: mealType, mode: 'insensitive' },
+        cuisine: { equals: cuisine },
+        mealType: { equals: mealType },
       },
       orderBy: { title: 'asc' },
     });
@@ -100,11 +114,10 @@ export async function searchRecipes(query: string): Promise<Recipe[]> {
     const recipes = await prismaClient.recipe.findMany({
       where: {
         OR: [
-          { title: { contains: query, mode: 'insensitive' } },
-          { description: { contains: query, mode: 'insensitive' } },
-          { cuisine: { contains: query, mode: 'insensitive' } },
-          { mealType: { contains: query, mode: 'insensitive' } },
-          { dietary: { has: query } },
+          { title: { contains: query } },
+          { description: { contains: query } },
+          { cuisine: { contains: query } },
+          { mealType: { contains: query } },
         ],
       },
       orderBy: { title: 'asc' },

@@ -154,7 +154,7 @@ export default function SearchResults({ query, isVisible, onResultClick }: Searc
                     <span className="px-2 py-1 bg-[var(--color-secondary)] text-[var(--color-text-on-dark)] text-xs rounded-full">
                       {result.cuisine}
                     </span>
-                    {result.dietary.map((diet) => (
+                    {Array.isArray(result.dietary) && result.dietary.map((diet) => (
                       <span
                         key={diet}
                         className="px-2 py-1 bg-[var(--color-success)] text-white text-xs rounded-full"
