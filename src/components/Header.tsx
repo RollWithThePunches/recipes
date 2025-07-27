@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Menu, Search, X } from "lucide-react";
 import { useRouter, usePathname } from "next/navigation";
+import Link from "next/link";
 import contentData from "@/data/content.json";
 import { ContentData } from "@/types/content";
 import Drawer from "./Drawer";
@@ -164,15 +165,16 @@ export default function Header() {
             </button>
 
             {/* Brand name */}
-            <h1
-              className="text-[32px] text-[var(--color-primary)] leading-none"
+            <Link
+              href="/"
+              className="text-[32px] text-[var(--color-primary)] leading-none hover:text-[var(--color-primary)] transition-colors duration-150"
               style={{
                 fontFamily: "var(--font-family-heading)",
                 fontSize: "var(--font-size-3xl)",
               }}
             >
               {content.ui.navigation.brand}
-            </h1>
+            </Link>
           </div>
 
           {/* Right section with search and profile */}

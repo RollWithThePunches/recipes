@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
+import Link from "next/link";
 import contentData from "@/data/content.json";
 import { ContentData } from "@/types/content";
 import AccountMenu from "./AccountMenu";
@@ -84,15 +85,16 @@ export default function SimpleHeader() {
           {/* Left section with brand */}
           <div className="flex flex-row items-center">
             {/* Brand name */}
-            <h1
-              className="text-[32px] text-[var(--color-primary)] leading-none"
+            <Link
+              href="/"
+              className="text-[32px] text-[var(--color-primary)] leading-none hover:text-[var(--color-primary)] transition-colors duration-150"
               style={{
                 fontFamily: "var(--font-family-heading)",
                 fontSize: "var(--font-size-3xl)",
               }}
             >
               {content.ui.navigation.brand}
-            </h1>
+            </Link>
           </div>
 
           {/* Right section with profile */}
