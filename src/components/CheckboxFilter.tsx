@@ -121,9 +121,15 @@ export default function CheckboxFilter({
   };
 
   return (
-    <div className={`relative w-80 ${className}`} ref={dropdownRef}>
+    <div className={`relative w-full ${className}`} ref={dropdownRef}>
       {/* Label */}
-      <label className="font-['Lexend:SemiBold',_sans-serif] font-semibold leading-[0] relative text-[var(--color-text-heading)] text-[var(--font-size-md)] text-left w-full block mb-2">
+      <label className="font-semibold relative text-[var(--font-size-md)] text-left w-full block mb-[var(--spacing-sm)]"
+      style={{
+        fontFamily: "var(--font-family-body)",
+        fontSize: "var(--font-size-base)",
+        color: "var(--color-text-heading)"
+      }}
+      >
         {title}
       </label>
 
@@ -131,7 +137,7 @@ export default function CheckboxFilter({
       <Button
         variant="outline"
         onClick={handleToggle}
-        className="h-10 w-80 bg-[var(--color-background)] border border-[var(--color-gray)] text-[var(--color-text-heading)] hover:bg-[var(--color-hover-background)] justify-between px-3 py-1"
+        className="h-10 w-full bg-[var(--color-background)] border border-[var(--color-gray)] text-[var(--color-text-heading)] hover:bg-[var(--color-hover-background)] justify-between px-3 py-1"
         aria-expanded={isOpen}
         aria-haspopup="listbox"
         aria-label={`${title} filter dropdown`}
@@ -157,11 +163,10 @@ export default function CheckboxFilter({
             {options.map((option, index) => (
               <div
                 key={option.id}
-                className={`flex flex-row items-center justify-start p-0 relative w-full hover:bg-[var(--color-hover-background)] transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)] focus:ring-offset-1 ${
+                className={`flex flex-row items-center justify-start p-0 relative w-full hover:bg-[var(--color-hover-background)] transition-colors duration-150 pl-[var(--spacing-sm)] gap-[var(--spacing-sm)] rounded-[var(--radius-sm)] ${
                   focusedIndex === index ? 'bg-[var(--color-hover-background)]' : ''
                 }`}
                 role="menuitem"
-                aria-checked={selectedValues.includes(option.value)}
                 tabIndex={focusedIndex === index ? 0 : -1}
                 onFocus={() => setFocusedIndex(index)}
               >
@@ -170,8 +175,9 @@ export default function CheckboxFilter({
                     id={option.id}
                     checked={selectedValues.includes(option.value)}
                     onCheckedChange={(checked) => handleCheckboxChange(option.value, checked as boolean)}
-                    className="h-[18px] w-[18px]"
+                    className="h-[18px] w-[18px] focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)] focus:ring-offset-1"
                     ref={index === 0 ? firstCheckboxRef : undefined}
+                    aria-checked={selectedValues.includes(option.value)}
                   />
                 </div>
                 <label
@@ -179,7 +185,7 @@ export default function CheckboxFilter({
                   className="relative text-left cursor-pointer py-2 flex-1 h-12 flex items-center"
                   style={{ 
                     fontFamily: "var(--font-family-body)",
-                    fontSize: "var(--font-size-md)",
+                    fontSize: "var(--font-size-base)",
                     color: "var(--color-text-heading)"
                   }}
                 >

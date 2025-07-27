@@ -272,9 +272,10 @@ Based on: `front-end-prd.mdc` and `design-requirements-prd.mdc`
   - [ ] 8.1 Component Review
     - [ ] 8.1.1 **IMPORTANT**: Verify ALL components use Shadcn components wherever possible
     - [ ] 8.1.2 **IMPORTANT**: Verify ALL components use design tokens instead of hardcoded values
-    - [ ] 8.1.3 Ensure components match design requirements
-    - [ ] 8.1.4 **IMPORTANT**: Confirm dynamic content loading from content.json
-    - [ ] 8.1.5 Test component props and error handling
+    - [ ] 8.1.3 **IMPORTANT**: Verify ALL labels use inline styles for font family and size: `style={{ fontFamily: "var(--font-family-body)", fontSize: "var(--font-size-base)" }}`
+    - [ ] 8.1.4 Ensure components match design requirements
+    - [ ] 8.1.5 **IMPORTANT**: Confirm dynamic content loading from content.json
+    - [ ] 8.1.6 Test component props and error handling
   - [ ] 8.2 Design Token Validation
     - [ ] 8.2.1 **IMPORTANT**: Confirm ALL colors use design tokens in Tailwind classes (e.g., `bg-[var(--color-primary)]`)
     - [ ] 8.2.2 **IMPORTANT**: Verify NO hardcoded hex values remain in codebase
@@ -306,7 +307,7 @@ Based on: `front-end-prd.mdc` and `design-requirements-prd.mdc`
     - [ ] 7.6.2 Verify build process works without errors
     - [ ] 7.6.3 Test production build performance
     - [ ] 7.6.4 Validate all links and navigation work correctly
-    - [ ] 7.6.5 **IMPORTANT**: Final audit - no hardcoded values, all Shadcn components used, all Lucide React icons used, all content dynamic
+    - [ ] 7.6.5 **IMPORTANT**: Final audit - no hardcoded values, all Shadcn components used, all Lucide React icons used, all content dynamic, all labels use inline font styles
 
 ## Content.json Structure Requirements
 
@@ -405,12 +406,13 @@ The content.json file should include:
 5. **WCAG 2.1**: Must meet accessibility compliance following the patterns documented in `front-end-prd.mdc`
 6. **Responsive**: Must work on all screen sizes
 7. **Testing**: Must have comprehensive tests
+8. **Label Typography**: Must use inline styles for font family and size on labels: `style={{ fontFamily: "var(--font-family-body)", fontSize: "var(--font-size-base)" }}` - NO Tailwind font classes on labels
 
 ### 🔍 Review Checkpoints:
-- After each component: Verify Shadcn usage, design token implementation, and Lucide React icon usage
-- After each pattern: Verify no hardcoded values remain and all icons use Lucide React
-- After each page: Verify dynamic content loading and consistent icon usage
-- Before final: Run automated audit for hardcoded values, missing Shadcn components, and custom SVG icons
+- After each component: Verify Shadcn usage, design token implementation, Lucide React icon usage, and label typography uses inline styles
+- After each pattern: Verify no hardcoded values remain, all icons use Lucide React, and labels use inline font styles
+- After each page: Verify dynamic content loading, consistent icon usage, and proper label typography
+- Before final: Run automated audit for hardcoded values, missing Shadcn components, custom SVG icons, and incorrect label font classes
 
 ```json
 {

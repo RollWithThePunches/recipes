@@ -1,13 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Search, X } from "lucide-react";
+import { X } from "lucide-react";
 import { useFavorites } from "@/hooks/useFavorites";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import CheckboxFilter from "@/components/CheckboxFilter";
+import FavoritesSearch from "@/components/FavoritesSearch";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -32,7 +32,7 @@ export default function FavoritesPage() {
       favorite.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       favorite.description.toLowerCase().includes(searchQuery.toLowerCase());
     
-    const matchesCulture = cultureFilters.length === 0 || cultureFilters.includes(favorite.cuisine);
+    const matchesCulture = cultureFilters.length === 0 || (favorite.cuisine && cultureFilters.includes(favorite.cuisine));
     const matchesDish = dishFilters.length === 0 || true; // Dish type filtering can be added later
     
     return matchesSearch && matchesCulture && matchesDish;
@@ -42,11 +42,13 @@ export default function FavoritesPage() {
   const uniqueCultures = Array.from(new Set(favorites.map(fav => fav.cuisine)));
 
   // Create filter options
-  const cultureOptions = uniqueCultures.filter(Boolean).map(culture => ({
-    id: `culture-${culture}`,
-    label: culture,
-    value: culture
-  }));
+  const cultureOptions = uniqueCultures
+    .filter((culture): culture is string => Boolean(culture))
+    .map(culture => ({
+      id: `culture-${culture}`,
+      label: culture,
+      value: culture
+    }));
 
   const dishOptions = [
     { id: "dish-main", label: "Main dishes", value: "main" },
@@ -74,16 +76,23 @@ export default function FavoritesPage() {
   }
 
   return (
-    <div className="flex flex-col gap-12 items-center justify-start p-0 relative w-full max-w-6xl mx-auto">
+    <div className="flex flex-col gap-[var(--spacing-lg)] items-center justify-start p-0 relative w-full max-w-6xl mx-auto mt-[var(--spacing-4xl)]">
       {/* Page title container */}
-      <div className="flex flex-col gap-4 items-start justify-start p-0 relative w-full">
-        <h1 
-          className="font-['Madimi_One:Regular',_sans-serif] leading-[0] min-w-full relative text-[var(--color-text-heading)] text-[var(--font-size-4xl)] text-left"
-          style={{ width: "min-content" }}
+      <h1 
+          className="min-w-full relative text-[var(--color-text-heading)] text-[var(--font-size-4xl)] text-left"
+          style={{ 
+            width: "min-content", 
+            fontFamily: "var(--font-family-heading)" 
+          }}
         >
           Favorites
         </h1>
-        <h2 className="font-['Lexend:Medium',_sans-serif] font-medium leading-[0] relative text-[var(--color-text-heading)] text-[var(--font-size-2xl)] text-left">
+      <div className="flex flex-col gap-4 items-start justify-start p-0 relative w-full">
+        <h2 className="font-medium relative text-[var(--color-text-heading)] text-[var(--font-size-2xl)] text-left mb-[var(--spacing-sm)]"
+        style={{
+          fontFamily: "var(--font-family-body)"
+        }}
+        >
           Filter by culture or dish
         </h2>
         
@@ -96,6 +105,7 @@ export default function FavoritesPage() {
             selectedValues={cultureFilters}
             onSelectionChange={setCultureFilters}
             placeholder="Select cultures"
+            className="flex-1"
           />
 
           {/* Dish type filter */}
@@ -105,31 +115,26 @@ export default function FavoritesPage() {
             selectedValues={dishFilters}
             onSelectionChange={setDishFilters}
             placeholder="Select dish types"
+            className="flex-1"
           />
 
           {/* Search input */}
-          <div className="flex flex-row grow items-center self-stretch">
+          <div className="flex flex-row flex-1 items-center self-stretch">
             <div className="flex flex-col gap-2 grow h-full items-start justify-center">
-              <label className="font-['Lexend:SemiBold',_sans-serif] font-semibold leading-[0] relative text-[var(--color-text-heading)] text-[var(--font-size-md)] text-left">
+              <label className="font-semibold relative text-[var(--color-text-heading)] text-left"
+              style={{
+                fontFamily: "var(--font-family-body)",
+                fontSize: "var(--font-size-base)",
+              }}
+              >
                 Search for a favorite
               </label>
-              <div className="flex flex-row gap-4 grow items-center justify-start px-2 py-1 relative rounded-lg w-full bg-[var(--color-background)] border border-[var(--color-text-heading)]">
-                <Input
-                  type="text"
-                  placeholder="What are looking for?"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="border-0 bg-transparent text-[var(--color-text-heading)] text-[var(--font-size-md)] focus:ring-0 focus:outline-none"
-                  style={{ fontFamily: "var(--font-family-body)" }}
-                />
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="w-8 h-8 text-[var(--color-text-heading)] hover:text-[var(--color-primary)] transition-colors duration-150"
-                >
-                  <Search className="w-6 h-6" />
-                </Button>
-              </div>
+              <FavoritesSearch
+                value={searchQuery}
+                onChange={setSearchQuery}
+                placeholder="What are you looking for?"
+                className="w-full h-10"
+              />
             </div>
           </div>
         </div>
@@ -167,13 +172,10 @@ export default function FavoritesPage() {
           )}
         </div>
       ) : (
-        <div className="flex flex-col gap-6 items-start justify-start p-0 relative w-full">
-          {/* Render favorites in rows of 3 */}
-          {Array.from({ length: Math.ceil(filteredFavorites.length / 3) }, (_, rowIndex) => (
-            <div key={rowIndex} className="flex flex-row gap-8 items-center justify-start p-0 relative w-full">
-              {filteredFavorites.slice(rowIndex * 3, (rowIndex + 1) * 3).map((favorite) => (
-                <Card key={favorite.id} className="bg-[var(--color-background)] max-w-80 w-80 shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]">
-                  <div className="relative h-[200px] w-80">
+        <div className="grid grid-cols-3 gap-8 w-full mt-[var(--spacing-2xl)]">
+          {filteredFavorites.map((favorite) => (
+            <Card key={favorite.id} className="bg-[var(--color-background)] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)] group">
+                  <div className="relative h-[200px]">
                     <div 
                       className="absolute inset-0 bg-cover bg-center rounded-t-lg"
                       style={{
@@ -185,14 +187,18 @@ export default function FavoritesPage() {
                       variant="ghost"
                       size="icon"
                       onClick={() => handleRemoveFavorite(favorite.id)}
-                      className="absolute top-2 right-2 w-8 h-8 bg-[var(--color-background)] border border-[var(--color-gray)] rounded-full hover:bg-[var(--color-hover-background)] transition-colors duration-150"
+                      className="absolute top-2 right-2 w-8 h-8 bg-[var(--color-background)] border border-[var(--color-gray)] rounded-full hover:bg-[var(--color-hover-background)] transition-colors duration-150 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100"
                       aria-label="Remove from favorites"
                     >
                       <X className="w-6 h-6 text-[var(--color-text-heading)]" />
                     </Button>
                   </div>
                   <CardContent className="flex flex-col gap-2 items-start justify-start p-[14px] text-left">
-                    <h3 className="font-['Lexend:SemiBold',_sans-serif] font-semibold text-[var(--color-text-heading)] text-[var(--font-size-md)]">
+                    <h3 className="text-[var(--color-text-heading)] font-semibold"
+                        style={{
+                          fontFamily: "var(--font-family-body)",
+                          fontSize: "var(--font-size-base)"
+                        }}>
                       {favorite.title}
                     </h3>
                     <Link 
@@ -203,8 +209,6 @@ export default function FavoritesPage() {
                     </Link>
                   </CardContent>
                 </Card>
-              ))}
-            </div>
           ))}
         </div>
       )}

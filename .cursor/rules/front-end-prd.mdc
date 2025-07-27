@@ -34,6 +34,7 @@ Follow these requirements and the process for generating components, patterns, p
 - Use Shadcn components for customization whenever possible. This is **IMPORTANT**.
 - Use tokens that already exist in a `tokens.css` file and include in the Tailwind classes. For example, `bg-[var(--color-primary)]`. This is **IMPORTANT** 
 - **IMPORTANT**: Use Lucide React icons throughout the project for consistency. Import specific icons as needed: `import { IconName } from 'lucide-react'`. Icons should use design tokens for colors and have proper hover/focus states.
+- **IMPORTANT**: For labels, use inline styles for font family and size: `style={{ fontFamily: "var(--font-family-body)", fontSize: "var(--font-size-base)" }}` - NO Tailwind font classes on labels.
 - If tokens do not exist, ask the user if the user would like to create them based on variables in Figma or styles in an image.
 - Compenents must meet WCAG 2.1 requirements
 - After all is completed, review again that styles and component structure match Figma or the image, ensure tokens are used in Tailwind classes, and all meets WCAG 2.1 requirements.
@@ -53,6 +54,7 @@ Follow these requirements and the process for generating components, patterns, p
 - After the page has been created, review these requirements one more time: 
     - It matches the design provided in the Figma frame or uploaded image.
     - Tokens are being used in either the Tailwind classes or styles.
+    - Labels use inline styles for font family and size.
     - Components or patterns that already exist are being used.
     - It meets WCAG 2.1 requirements.
 
