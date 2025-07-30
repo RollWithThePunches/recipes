@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button } from "./ui/button";
 import { useAuth } from "@/hooks/useAuth";
+import Link from "next/link";
 
 interface DrawerProps {
   isOpen: boolean;
@@ -41,11 +42,12 @@ const CloseIcon: React.FC<{ className?: string }> = ({ className = "" }) => (
 // Navigation menu item component
 interface MenuItemProps {
   children: React.ReactNode;
+  href?: string;
   onClick?: () => void;
   isOpen: boolean;
 }
 
-const MenuItem: React.FC<MenuItemProps> = ({ children, onClick, isOpen }) => {
+const MenuItem: React.FC<MenuItemProps> = ({ children, href, onClick, isOpen }) => {
   const [mounted, setMounted] = useState(false);
   
   useEffect(() => {
@@ -55,20 +57,35 @@ const MenuItem: React.FC<MenuItemProps> = ({ children, onClick, isOpen }) => {
   // Use -1 for server-side rendering to avoid hydration mismatch
   const tabIndex = mounted ? (isOpen ? 0 : -1) : -1;
   
+  const baseStyles = {
+    fontFamily: "var(--font-family-body)",
+    padding: "var(--spacing-sm) var(--spacing-md)",
+  };
+  
+  const baseClasses = "w-full justify-start text-left h-auto bg-[var(--color-background)] text-[var(--color-text-heading)] hover:bg-[var(--color-hover-background)] hover:text-[var(--color-text-heading)] transition-colors duration-150 flex items-center rounded-md no-underline";
+  
+  if (href) {
+    return (
+      <Link
+        href={href}
+        className={baseClasses}
+        style={baseStyles}
+        tabIndex={tabIndex}
+      >
+        <span className="text-current">{children}</span>
+      </Link>
+    );
+  }
+  
   return (
-    <Button
-      variant="ghost"
-      size="default"
+    <button
       onClick={onClick}
-      className="w-full justify-start text-left h-auto bg-[var(--color-background)] text-[var(--color-text-heading)] hover:bg-[var(--color-hover-background)] hover:text-[var(--color-text-heading)] transition-colors duration-150"
-      style={{
-        fontFamily: "var(--font-family-body)",
-        padding: "var(--spacing-sm) var(--spacing-md)",
-      }}
+      className={baseClasses}
+      style={baseStyles}
       tabIndex={tabIndex}
     >
       <span className="text-current">{children}</span>
-    </Button>
+    </button>
   );
 };
 
@@ -220,7 +237,7 @@ export const Drawer: React.FC<DrawerProps> = ({
                 borderTop: "1px solid var(--color-gray)"
               }}
             >
-              <MenuItem onClick={() => console.log("Favorites clicked")} isOpen={isOpen}>
+              <MenuItem href="/favorites" isOpen={isOpen}>
                 Favorites
               </MenuItem>
               <MenuItem onClick={() => console.log("Your recipes clicked")} isOpen={isOpen}>
