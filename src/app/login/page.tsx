@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/toast-provider";
-import Link from "next/link";
+import Heading from "@/components/ui/heading";
+import Link from "@/components/ui/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, Suspense } from "react";
 
@@ -62,20 +63,19 @@ function LoginForm() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[var(--color-background)]">
+    <div 
+      className="min-h-screen flex items-center justify-center bg-[var(--color-background)]"
+      style={{
+        padding: "var(--spacing-3xl) var(--spacing-lg)",
+      }}
+    >
       <div
         className="w-full max-w-md border border-[var(--color-text-heading)] rounded-lg bg-white flex flex-col gap-[var(--spacing-lg)] items-center"
         style={{ padding: "var(--spacing-xl)" }}
       >
-        <h1
-          className="font-semibold text-[var(--color-text-heading)] w-full text-left mb-[var(--spacing-md)]"
-          style={{
-            fontSize: "var(--font-size-3xl)",
-            fontFamily: "var(--font-family-body)",
-          }}
-        >
+        <Heading as="h1" size="3xl" font="body" className="font-semibold w-full text-left mb-[var(--spacing-md)]">
           Sign in to your account
-        </h1>
+        </Heading>
         <form
           className="flex flex-col gap-[var(--spacing-lg)] w-full"
           autoComplete="off"
@@ -121,15 +121,15 @@ function LoginForm() {
         <div className="w-full flex items-center justify-between text-[var(--font-size-base)] text-[var(--color-secondary)]">
           <Link
             href={`/reset-password?redirectTo=${encodeURIComponent(redirectTo)}`}
-            className="underline decoration-solid underline-offset-2 hover:text-[var(--color-primary)] transition-colors"
-            style={{ fontFamily: "var(--font-family-body)" }}
+            variant="secondary"
+            underline
           >
             Forgot your password?
           </Link>
           <Link
             href={`/create-account?redirectTo=${encodeURIComponent(redirectTo)}`}
-            className="underline decoration-solid underline-offset-2 hover:text-[var(--color-primary)] transition-colors"
-            style={{ fontFamily: "var(--font-family-body)" }}
+            variant="secondary"
+            underline
           >
             Create an account
           </Link>

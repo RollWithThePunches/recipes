@@ -1,5 +1,8 @@
 "use client";
 
+import Heading from "@/components/ui/heading";
+import Text from "@/components/ui/text";
+
 interface Ingredient {
   amount: string;
   item: string;
@@ -16,21 +19,21 @@ export default function IngredientsList({
 }: IngredientsListProps) {
   return (
     <div className={`${className}`}>
-      <h2 className="text-[var(--font-size-2xl)] font-bold text-[var(--color-text-heading)] mb-[var(--spacing-lg)] font-[var(--font-family-heading)]">
+      <Heading as="h2" size="xl" font="heading" className="font-bold mb-[var(--spacing-lg)]">
         Ingredients
-      </h2>
+      </Heading>
       <ul className="space-y-[var(--spacing-sm)] list-none">
         {ingredients.map((ingredient, index) => (
           <li
             key={index}
             className="flex text-[var(--color-text-body)] text-[var(--font-size-base)] leading-[var(--line-height-normal)]"
           >
-            <span className="text-[var(--color-primary)] mr-[var(--spacing-sm)] font-bold">
+            <Text as="span" size="base" color="primary" weight="bold" className="mr-[var(--spacing-sm)]">
               •
-            </span>
-            <span>
+            </Text>
+            <Text as="span" size="base" color="body">
               {ingredient.amount} {ingredient.item}
-            </span>
+            </Text>
           </li>
         ))}
       </ul>

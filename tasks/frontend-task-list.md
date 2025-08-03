@@ -56,8 +56,89 @@ Based on: `front-end-prd.mdc` and `design-requirements-prd.mdc`
 - **🔥 IMPORTANT**: Use Lucide React icons throughout the project for consistency - Import specific icons as needed: `import { IconName } from 'lucide-react'`
 - **🔥 IMPORTANT**: All components must be accessible (WCAG 2.1 compliant) - Follow the detailed accessibility patterns documented in `front-end-prd.mdc`
 - **🔥 IMPORTANT**: Implement proper focus management, keyboard navigation, and ARIA labeling as specified in the accessibility guidelines
+- **🔥 IMPORTANT**: Use available UI components instead of raw HTML tags - See "Available UI Components" section below
 - Mobile-first responsive design throughout
 - Test with keyboard navigation and screen readers
+
+### 📋 AVAILABLE UI COMPONENTS
+
+**🔥 CRITICAL**: Always use these available UI components instead of raw HTML tags:
+
+#### Text Components
+- **`<Text>`** - Use instead of raw `<p>`, `<span>`, or `<div>` for text content
+  - Supports: size, color, weight, lineHeight, as props
+  - Example: `<Text size="base" color="body" weight="light">Content</Text>`
+  - **NEVER use**: `<p>`, `<span>`, `<div>` for text content
+
+#### Heading Components  
+- **`<Heading>`** - Use instead of raw `<h1>`, `<h2>`, `<h3>`, etc.
+  - Supports: as, size, font, className, id props
+  - Example: `<Heading as="h2" size="4xl" font="heading">Title</Heading>`
+  - **NEVER use**: `<h1>`, `<h2>`, `<h3>`, `<h4>`, `<h5>`, `<h6>` directly
+
+#### Link Components
+- **`<Link>`** - Use instead of raw `<a>` tags
+  - Supports: href, size, weight, underline, variant, external props
+  - Example: `<Link href="/recipe/123" variant="primary" underline>View Recipe</Link>`
+  - **NEVER use**: `<a>` tags directly
+
+#### Form Components
+- **`<Button>`** - Use instead of raw `<button>` tags
+  - Supports: variant, size, disabled, loading states
+  - Example: `<Button variant="primary" size="lg">Submit</Button>`
+  - **NEVER use**: `<button>` tags directly
+
+- **`<Input>`** - Use instead of raw `<input>` tags
+  - Supports: type, placeholder, disabled, error states
+  - Example: `<Input type="text" placeholder="Search recipes..." />`
+  - **NEVER use**: `<input>` tags directly
+
+- **`<Label>`** - Use instead of raw `<label>` tags
+  - Supports: htmlFor, className props
+  - Example: `<Label htmlFor="email">Email Address</Label>`
+  - **NEVER use**: `<label>` tags directly
+
+#### Layout Components
+- **`<Card>`** - Use for card layouts instead of custom div structures
+  - Supports: CardHeader, CardContent, CardFooter subcomponents
+  - Example: `<Card><CardHeader>Title</CardHeader><CardContent>Content</CardContent></Card>`
+
+#### Interactive Components
+- **`<Checkbox>`** - Use instead of raw `<input type="checkbox">`
+- **`<Select>`** - Use instead of raw `<select>` tags
+- **`<DropdownMenu>`** - Use for dropdown menus instead of custom implementations
+
+#### Component Import Pattern
+```tsx
+// ✅ CORRECT - Import and use UI components
+import Text from "@/components/ui/text";
+import Heading from "@/components/ui/heading";
+import Link from "@/components/ui/link";
+import Button from "@/components/ui/button";
+import Input from "@/components/ui/input";
+
+// ✅ CORRECT - Use components with proper props
+<Text size="base" color="body">This is body text</Text>
+<Heading as="h2" size="3xl">Section Title</Heading>
+<Link href="/recipe/123" variant="primary">View Recipe</Link>
+
+// ❌ INCORRECT - Using raw HTML tags
+<p>This is body text</p>
+<h2>Section Title</h2>
+<a href="/recipe/123">View Recipe</a>
+```
+
+#### Label Typography Requirement
+- **IMPORTANT**: For labels, use inline styles for font family and size:
+  ```tsx
+  // ✅ CORRECT - Labels use inline styles
+  <label style={{ fontFamily: "var(--font-family-body)", fontSize: "var(--font-size-base)" }}>
+    Email Address
+  </label>
+  
+  // ❌ INCORRECT - Labels with Tailwind font classes
+  <label className="font-body text-base">Email Address</label>
+  ```
 
 ## Tasks
 
@@ -399,20 +480,21 @@ The content.json file should include:
 ## 🚨 CRITICAL SUCCESS CRITERIA
 
 ### ✅ Before any component is considered complete:
-1. **Shadcn Components**: Must use Shadcn components wherever possible
-2. **Design Tokens**: Must use design tokens in Tailwind classes (e.g., `bg-[var(--color-primary)]`) - NO hardcoded values
-3. **Dynamic Content**: Must load content from content.json
-4. **Lucide React Icons**: Must use Lucide React icons for all icons - NO custom SVGs
-5. **WCAG 2.1**: Must meet accessibility compliance following the patterns documented in `front-end-prd.mdc`
-6. **Responsive**: Must work on all screen sizes
-7. **Testing**: Must have comprehensive tests
-8. **Label Typography**: Must use inline styles for font family and size on labels: `style={{ fontFamily: "var(--font-family-body)", fontSize: "var(--font-size-base)" }}` - NO Tailwind font classes on labels
+1. **UI Components**: Must use available UI components instead of raw HTML tags (Text, Heading, Link, Button, Input, etc.)
+2. **Shadcn Components**: Must use Shadcn components wherever possible
+3. **Design Tokens**: Must use design tokens in Tailwind classes (e.g., `bg-[var(--color-primary)]`) - NO hardcoded values
+4. **Dynamic Content**: Must load content from content.json
+5. **Lucide React Icons**: Must use Lucide React icons for all icons - NO custom SVGs
+6. **WCAG 2.1**: Must meet accessibility compliance following the patterns documented in `front-end-prd.mdc`
+7. **Responsive**: Must work on all screen sizes
+8. **Testing**: Must have comprehensive tests
+9. **Label Typography**: Must use inline styles for font family and size on labels: `style={{ fontFamily: "var(--font-family-body)", fontSize: "var(--font-size-base)" }}` - NO Tailwind font classes on labels
 
 ### 🔍 Review Checkpoints:
-- After each component: Verify Shadcn usage, design token implementation, Lucide React icon usage, and label typography uses inline styles
-- After each pattern: Verify no hardcoded values remain, all icons use Lucide React, and labels use inline font styles
-- After each page: Verify dynamic content loading, consistent icon usage, and proper label typography
-- Before final: Run automated audit for hardcoded values, missing Shadcn components, custom SVG icons, and incorrect label font classes
+- After each component: Verify UI component usage (Text, Heading, Link, etc.), Shadcn usage, design token implementation, Lucide React icon usage, and label typography uses inline styles
+- After each pattern: Verify no raw HTML tags remain, no hardcoded values remain, all icons use Lucide React, and labels use inline font styles
+- After each page: Verify dynamic content loading, consistent icon usage, proper label typography, and UI component usage
+- Before final: Run automated audit for raw HTML tags, hardcoded values, missing Shadcn components, custom SVG icons, and incorrect label font classes
 
 ```json
 {

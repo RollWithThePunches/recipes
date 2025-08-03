@@ -3,6 +3,7 @@ import contentData from "@/data/content.json";
 import HeroSection from "@/components/patterns/HeroSection";
 import RecipeGrid from "@/components/patterns/RecipeGrid";
 import FeaturedRecipeSection from "@/components/patterns/FeaturedRecipeSection";
+import Heading from "@/components/ui/heading";
 import { ContentData } from "@/types/content";
 import { getRecipesByIds } from "@/lib/recipes";
 
@@ -33,7 +34,11 @@ export default async function HomePage() {
         {/* Hero Section */}
         <section
           aria-labelledby="hero-heading"
-          style={{ paddingTop: "var(--spacing-4xl)" }}
+          style={{
+            paddingLeft: "var(--spacing-lg)",
+            paddingRight: "var(--spacing-lg)",
+            paddingTop: "var(--spacing-4xl)",
+          }}
         >
           <HeroSection
             hero={content.homepage.hero}
@@ -49,20 +54,15 @@ export default async function HomePage() {
             backgroundColor: "var(--color-background-yellow)",
             paddingTop: "var(--spacing-xl)",
             paddingBottom: "var(--spacing-xl)",
+            paddingLeft: "var(--spacing-lg)",
+            paddingRight: "var(--spacing-lg)",
           }}
         >
           <div className="w-full max-w-[1024px] mx-auto px-4 sm:px-6 lg:px-0">
             <div className="flex flex-col gap-6">
-              <h2
-                id="popular-heading"
-                className="text-4xl text-[var(--color-text-heading)]"
-                style={{
-                  fontFamily: "var(--font-family-heading)",
-                  fontSize: "var(--font-size-4xl)",
-                }}
-              >
+              <Heading as="h2" size="4xl" font="heading" id="popular-heading">
                 {content.homepage.sections.popularNow.title}
-              </h2>
+              </Heading>
 
               <Suspense fallback={<div>Loading popular recipes...</div>}>
                 <RecipeGrid
@@ -79,9 +79,9 @@ export default async function HomePage() {
           aria-labelledby="featured-heading"
           className=""
           style={{
-            paddingBottom: "var(--spacing-2xl)",
-            paddingLeft: "var(--spacing-md)",
-            paddingRight: "var(--spacing-md)",
+            paddingBottom: "var(--spacing-3xl)",
+            paddingLeft: "var(--spacing-lg)",
+            paddingRight: "var(--spacing-lg)",
           }}
         >
           <div className="max-w-[1024px] mx-auto space-y-10">

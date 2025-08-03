@@ -1,5 +1,6 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
+import Heading from "@/components/ui/heading"
 
 const Card = React.forwardRef<
   HTMLDivElement,
@@ -31,18 +32,19 @@ CardHeader.displayName = "CardHeader"
 const CardTitle = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLHeadingElement>
->(({ className, ...props }, ref) => (
-  <h3
-    ref={ref}
+>(({ className, children, ...props }) => (
+  <Heading
+    as="h3"
+    size="lg"
+    font="body"
     className={cn(
-      "text-[var(--font-size-lg)] font-semibold leading-none tracking-tight",
+      "font-semibold leading-none tracking-tight",
       className
     )}
-    style={{
-      fontFamily: "var(--font-family-body)",
-    }}
     {...props}
-  />
+  >
+    {children}
+  </Heading>
 ))
 CardTitle.displayName = "CardTitle"
 

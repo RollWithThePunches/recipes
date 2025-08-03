@@ -3,6 +3,9 @@ import {
   SummerRecipesSection,
 } from "@/types/content";
 import RecipeListItem from "@/components/RecipeListItem";
+import Heading from "@/components/ui/heading";
+import Link from "@/components/ui/link";
+import Text from "@/components/ui/text";
 
 interface HeroSectionProps {
   hero: HeroSectionType;
@@ -27,51 +30,46 @@ export default function HeroSection({ hero, summerRecipes }: HeroSectionProps) {
 
             {/* Hero content */}
             <div className="flex flex-col gap-2 text-left w-full">
-              <h1
+              <Heading
+                as="h1"
+                size="4xl"
+                font="heading"
                 id="hero-heading"
-                className="text-3xl md:text-4xl text-[var(--color-text-heading)]"
-                style={{
-                  fontFamily: "var(--font-family-heading)",
-                  fontSize: "var(--font-size-4xl)",
-                }}
+                className="text-3xl md:text-4xl"
               >
                 {hero.title}
-              </h1>
-              <p
-                className="text-sm md:text-base text-black"
-                style={{
-                  fontFamily: "var(--font-family-body)",
-                  fontWeight: "300",
-                  lineHeight: "var(--line-height-normal)",
-                }}
+              </Heading>
+              <Text
+                size="base"
+                color="body"
+                weight="light"
+                lineHeight="normal"
+                className="text-sm md:text-base"
               >
                 {hero.subtitle}
-              </p>
-              <a
+              </Text>
+              <Link
                 href="#popular-heading"
-                className="text-sm md:text-base text-[var(--color-secondary)] underline hover:text-[var(--color-primary)] transition-colors"
-                style={{
-                  fontFamily: "var(--font-family-body)",
-                  fontWeight: "300",
-                  lineHeight: "var(--line-height-normal)",
-                }}
+                variant="secondary"
+                size="base"
+                weight="light"
+                underline
               >
                 {hero.learnMoreText}
-              </a>
+              </Link>
             </div>
           </div>
 
           {/* Right side - Summer recipes list */}
           <div className="flex-1 flex flex-col gap-6 w-full">
-            <h2
-              className="text-2xl md:text-[32px] text-[var(--color-text-heading)] leading-none"
-              style={{
-                fontFamily: "var(--font-family-heading)",
-                fontSize: "var(--font-size-3xl)",
-              }}
+            <Heading
+              as="h2"
+              size="3xl"
+              font="heading"
+              className="text-2xl md:text-[32px] leading-none"
             >
               {summerRecipes.title}
-            </h2>
+            </Heading>
 
             {/* Recipe list items */}
             <ul className="flex flex-col gap-4 md:gap-6 w-full list-none p-0 m-0">

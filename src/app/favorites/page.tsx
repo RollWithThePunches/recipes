@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import CheckboxFilter from "@/components/CheckboxFilter";
 import FavoritesSearch from "@/components/FavoritesSearch";
+import Heading from "@/components/ui/heading";
+import Text from "@/components/ui/text";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -65,7 +67,7 @@ export default function FavoritesPage() {
   if (authLoading) {
     return (
       <div className="flex justify-center items-center w-full py-12">
-        <p className="text-[var(--color-text-body)]">Loading...</p>
+        <Text color="body">Loading...</Text>
       </div>
     );
   }
@@ -76,28 +78,23 @@ export default function FavoritesPage() {
   }
 
   return (
-    <div className="flex flex-col gap-[var(--spacing-lg)] items-center justify-start p-0 relative w-full max-w-6xl mx-auto mt-[var(--spacing-4xl)]">
+    <div 
+      className="flex flex-col gap-[var(--spacing-lg)] items-center justify-start relative w-full max-w-6xl mx-auto"
+      style={{
+        padding: "var(--spacing-3xl) var(--spacing-lg)",
+      }}
+    >
       {/* Page title container */}
-      <h1 
-          className="min-w-full relative text-[var(--color-text-heading)] text-[var(--font-size-4xl)] text-left"
-          style={{ 
-            width: "min-content", 
-            fontFamily: "var(--font-family-heading)" 
-          }}
-        >
-          Favorites
-        </h1>
+      <Heading as="h1" size="4xl" font="heading" className="min-w-full relative text-left">
+        Favorites
+      </Heading>
       <div className="flex flex-col gap-4 items-start justify-start p-0 relative w-full">
-        <h2 className="font-medium relative text-[var(--color-text-heading)] text-[var(--font-size-2xl)] text-left mb-[var(--spacing-sm)]"
-        style={{
-          fontFamily: "var(--font-family-body)"
-        }}
-        >
+        <Heading as="h2" size="2xl" font="body" className="font-medium relative text-left mb-[var(--spacing-sm)]">
           Filter by culture or dish
-        </h2>
+        </Heading>
         
         {/* Filter container */}
-        <div className="flex flex-row gap-8 items-center justify-start p-0 relative w-full">
+        <div className="flex flex-col sm:flex-row gap-4 items-center justify-start p-0 relative w-full">
           {/* Culture type filter */}
           <CheckboxFilter
             title="Culture type"
@@ -143,15 +140,15 @@ export default function FavoritesPage() {
       {/* Recipe cards container */}
       {isLoading ? (
         <div className="flex justify-center items-center w-full py-12">
-          <p className="text-[var(--color-text-body)]">Loading favorites...</p>
+          <Text color="body">Loading favorites...</Text>
         </div>
       ) : filteredFavorites.length === 0 ? (
         <div className="flex flex-col items-center justify-center w-full py-12 gap-4">
-          <p className="text-[var(--color-text-body)] text-[var(--font-size-lg)]">
+          <Text size="lg" color="body">
             {searchQuery || cultureFilters.length > 0 || dishFilters.length > 0
               ? "No favorites match your filters" 
               : "You haven't added any favorites yet"}
-          </p>
+          </Text>
           {searchQuery || cultureFilters.length > 0 || dishFilters.length > 0 ? (
             <Button 
               onClick={() => {
@@ -172,7 +169,7 @@ export default function FavoritesPage() {
           )}
         </div>
       ) : (
-        <div className="grid grid-cols-3 gap-8 w-full mt-[var(--spacing-2xl)]">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full mt-[var(--spacing-2xl)]">
           {filteredFavorites.map((favorite) => (
             <Card key={favorite.id} className="bg-[var(--color-background)] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)] group">
                   <div className="relative h-[200px]">
@@ -194,16 +191,12 @@ export default function FavoritesPage() {
                     </Button>
                   </div>
                   <CardContent className="flex flex-col gap-2 items-start justify-start p-[14px] text-left">
-                    <h3 className="text-[var(--color-text-heading)] font-semibold"
-                        style={{
-                          fontFamily: "var(--font-family-body)",
-                          fontSize: "var(--font-size-base)"
-                        }}>
+                    <Heading as="h3" size="base" font="body" className="font-semibold">
                       {favorite.title}
-                    </h3>
+                    </Heading>
                     <Link 
                       href={`/recipe/${favorite.id}`}
-                      className="font-['Lexend:Light',_sans-serif] font-light text-[var(--color-secondary)] text-[var(--font-size-sm)] underline hover:text-[var(--color-secondary)] transition-colors duration-150"
+                      className="font-['Lexend:Light',_sans-serif] font-light text-[var(--color-link)] underline hover:text-[var(--color-primary)] transition-colors duration-150"
                     >
                       Learn more
                     </Link>

@@ -4,8 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/toast-provider";
+import Heading from "@/components/ui/heading";
+import Link from "@/components/ui/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import Link from "next/link";
 import { useState, Suspense } from "react";
 
 function ResetPasswordForm() {
@@ -58,20 +59,19 @@ function ResetPasswordForm() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[var(--color-background)]">
+    <div 
+      className="min-h-screen flex items-center justify-center bg-[var(--color-background)]"
+      style={{
+        padding: "var(--spacing-3xl) var(--spacing-lg)",
+      }}
+    >
       <div
         className="w-full max-w-md border border-[var(--color-text-heading)] rounded-lg bg-white flex flex-col gap-[var(--spacing-lg)] items-center"
         style={{ padding: "var(--spacing-xl)" }}
       >
-        <h1
-          className="font-semibold text-[var(--color-text-heading)] w-full text-left mb-[var(--spacing-md)]"
-          style={{
-            fontSize: "var(--font-size-3xl)",
-            fontFamily: "var(--font-family-body)",
-          }}
-        >
+        <Heading as="h1" size="3xl" font="body" className="font-semibold w-full text-left mb-[var(--spacing-md)]">
           Reset your password
-        </h1>
+        </Heading>
         <form
           className="flex flex-col gap-[var(--spacing-lg)] w-full"
           autoComplete="off"

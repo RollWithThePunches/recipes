@@ -1,4 +1,7 @@
 import { Recipe } from "@/types/recipe";
+import Heading from "@/components/ui/heading";
+import Link from "@/components/ui/link";
+import Text from "@/components/ui/text";
 
 interface FeaturedRecipeSectionProps {
   recipe: Recipe;
@@ -31,36 +34,26 @@ export default function FeaturedRecipeSection({
             : "order-2 md:order-2"
         }`}
       >
-        <h3
-          className="text-3xl md:text-4xl text-[var(--color-text-heading)]"
-          style={{
-            fontFamily: "var(--font-family-heading)",
-            fontSize: "var(--font-size-4xl)",
-          }}
-        >
+        <Heading as="h3" size="4xl" font="heading" className="text-3xl md:text-4xl">
           {recipe.title}
-        </h3>
-        <p
-          className="text-base text-black"
-          style={{
-            fontFamily: "var(--font-family-body)",
-            fontWeight: "300",
-            lineHeight: "var(--line-height-normal)",
-          }}
+        </Heading>
+        <Text
+          size="base"
+          color="body"
+          weight="light"
+          lineHeight="normal"
         >
           {recipe.description}
-        </p>
-        <a
+        </Text>
+        <Link
           href={`/recipe/${recipe.slug}`}
-          className="text-base text-[var(--color-secondary)] underline hover:text-[var(--color-primary)] transition-colors"
-          style={{
-            fontFamily: "var(--font-family-body)",
-            fontWeight: "300",
-            lineHeight: "var(--line-height-normal)",
-          }}
+          variant="secondary"
+          size="base"
+          weight="light"
+          underline
         >
           Learn more
-        </a>
+        </Link>
       </div>
     </div>
   );

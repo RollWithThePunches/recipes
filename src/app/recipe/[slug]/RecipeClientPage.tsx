@@ -5,6 +5,8 @@ import Image from "next/image";
 import { Heart, Share, Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Breadcrumb, { BreadcrumbItem } from "@/components/Breadcrumb";
+import Heading from "@/components/ui/heading";
+import Text from "@/components/ui/text";
 import RecipeRating from "@/components/RecipeRating";
 import RecipeStats from "@/components/RecipeStats";
 import IngredientsList from "@/components/IngredientsList";
@@ -151,7 +153,7 @@ export default function RecipeClientPage({
         display: "flex",
         flexDirection: "column",
         gap: "var(--spacing-3xl)",
-        paddingTop: "var(--spacing-4xl)",
+        paddingTop: "var(--spacing-3xl)",
       }}
     >
       {/* Breadcrumb */}
@@ -161,9 +163,9 @@ export default function RecipeClientPage({
 
       {/* Recipe Header */}
       <div>
-        <h1 className="text-[var(--font-size-4xl)] font-bold text-[var(--color-text-heading)] mb-[var(--spacing-md)] font-[var(--font-family-heading)]">
+        <Heading as="h1" size="4xl" font="heading" className="font-bold mb-[var(--spacing-md)]">
           {recipeData.title}
-        </h1>
+        </Heading>
 
         {/* Recipe Meta Information */}
         <div className="flex flex-wrap items-center gap-[var(--spacing-md)] mb-[var(--spacing-lg)] text-[var(--color-text-body)] text-[var(--font-size-sm)]">
@@ -234,9 +236,9 @@ export default function RecipeClientPage({
         </div>
 
         {/* Description */}
-        <p className="text-[var(--color-text-body)] text-[var(--font-size-base)] leading-[var(--line-height-normal)] font-[var(--font-family-body)]">
+        <Text size="base" color="body" lineHeight="normal">
           {recipeData.description}
-        </p>
+        </Text>
       </div>
 
       {/* Recipe Image */}

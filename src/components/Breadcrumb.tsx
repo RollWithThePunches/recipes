@@ -2,6 +2,7 @@
 
 import { Home } from "lucide-react";
 import Link from "next/link";
+import Text from "@/components/ui/text";
 
 export interface BreadcrumbItem {
   label: string;
@@ -36,9 +37,9 @@ export default function Breadcrumb({
               <Home className="w-4 h-4" />
             </Link>
             {items.length > 0 && (
-              <span className="mx-[var(--spacing-sm)] text-[var(--color-text-body)] font-normal">
+              <Text as="span" size="sm" color="body" weight="normal" className="mx-[var(--spacing-sm)]">
                 /
-              </span>
+              </Text>
             )}
           </li>
         )}
@@ -57,22 +58,21 @@ export default function Breadcrumb({
                   {item.label}
                 </Link>
               ) : (
-                <span
-                  className={`${
-                    isCurrent
-                      ? "text-[var(--color-text-body)] font-semibold"
-                      : "text-[var(--color-secondary)] font-medium"
-                  }`}
+                <Text
+                  as="span"
+                  size="sm"
+                  color={isCurrent ? "body" : "secondary"}
+                  weight={isCurrent ? "semibold" : "medium"}
                   aria-current={isCurrent ? "page" : undefined}
                 >
                   {item.label}
-                </span>
+                </Text>
               )}
 
               {!isLast && (
-                <span className="mx-[var(--spacing-sm)] text-[var(--color-text-body)] font-normal">
+                <Text as="span" size="sm" color="body" weight="normal" className="mx-[var(--spacing-sm)]">
                   /
-                </span>
+                </Text>
               )}
             </li>
           );

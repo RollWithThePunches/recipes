@@ -1,4 +1,7 @@
 import { RecipeCard } from "@/types/recipe";
+import Heading from "@/components/ui/heading";
+import Link from "@/components/ui/link";
+import Text from "@/components/ui/text";
 
 interface RecipeListItemProps {
   recipe: RecipeCard;
@@ -7,7 +10,7 @@ interface RecipeListItemProps {
 export default function RecipeListItem({ recipe }: RecipeListItemProps) {
   return (
     <li className="w-full">
-      <a
+      <Link
         href={`/recipe/${recipe.slug}`}
         className="flex flex-row gap-2 items-start w-full hover:bg-[var(--color-hover-background)] p-2 rounded-md transition-colors group"
         aria-label={`View recipe for ${recipe.title}`}
@@ -30,30 +33,19 @@ export default function RecipeListItem({ recipe }: RecipeListItemProps) {
 
         {/* Recipe content */}
         <div className="flex-1 flex flex-col gap-1 text-left text-black text-base">
-          <h3
-            className="font-semibold group-hover:text-[var(--color-primary)] transition-colors"
-            style={{
-              fontFamily: "var(--font-family-body)",
-              fontWeight: "600",
-              fontSize: "var(--font-size-base)",
-              lineHeight: "normal",
-            }}
-          >
+          <Heading as="h3" size="base" font="body" className="font-semibold group-hover:text-[var(--color-primary)] transition-colors">
             {recipe.title}
-          </h3>
-          <p
-            className="font-light"
-            style={{
-              fontFamily: "var(--font-family-body)",
-              fontWeight: "300",
-              fontSize: "var(--font-size-base)",
-              lineHeight: "normal",
-            }}
+          </Heading>
+          <Text
+            size="base"
+            color="body"
+            weight="light"
+            lineHeight="normal"
           >
             {recipe.description}
-          </p>
+          </Text>
         </div>
-      </a>
+      </Link>
     </li>
   );
 }

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/toast-provider";
+import Heading from "@/components/ui/heading";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, Suspense } from "react";
 
@@ -69,20 +70,19 @@ function CreateAccountForm() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[var(--color-background)]">
+    <div 
+      className="min-h-screen flex items-center justify-center bg-[var(--color-background)]"
+      style={{
+        padding: "var(--spacing-3xl) var(--spacing-lg)",
+      }}
+    >
       <div
         className="w-full max-w-md border border-[var(--color-text-heading)] rounded-lg bg-white flex flex-col gap-[var(--spacing-lg)] items-center"
         style={{ padding: "var(--spacing-xl)" }}
       >
-        <h1
-          className="font-semibold text-[var(--color-text-heading)] w-full text-left mb-[var(--spacing-md)]"
-          style={{
-            fontSize: "var(--font-size-3xl)",
-            fontFamily: "var(--font-family-body)",
-          }}
-        >
+        <Heading as="h1" size="3xl" font="body" className="font-semibold w-full text-left mb-[var(--spacing-md)]">
           Create an account
-        </h1>
+        </Heading>
         <form
           className="flex flex-col gap-[var(--spacing-lg)] w-full"
           autoComplete="off"

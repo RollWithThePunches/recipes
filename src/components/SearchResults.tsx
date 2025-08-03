@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Clock, Users, ChefHat } from "lucide-react";
+import Heading from "@/components/ui/heading";
+import Text from "@/components/ui/text";
 
 interface SearchResult {
   id: string;
@@ -123,13 +125,13 @@ export default function SearchResults({ query, isVisible, onResultClick }: Searc
 
                 {/* Recipe Details */}
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-[var(--color-text-heading)] text-sm mb-1 truncate">
+                  <Heading as="h3" size="sm" font="body" className="font-semibold mb-1 truncate">
                     {result.title}
-                  </h3>
+                  </Heading>
                   
-                  <p className="text-[var(--color-text-body)] text-xs mb-2 line-clamp-2">
+                  <Text size="xs" color="body" className="mb-2 line-clamp-2">
                     {result.description}
-                  </p>
+                  </Text>
 
                   {/* Recipe Meta */}
                   <div className="flex items-center gap-4 text-xs text-[var(--color-text-muted)]">
@@ -151,16 +153,19 @@ export default function SearchResults({ query, isVisible, onResultClick }: Searc
 
                   {/* Cuisine and Dietary Tags */}
                   <div className="flex items-center gap-2 mt-2">
-                    <span className="px-2 py-1 bg-[var(--color-secondary)] text-[var(--color-text-on-dark)] text-xs rounded-full">
+                    <Text as="span" size="xs" color="on-dark" className="px-2 py-1 bg-[var(--color-secondary)] rounded-full">
                       {result.cuisine}
-                    </span>
+                    </Text>
                     {Array.isArray(result.dietary) && result.dietary.map((diet) => (
-                      <span
+                      <Text
                         key={diet}
-                        className="px-2 py-1 bg-[var(--color-success)] text-white text-xs rounded-full"
+                        as="span"
+                        size="xs"
+                        color="on-dark"
+                        className="px-2 py-1 bg-[var(--color-success)] rounded-full"
                       >
                         {diet}
-                      </span>
+                      </Text>
                     ))}
                   </div>
                 </div>

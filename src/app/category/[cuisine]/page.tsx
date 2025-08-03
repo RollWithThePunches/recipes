@@ -7,6 +7,8 @@ import { Recipe } from "@/types/recipe";
 import Breadcrumb, { BreadcrumbItem } from "@/components/Breadcrumb";
 import RecipeCard from "@/components/RecipeCard";
 import { Button } from "@/components/ui/button";
+import Heading from "@/components/ui/heading";
+import Text from "@/components/ui/text";
 import { getRecipesByIds } from "@/lib/recipes";
 
 // Cast the imported JSON to our content type
@@ -41,27 +43,19 @@ function FeaturedRecipe({ recipe }: FeaturedRecipeProps) {
 
       {/* Recipe Content */}
       <div className="flex flex-col gap-4 flex-1 min-w-0">
-        <h2
-          className="text-[var(--color-text-heading)]"
-          style={{
-            fontFamily: "var(--font-family-heading)",
-            fontSize: "var(--font-size-4xl)",
-            lineHeight: "var(--line-height-tight)",
-          }}
-        >
+        <Heading as="h2" size="4xl" font="heading">
           {recipe.title}
-        </h2>
+        </Heading>
 
-        <p
-          className="text-[var(--color-text-body)] leading-6"
-          style={{
-            fontFamily: "var(--font-family-body)",
-            fontSize: "var(--font-size-base)",
-            fontWeight: "300",
-          }}
+        <Text
+          size="base"
+          color="body"
+          weight="light"
+          lineHeight="relaxed"
+          className="leading-6"
         >
           {recipe.description}
-        </p>
+        </Text>
 
         <Link
           href={`/recipe/${recipe.slug}`}
@@ -94,32 +88,19 @@ function CategoryNavigation({
     <div
       className="w-full bg-[var(--color-background-yellow)]"
       style={{
-        paddingTop: "var(--spacing-lg)",
-        paddingBottom: "var(--spacing-lg)",
+        paddingLeft: "var(--spacing-md)",
+        paddingRight: "var(--spacing-md)",
+        paddingTop: "var(--spacing-3xl)",
+        paddingBottom: "var(--spacing-3xl)",
       }}
       role="navigation"
       aria-label="Category meal types"
     >
-      <div
-        className="w-full max-w-[1024px] mx-auto"
-        style={{
-          paddingLeft: "var(--spacing-md)",
-          paddingRight: "var(--spacing-md)",
-          paddingTop: "var(--spacing-3xl)",
-          paddingBottom: "var(--spacing-3xl)",
-        }}
-      >
+      <div className="w-full max-w-[1024px] mx-auto">
         <div className="flex flex-col gap-6 items-center">
-          <h2
-            className="text-center text-[var(--color-text-heading)]"
-            style={{
-              fontFamily: "var(--font-family-heading)",
-              fontSize: "var(--font-size-3xl)",
-              lineHeight: "var(--line-height-tight)",
-            }}
-          >
+          <Heading as="h2" size="3xl" font="heading" className="text-center">
             {title}
-          </h2>
+          </Heading>
 
           <nav className="flex flex-wrap gap-6 items-center justify-center">
             {mealTypes.map((mealType) => (
@@ -182,17 +163,18 @@ export default async function CategoryPage({
   ];
 
   return (
-    <div className="bg-[var(--color-background)] min-h-screen">
+    <div 
+      className="bg-[var(--color-background)] min-h-screen"
+      style={{
+        padding: "var(--spacing-3xl) var(--spacing-lg)",
+      }}
+    >
       {/* Main Content */}
       <div className="w-full">
         {/* Page Container */}
         <div
           className="w-full max-w-[1024px] mx-auto"
           style={{
-            paddingLeft: "var(--spacing-md)",
-            paddingRight: "var(--spacing-md)",
-            paddingTop: "var(--spacing-3xl)",
-            paddingBottom: "var(--spacing-3xl)",
             display: "flex",
             flexDirection: "column",
             gap: "var(--spacing-4xl)",
@@ -205,16 +187,9 @@ export default async function CategoryPage({
             {/* Page Title Container */}
             <div className="flex flex-col gap-8 items-center w-full">
               {/* Page Title */}
-              <h1
-                className="text-center text-[var(--color-text-heading)] w-full"
-                style={{
-                  fontFamily: "var(--font-family-heading)",
-                  fontSize: "var(--font-size-5xl)",
-                  lineHeight: "var(--line-height-tight)",
-                }}
-              >
+              <Heading as="h1" size="5xl" font="heading" className="text-center w-full">
                 {categoryData.name}
-              </h1>
+              </Heading>
 
               {/* Category Navigation */}
               <CategoryNavigation
@@ -226,26 +201,18 @@ export default async function CategoryPage({
 
             {/* Featured Recipe Section */}
             <section aria-labelledby="featured-recipe-heading">
-              <h2 id="featured-recipe-heading" className="sr-only">
+              <Heading as="h2" id="featured-recipe-heading" className="sr-only">
                 Featured Recipe
-              </h2>
+              </Heading>
               <FeaturedRecipe recipe={featuredRecipe} />
             </section>
 
             {/* Explore Section */}
             <section aria-labelledby="explore-heading">
               <div className="flex flex-col gap-6 w-full">
-                <h2
-                  id="explore-heading"
-                  className="text-left text-[var(--color-text-heading)] w-full"
-                  style={{
-                    fontFamily: "var(--font-family-heading)",
-                    fontSize: "var(--font-size-4xl)",
-                    lineHeight: "var(--line-height-tight)",
-                  }}
-                >
+                <Heading as="h2" size="4xl" font="heading" id="explore-heading" className="text-left w-full">
                   {categoryData.exploreSection.title}
-                </h2>
+                </Heading>
 
                 {/* Recipe Grid */}
                 <Suspense fallback={<div>Loading recipes...</div>}>
@@ -263,10 +230,10 @@ export default async function CategoryPage({
 
                 {filteredRecipes.length === 0 && (
                   <div className="text-center py-12">
-                    <p className="text-[var(--color-text-body)] text-lg">
+                    <Text size="lg" color="body">
                       No recipes found for {type ? `${type} in ` : ""}
                       {categoryData.name.toLowerCase()} cuisine.
-                    </p>
+                    </Text>
                     {type && (
                       <Button asChild className="mt-4">
                         <Link href={`/category/${cuisine}`}>

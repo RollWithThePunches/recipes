@@ -184,6 +184,11 @@
     color: var(--color-link-hover);
   }
   
+  /* Custom Link component hover styles */
+  a[style*="--hover-color"]:hover {
+    color: var(--hover-color) !important;
+  }
+  
   a:focus {
     outline: var(--focus-ring);
     outline-offset: var(--focus-ring-offset);

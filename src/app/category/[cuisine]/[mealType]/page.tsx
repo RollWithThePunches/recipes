@@ -5,6 +5,8 @@ import contentData from "@/data/content.json";
 import { ContentData } from "@/types/content";
 import Breadcrumb, { BreadcrumbItem } from "@/components/Breadcrumb";
 import RecipeCard from "@/components/RecipeCard";
+import Heading from "@/components/ui/heading";
+import Text from "@/components/ui/text";
 import { getRecipesByIds } from "@/lib/recipes";
 
 // Cast the imported JSON to our content type
@@ -48,17 +50,17 @@ export default async function SubcategoryPage({
   ];
 
   return (
-    <div className="bg-[var(--color-background)] min-h-screen">
+    <div className="bg-[var(--color-background)] min-h-screen"
+    style={{
+      padding: "var(--spacing-3xl) var(--spacing-lg)",
+    }}
+    >
       {/* Main Content */}
       <div className="w-full">
         {/* Page Container */}
         <div
           className="w-full max-w-[1024px] mx-auto"
           style={{
-            paddingLeft: "var(--spacing-md)",
-            paddingRight: "var(--spacing-md)",
-            paddingTop: "var(--spacing-4xl)",
-            paddingBottom: "var(--spacing-3xl)",
             display: "flex",
             flexDirection: "column",
             gap: "var(--spacing-4xl)",
@@ -71,35 +73,26 @@ export default async function SubcategoryPage({
               <Breadcrumb items={breadcrumbItems} showHomeIcon={false} />
 
               {/* Page Title */}
-              <h1
-                className="text-left text-[var(--color-text-heading)] w-full"
-                style={{
-                  fontFamily: "var(--font-family-heading)",
-                  fontSize: "var(--font-size-5xl)",
-                  lineHeight: "var(--line-height-tight)",
-                }}
-              >
+              <Heading as="h1" size="5xl" font="heading" className="text-left w-full">
                 {subcategoryData.name}
-              </h1>
+              </Heading>
 
               {/* Description */}
-              <p
-                className="text-left text-[var(--color-text-body)] w-full"
-                style={{
-                  fontFamily: "var(--font-family-body)",
-                  fontSize: "var(--font-size-xl)",
-                  lineHeight: "var(--line-height-normal)",
-                }}
+              <Text
+                size="xl"
+                color="body"
+                lineHeight="normal"
+                className="text-left w-full"
               >
                 {subcategoryData.description}
-              </p>
+              </Text>
             </div>
 
             {/* Recipe Cards Section */}
             <section aria-labelledby="recipes-heading">
-              <h2 id="recipes-heading" className="sr-only">
+              <Heading as="h2" id="recipes-heading" className="sr-only">
                 {subcategoryData.name} Recipes
-              </h2>
+              </Heading>
 
               {subcategoryRecipes.length > 0 ? (
                 <Suspense fallback={<div>Loading recipes...</div>}>
@@ -122,10 +115,10 @@ export default async function SubcategoryPage({
                     paddingBottom: "var(--spacing-3xl)",
                   }}
                 >
-                  <p className="text-[var(--color-text-body)] text-lg mb-4">
+                  <Text size="lg" color="body" className="mb-4">
                     No recipes found for {subcategoryData.name.toLowerCase()} in{" "}
                     {categoryData.name.toLowerCase()} cuisine.
-                  </p>
+                  </Text>
                   <Link
                     href={`/category/${cuisine}`}
                     className="text-[var(--color-link)] hover:text-[var(--color-link-hover)] underline decoration-solid underline-offset-2"

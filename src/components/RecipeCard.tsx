@@ -1,4 +1,7 @@
 import { Recipe } from "@/types/recipe";
+import Heading from "@/components/ui/heading";
+import Link from "@/components/ui/link";
+import Text from "@/components/ui/text";
 
 interface RecipeCardProps {
   recipe: Recipe;
@@ -20,39 +23,28 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
       {/* Recipe content */}
       <div className="w-full flex-1 flex flex-col">
         <div className="flex flex-col gap-2 items-start p-[14px] text-left w-full h-full">
-          <h3
-            className="text-base text-black font-semibold w-full"
-            style={{
-              fontFamily: "var(--font-family-body)",
-              fontWeight: "600",
-              fontSize: "var(--font-size-base)",
-            }}
-          >
+          <Heading as="h3" size="base" font="body" className="text-black font-semibold w-full">
             {recipe.title}
-          </h3>
-          <p
-            className="text-base text-black font-light w-full flex-1"
-            style={{
-              fontFamily: "var(--font-family-body)",
-              fontWeight: "300",
-              fontSize: "var(--font-size-base)",
-              lineHeight: "var(--line-height-normal)",
-            }}
+          </Heading>
+          <Text
+            size="base"
+            color="body"
+            weight="light"
+            lineHeight="normal"
+            className="w-full flex-1"
           >
             {recipe.description}
-          </p>
-          <a
+          </Text>
+          <Link
             href={`/recipe/${recipe.slug}`}
-            className="text-sm text-[var(--color-secondary)] underline hover:text-[var(--color-primary)] transition-colors mt-auto"
-            style={{
-              fontFamily: "var(--font-family-body)",
-              fontWeight: "300",
-              fontSize: "var(--font-size-sm)",
-              lineHeight: "var(--line-height-normal)",
-            }}
+            variant="secondary"
+            size="sm"
+            weight="light"
+            underline
+            className="mt-auto"
           >
             Learn more
-          </a>
+          </Link>
         </div>
       </div>
     </div>

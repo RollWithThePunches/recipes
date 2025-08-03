@@ -2,8 +2,9 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { Button } from "./ui/button";
+import Heading from "@/components/ui/heading";
+import Link from "@/components/ui/link";
 import { useAuth } from "@/hooks/useAuth";
-import Link from "next/link";
 
 interface DrawerProps {
   isOpen: boolean;
@@ -190,16 +191,9 @@ export const Drawer: React.FC<DrawerProps> = ({
             >
               <CloseIcon className="w-6 h-6" />
             </Button>
-            <h1
-              id="drawer-title"
-              className="font-normal text-[var(--color-primary)]"
-              style={{
-                fontFamily: "var(--font-family-heading)",
-                fontSize: "var(--font-size-3xl)",
-              }}
-            >
+            <Heading as="h1" size="3xl" font="heading" id="drawer-title" className="font-normal text-[var(--color-primary)]">
               Cooking
-            </h1>
+            </Heading>
           </div>
 
 
@@ -240,7 +234,7 @@ export const Drawer: React.FC<DrawerProps> = ({
               <MenuItem href="/favorites" isOpen={isOpen}>
                 Favorites
               </MenuItem>
-              <MenuItem onClick={() => console.log("Your recipes clicked")} isOpen={isOpen}>
+              <MenuItem href="/create-recipe" isOpen={isOpen}>
                 Your recipes
               </MenuItem>
             </div>

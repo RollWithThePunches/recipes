@@ -149,6 +149,30 @@
         "image": "/assets/burgers.jpg"
       }
     ],
+    "createRecipePage": {
+      "title": "Your recipes",
+      "description": "Create your own recipes by uploading ingredients, directions, and images. Click the edit icon to make changes.",
+      "createCard": {
+        "title": "Create a recipe",
+        "ariaLabel": "Create a new recipe"
+      },
+      "userRecipes": [
+        {
+          "id": "user-cemitas",
+          "title": "Cemitas",
+          "description": "Learn more",
+          "image": "/assets/burgers.jpg",
+          "editAriaLabel": "Edit Cemitas recipe"
+        },
+        {
+          "id": "user-burgers",
+          "title": "Burgers",
+          "description": "Learn more",
+          "image": "/assets/burgers.jpg",
+          "editAriaLabel": "Edit Burgers recipe"
+        }
+      ]
+    },
     "quickActions": [
       {
         "label": "Account information",
@@ -216,6 +240,72 @@
         { "label": "Security Measures", "href": "/security" },
         { "label": "Sitemap", "href": "/sitemap" }
       ]
+    }
+  },
+
+  "createRecipeForm": {
+    "title": "Create a recipe",
+    "description": "Enter in all information about the recipe, following the directions. Upload an image and submit for approval. It may take a week for approval and publishing.",
+    "form": {
+      "recipeName": {
+        "label": "Recipe name",
+        "placeholder": "Enter recipe name"
+      },
+      "shortDescription": {
+        "label": "Short description",
+        "placeholder": "Describe your recipe"
+      },
+      "foodCategory": {
+        "label": "Food category",
+        "placeholder": "Select a category",
+        "options": [
+          { "value": "appetizers", "label": "Appetizers" },
+          { "value": "main-dish", "label": "Main Dish" },
+          { "value": "desserts", "label": "Desserts" },
+          { "value": "drinks", "label": "Drinks" },
+          { "value": "sides", "label": "Sides" },
+          { "value": "soups", "label": "Soups" }
+        ]
+      },
+      "cuisine": {
+        "label": "Cuisine",
+        "placeholder": "Select cuisine",
+        "options": [
+          { "value": "mexican", "label": "Mexican" },
+          { "value": "italian", "label": "Italian" },
+          { "value": "american", "label": "American" },
+          { "value": "asian", "label": "Asian" },
+          { "value": "mediterranean", "label": "Mediterranean" },
+          { "value": "indian", "label": "Indian" }
+        ]
+      },
+      "dietary": {
+        "label": "Dietary",
+        "placeholder": "Select Dietary",
+        "options": [
+          { "value": "vegetarian", "label": "Vegetarian" },
+          { "value": "vegan", "label": "Vegan" },
+          { "value": "gluten-free", "label": "Gluten Free" },
+          { "value": "dairy-free", "label": "Dairy Free" },
+          { "value": "keto", "label": "Keto" },
+          { "value": "paleo", "label": "Paleo" }
+        ]
+      },
+      "ingredients": {
+        "label": "Ingredients",
+        "description": "List ingredients and amount. Separate each by commas.",
+        "placeholder": "Enter ingredients with amounts, separated by commas"
+      },
+      "directions": {
+        "label": "Directions",
+        "description": "Add each step for the directions. Click add more to continue adding steps in the recipe.",
+        "stepLabel": "Step",
+        "addStepButton": "Add another step"
+      },
+      "buttons": {
+        "cancel": "Cancel",
+        "preview": "Preview"
+      }
     }
   }
 } 

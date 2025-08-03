@@ -1,5 +1,7 @@
 "use client";
 
+import Heading from "@/components/ui/heading";
+
 interface DirectionStep {
   stepNumber: number;
   instruction: string;
@@ -16,30 +18,16 @@ export default function RecipeDirections({
 }: RecipeDirectionsProps) {
   return (
     <div className={className}>
-      <h2
-        className="font-bold mb-[var(--spacing-xl)]"
-        style={{
-          fontSize: "var(--font-size-2xl)",
-          color: "var(--color-text-heading)",
-          fontFamily: "var(--font-family-heading)",
-        }}
-      >
+      <Heading as="h2" size="2xl" font="heading" className="font-bold mb-[var(--spacing-xl)]">
         Directions
-      </h2>
+      </Heading>
       <ol className="space-y-[var(--spacing-xl)]" style={{ listStyle: "none" }}>
         {steps.map((step, index) => (
           <li key={index}>
             <div>
-              <h3
-                className="font-bold mb-[var(--spacing-sm)]"
-                style={{
-                  fontSize: "var(--font-size-lg)",
-                  color: "var(--color-text-heading)",
-                  fontFamily: "var(--font-family-heading)",
-                }}
-              >
+              <Heading as="h3" size="lg" font="heading" className="font-bold mb-[var(--spacing-sm)]">
                 Step {step.stepNumber}
-              </h3>
+              </Heading>
               <p
                 style={{
                   color: "var(--color-text-body)",

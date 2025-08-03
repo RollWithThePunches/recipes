@@ -1,5 +1,8 @@
 import contentData from "@/data/content.json";
 import { ContentData } from "@/types/content";
+import Heading from "@/components/ui/heading";
+import Link from "@/components/ui/link";
+import Text from "@/components/ui/text";
 
 const content = contentData as ContentData;
 
@@ -13,15 +16,9 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between px-6 py-6 w-full gap-4 md:gap-0">
           {/* Left section - Brand */}
           <div className="flex flex-row items-center">
-            <h2
-              className="text-[32px] text-white leading-none"
-              style={{
-                fontFamily: "var(--font-family-heading)",
-                fontSize: "var(--font-size-3xl)",
-              }}
-            >
+            <Heading as="h2" size="3xl" font="heading" className="text-white leading-none">
               {content.ui.footer.brand}
-            </h2>
+            </Heading>
           </div>
 
           {/* Right section - Navigation links and copyright */}
@@ -33,33 +30,29 @@ export default function Footer() {
               aria-label="Footer navigation"
             >
               {content.ui.footer.links.map((link, index) => (
-                <a
+                <Link
                   key={index}
                   href={link.href}
-                  className="text-white text-sm underline hover:text-[var(--color-primary)] transition-colors"
-                  style={{
-                    fontFamily: "var(--font-family-body)",
-                    fontSize: "var(--font-size-sm)",
-                    lineHeight: "normal",
-                  }}
+                  variant="body"
+                  size="sm"
+                  underline
+                  color="on-dark"
+                  className="hover:text-[var(--color-primary)]"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
             </nav>
 
             {/* Copyright */}
             <div className="text-sm">
-              <p
-                style={{
-                  fontFamily: "var(--font-family-body)",
-                  fontSize: "var(--font-size-sm)",
-                  lineHeight: "normal",
-                  color: "var(--color-text-on-dark)",
-                }}
+              <Text
+                size="sm"
+                color="on-dark"
+                lineHeight="normal"
               >
                 {content.ui.footer.copyright}
-              </p>
+              </Text>
             </div>
           </div>
         </div>

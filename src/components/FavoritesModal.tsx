@@ -2,6 +2,9 @@
 
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Heading from "@/components/ui/heading";
+import Link from "@/components/ui/link";
+import Text from "@/components/ui/text";
 import { useRouter, usePathname } from "next/navigation";
 
 interface FavoritesModalProps {
@@ -23,11 +26,7 @@ export default function FavoritesModal({ isOpen, onClose }: FavoritesModalProps)
     router.push(`/login?redirectTo=${encodeURIComponent(pathname)}`);
   };
 
-  const handleCreateAccount = () => {
-    onClose();
-    // Route to create account page with current page as redirect
-    router.push(`/create-account?redirectTo=${encodeURIComponent(pathname)}`);
-  };
+
 
   const handleKeyDown = (e: React.KeyboardEvent, action: () => void) => {
     if (e.key === "Enter" || e.key === " ") {
@@ -73,13 +72,9 @@ export default function FavoritesModal({ isOpen, onClose }: FavoritesModalProps)
         <div className="flex flex-col items-center gap-[var(--spacing-xl)] px-[var(--spacing-xl)] pb-[var(--spacing-xl)]">
           {/* Title and Sign In Button */}
           <div className="flex flex-col items-center gap-[var(--spacing-lg)] w-full">
-            <h2 
-              id="modal-title"
-              className="font-semibold text-center"
-              style={{ fontFamily: "var(--font-family-body)" }}
-            >
+            <Heading as="h2" size="base" font="body" id="modal-title" className="font-semibold text-center">
               Sign in to add to Favorites
-            </h2>
+            </Heading>
             
             <Button
               onClick={handleSignIn}
@@ -97,17 +92,18 @@ export default function FavoritesModal({ isOpen, onClose }: FavoritesModalProps)
 
           {/* Create Account Section */}
           <div className="flex flex-col items-center gap-[var(--spacing-sm)] text-[var(--font-size-base)] text-center">
-            <p className="text-[var(--color-text-body)]">
+            <Text color="body">
               Don&apos;t have an account?
-            </p>
-            <button
-              onClick={handleCreateAccount}
-              onKeyDown={(e) => handleKeyDown(e, handleCreateAccount)}
-              className="text-[var(--color-secondary)] underline hover:text-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)] rounded transition-colors"
+            </Text>
+            <Link
+              href={`/create-account?redirectTo=${encodeURIComponent(pathname)}`}
+              variant="secondary"
+              underline
+              className="focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)] rounded"
               id="modal-description"
             >
               Create one to get started
-            </button>
+            </Link>
           </div>
         </div>
       </div>
