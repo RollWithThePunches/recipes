@@ -30,7 +30,8 @@
     "db:check-favorites": "node scripts/check-favorites.js",
     "db:clear-favorites": "node scripts/clear-favorites.js",
     "deploy": "git push heroku main",
-    "deploy:staging": "git push heroku main && echo 'Deployment to staging completed!'"
+    "deploy:staging": "git push heroku main && echo 'Deployment to staging completed!'",
+    "db:sync-json": "node scripts/sync-json-to-db.js"
   },
   "dependencies": {
     "@prisma/client": "^6.12.0",

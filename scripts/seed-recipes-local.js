@@ -15,7 +15,7 @@ const recipes = [
   {
     slug: "barbacoa-tacos",
     title: "Barbacoa Tacos",
-    description: "These barbacoa tacos are packed with smoky shredded beef that's perfectly tender.",
+    description: "These barbacoa tacos are packed with smoky shredded beef that's perfectly tender. Spices like cumin complement the chiles, while oregano and bay leaves add an earthiness to this recipe.",
     image: "/assets/fh-tacos-3784500610.jpg",
     cuisine: "Mexican",
     mealType: "dinner",
