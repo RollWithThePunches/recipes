@@ -15,40 +15,38 @@ interface SelectProps {
   required?: boolean;
 }
 
-const Select = React.forwardRef<HTMLDivElement, SelectProps>(
-  ({ title = "", options, value, onValueChange, placeholder = "Select an option", className, required }) => {
-    const selectedValues = value ? [value] : [];
-    
-    const handleSelectionChange = (values: string[]) => {
-      onValueChange(values[0] || "");
-    };
+const Select = ({ title = "", options, value, onValueChange, placeholder = "Select an option", className, required }: SelectProps) => {
+  const selectedValues = value ? [value] : [];
+  
+  const handleSelectionChange = (values: string[]) => {
+    onValueChange(values[0] || "");
+  };
 
-    const renderSelectItem = (item: { id: string; label: string; value: string }) => {
-      return (
-        <DropdownMenuItem
-          id={item.id}
-          label={item.label}
-          onClick={() => onValueChange(item.value)}
-          variant="menu"
-        />
-      );
-    };
-
+  const renderSelectItem = (item: { id: string; label: string; value: string }) => {
     return (
-      <Dropdown
-        title={title}
-        items={options}
-        selectedValues={selectedValues}
-        onSelectionChange={handleSelectionChange}
-        placeholder={placeholder}
-        className={className}
-        renderItem={renderSelectItem}
-        required={required}
+      <DropdownMenuItem
+        id={item.id}
+        label={item.label}
+        onClick={() => onValueChange(item.value)}
+        variant="menu"
       />
     );
-  }
-);
-Select.displayName = "Select";
+  };
+
+  return (
+    <Dropdown
+      title={title}
+      items={options}
+      selectedValues={selectedValues}
+      onSelectionChange={handleSelectionChange}
+      placeholder={placeholder}
+      className={className}
+      renderItem={renderSelectItem}
+      required={required}
+      closeOnSelection={true}
+    />
+  );
+};
 
 // Multi-select version
 interface MultiSelectProps {
@@ -60,42 +58,39 @@ interface MultiSelectProps {
   className?: string;
 }
 
-const MultiSelect = React.forwardRef<HTMLDivElement, MultiSelectProps>(
-  ({ title, options, values, onValuesChange, placeholder = "Select options", className }) => {
-    const renderMultiSelectItem = (item: { id: string; label: string; value: string }) => {
-      const isSelected = values.includes(item.value);
-      
-      return (
-        <DropdownMenuItem
-          id={item.id}
-          label={item.label}
-          isSelected={isSelected}
-          onToggle={(checked) => {
-            if (checked) {
-              onValuesChange([...values, item.value]);
-            } else {
-              onValuesChange(values.filter(v => v !== item.value));
-            }
-          }}
-          variant="checkbox"
-        />
-      );
-    };
-
+const MultiSelect = ({ title, options, values, onValuesChange, placeholder = "Select options", className }: MultiSelectProps) => {
+  const renderMultiSelectItem = (item: { id: string; label: string; value: string }) => {
+    const isSelected = values.includes(item.value);
+    
     return (
-      <Dropdown
-        title={title}
-        items={options}
-        selectedValues={values}
-        onSelectionChange={onValuesChange}
-        placeholder={placeholder}
-        className={className}
-        renderItem={renderMultiSelectItem}
+      <DropdownMenuItem
+        id={item.id}
+        label={item.label}
+        isSelected={isSelected}
+        onToggle={(checked) => {
+          if (checked) {
+            onValuesChange([...values, item.value]);
+          } else {
+            onValuesChange(values.filter(v => v !== item.value));
+          }
+        }}
+        variant="checkbox"
       />
     );
-  }
-);
-MultiSelect.displayName = "MultiSelect";
+  };
+
+  return (
+    <Dropdown
+      title={title}
+      items={options}
+      selectedValues={values}
+      onSelectionChange={onValuesChange}
+      placeholder={placeholder}
+      className={className}
+      renderItem={renderMultiSelectItem}
+    />
+  );
+};
 
 // Legacy exports for backward compatibility
 const SelectGroup = Select;

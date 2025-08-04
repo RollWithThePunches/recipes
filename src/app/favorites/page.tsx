@@ -52,6 +52,20 @@ export default function FavoritesPage() {
       value: culture
     }));
 
+  // If no cultures found in favorites, provide some default options
+  if (cultureOptions.length === 0) {
+    cultureOptions.push(
+      { id: "culture-mexican", label: "Mexican", value: "mexican" },
+      { id: "culture-italian", label: "Italian", value: "italian" },
+      { id: "culture-chinese", label: "Chinese", value: "chinese" },
+      { id: "culture-indian", label: "Indian", value: "indian" },
+      { id: "culture-japanese", label: "Japanese", value: "japanese" },
+      { id: "culture-french", label: "French", value: "french" },
+      { id: "culture-thai", label: "Thai", value: "thai" },
+      { id: "culture-mediterranean", label: "Mediterranean", value: "mediterranean" }
+    );
+  }
+
   const dishOptions = [
     { id: "dish-main", label: "Main dishes", value: "main" },
     { id: "dish-appetizer", label: "Appetizers", value: "appetizer" },

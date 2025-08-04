@@ -32,12 +32,17 @@ export default function RecipePreviewModal({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-[var(--color-background)] rounded-lg shadow-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <div className="bg-[var(--color-background)] rounded-lg shadow-lg max-w-2xl w-full max-h-[90vh] flex flex-col">
         {/* Modal Header */}
-        <div className="flex justify-between items-center p-6 border-b border-[var(--color-gray)]">
-          <Heading as="h2" size="2xl" font="heading" className="text-[var(--color-text-heading)]">
-            Recipe Preview
-          </Heading>
+        <div className="flex justify-between items-start p-6 border-b border-[var(--color-gray)] flex-shrink-0">
+          <div className="space-y-1">
+            <Heading as="h2" size="2xl" font="heading" className="text-[var(--color-text-heading)]">
+              Recipe Preview
+            </Heading>
+            <Text size="base" color="body">
+              Please review your recipe before submitting.
+            </Text>
+          </div>
           <Button
             variant="ghost"
             onClick={onClose}
@@ -49,7 +54,7 @@ export default function RecipePreviewModal({
         </div>
 
         {/* Modal Content */}
-        <div className="p-6 space-y-6">
+        <div className="p-6 space-y-6 overflow-y-auto flex-1">
           {/* Recipe Name */}
           <div className="space-y-2">
             <Text size="base" weight="semibold" color="body">
@@ -76,7 +81,7 @@ export default function RecipePreviewModal({
               Food category
             </Text>
             <Text size="base" color="body">
-              {formData.foodCategory || 'No category selected'}
+              {formData.foodCategory ? formData.foodCategory.charAt(0).toUpperCase() + formData.foodCategory.slice(1) : 'No category selected'}
             </Text>
           </div>
 
@@ -86,7 +91,7 @@ export default function RecipePreviewModal({
               Cuisine
             </Text>
             <Text size="base" color="body">
-              {formData.cuisine || 'No cuisine selected'}
+              {formData.cuisine ? formData.cuisine.charAt(0).toUpperCase() + formData.cuisine.slice(1) : 'No cuisine selected'}
             </Text>
           </div>
 
@@ -96,7 +101,7 @@ export default function RecipePreviewModal({
               Dietary
             </Text>
             <Text size="base" color="body">
-              {formData.dietary || 'No dietary preference selected'}
+              {formData.dietary ? formData.dietary.charAt(0).toUpperCase() + formData.dietary.slice(1) : 'No dietary preference selected'}
             </Text>
           </div>
 
@@ -108,10 +113,15 @@ export default function RecipePreviewModal({
             {ingredients.length > 0 ? (
               <ul className="list-disc list-inside space-y-1">
                 {ingredients.map((ingredient, index) => (
-                  <li key={index} className="text-[var(--color-text-body)]">
-                    <Text size="base" color="body">
-                      {ingredient}
-                    </Text>
+                  <li 
+                    key={index} 
+                    className="text-[var(--color-text-body)]"
+                    style={{ 
+                      fontFamily: "var(--font-family-body)", 
+                      fontSize: "var(--font-size-base)" 
+                    }}
+                  >
+                    {ingredient}
                   </li>
                 ))}
               </ul>
@@ -130,10 +140,15 @@ export default function RecipePreviewModal({
             {directions.length > 0 ? (
               <ol className="list-decimal list-inside space-y-1">
                 {directions.map((direction, index) => (
-                  <li key={index} className="text-[var(--color-text-body)]">
-                    <Text size="base" color="body">
-                      {direction}
-                    </Text>
+                  <li 
+                    key={index} 
+                    className="text-[var(--color-text-body)]"
+                    style={{ 
+                      fontFamily: "var(--font-family-body)", 
+                      fontSize: "var(--font-size-base)" 
+                    }}
+                  >
+                    {direction}
                   </li>
                 ))}
               </ol>
@@ -146,7 +161,7 @@ export default function RecipePreviewModal({
         </div>
 
         {/* Modal Footer */}
-        <div className="flex justify-end gap-4 p-6 border-t border-[var(--color-gray)]">
+        <div className="flex justify-end gap-4 p-6 border-t border-[var(--color-gray)] flex-shrink-0">
           <Button
             variant="outline"
             onClick={onClose}

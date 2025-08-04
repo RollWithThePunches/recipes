@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label';
 import { Select } from '@/components/ui/select';
 import { Plus, X } from 'lucide-react';
 import RecipePreviewModal from './RecipePreviewModal';
+import RecipeSubmissionSuccess from './RecipeSubmissionSuccess';
 
 interface FormOption {
   value: string;
@@ -73,6 +74,7 @@ export default function CreateRecipeForm({ formContent }: CreateRecipeFormProps)
   });
   const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleInputChange = (field: keyof RecipeFormData, value: string) => {
     setFormData(prev => ({
@@ -152,8 +154,12 @@ export default function CreateRecipeForm({ formContent }: CreateRecipeFormProps)
     // TODO: Implement recipe submission
     console.log('Submit recipe:', formData);
     setIsPreviewModalOpen(false);
-    // TODO: Navigate to success page or show success message
+    setIsSubmitted(true);
   };
+
+  if (isSubmitted) {
+    return <RecipeSubmissionSuccess />;
+  }
 
   return (
     <div 

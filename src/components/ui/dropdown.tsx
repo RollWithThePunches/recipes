@@ -19,6 +19,7 @@ interface DropdownProps {
   className?: string;
   renderItem?: (item: DropdownItem, index: number) => ReactNode;
   required?: boolean;
+  closeOnSelection?: boolean;
 }
 
 export default function Dropdown({
@@ -30,6 +31,7 @@ export default function Dropdown({
   className = "",
   renderItem,
   required,
+  closeOnSelection = false,
 }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [focusedIndex, setFocusedIndex] = useState(-1);
@@ -79,8 +81,17 @@ export default function Dropdown({
           if (focusedIndex >= 0 && focusedIndex < items.length) {
             event.preventDefault();
             const item = items[focusedIndex];
-            const isCurrentlySelected = selectedValues.includes(item.value);
-            handleItemToggle(item.value, !isCurrentlySelected);
+            
+            // For single-select dropdowns (closeOnSelection = true), directly call onSelectionChange
+            if (closeOnSelection) {
+              onSelectionChange([item.value]);
+              setIsOpen(false);
+              setFocusedIndex(-1);
+            } else {
+              // For multi-select dropdowns, toggle the item
+              const isCurrentlySelected = selectedValues.includes(item.value);
+              handleItemToggle(item.value, !isCurrentlySelected);
+            }
           }
           break;
       }
@@ -109,6 +120,9 @@ export default function Dropdown({
     } else {
       onSelectionChange(selectedValues.filter(v => v !== value));
     }
+    // Close dropdown after selection
+    setIsOpen(false);
+    setFocusedIndex(-1);
   };
 
   const getDisplayText = () => {
@@ -170,13 +184,22 @@ export default function Dropdown({
             {items.map((item, index) => (
               <div
                 key={item.id}
-                className={`relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none hover:bg-[var(--color-hover-background)] focus:bg-[var(--color-hover-background)] focus:text-[var(--color-text-heading)] ${
+                data-item-index={index}
+                className={`relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pr-2 text-sm outline-none hover:bg-[var(--color-hover-background)] focus:bg-[var(--color-hover-background)] focus:text-[var(--color-text-heading)] ${
                   focusedIndex === index ? 'bg-[var(--color-hover-background)]' : ''
-                }`}
+                } ${closeOnSelection ? 'pl-2' : 'pl-8'}`}
                 role="option"
                 aria-selected={selectedValues.includes(item.value)}
                 tabIndex={focusedIndex === index ? 0 : -1}
                 onFocus={() => setFocusedIndex(index)}
+                onClick={() => {
+                  if (closeOnSelection) {
+                    setTimeout(() => {
+                      setIsOpen(false);
+                      setFocusedIndex(-1);
+                    }, 0);
+                  }
+                }}
                 ref={index === 0 ? firstItemRef : undefined}
               >
                 {renderItem ? (
