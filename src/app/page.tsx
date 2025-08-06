@@ -18,7 +18,8 @@ export default async function HomePage() {
   const featuredRecipes = featuredSlugs
     .map((slug) => featuredRecipesRaw.find((r) => r.slug === slug))
     .filter((r): r is NonNullable<typeof r> => Boolean(r));
-  const barbacoaRecipe = await getRecipesByIds(["barbacoa-tacos"]);
+  const cemitasRecipe = await getRecipesByIds(["cemitas"]);
+  const veganKebabsRecipe = await getRecipesByIds(["vegan-kebabs"]);
 
   return (
     <div className="bg-white">
@@ -85,15 +86,15 @@ export default async function HomePage() {
           }}
         >
           <div className="max-w-[1024px] mx-auto space-y-10">
-            {/* First featured recipe (left image) */}
+            {/* First featured recipe (left image) - Cemitas */}
             <FeaturedRecipeSection
-              recipe={barbacoaRecipe[0]}
+              recipe={cemitasRecipe[0]}
               imagePosition="left"
             />
 
-            {/* Second featured recipe (right image) */}
+            {/* Second featured recipe (right image) - Vegan Kebabs */}
             <FeaturedRecipeSection
-              recipe={barbacoaRecipe[0]}
+              recipe={veganKebabsRecipe[0]}
               imagePosition="right"
             />
           </div>

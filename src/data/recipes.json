@@ -274,5 +274,368 @@
         "instruction": "Strain into prepared glasses and garnish with lime wheels."
       }
     ]
+  },
+  {
+    "id": "cemitas",
+    "title": "Cemitas",
+    "description": "A cemita is a type of Mexican sandwich served on a fluffy sesame seed roll with breaded cutlets, avocado, cheese, and chipotle chiles.",
+    "image": "/assets/cemitas.png",
+    "cuisine": "Mexican",
+    "mealType": "sandwiches",
+    "prepTime": 20,
+    "cookTime": 15,
+    "servings": 4,
+    "difficulty": "medium",
+    "dietary": ["contains gluten", "contains dairy"],
+    "ingredients": [
+      {
+        "item": "beef, pork, or chicken cutlets, very thinly pounded",
+        "quantity": "4",
+        "unit": "pieces (6-ounce each)"
+      },
+      {
+        "item": "milk",
+        "quantity": "1",
+        "unit": "cup"
+      },
+      {
+        "item": "all-purpose flour",
+        "quantity": "1",
+        "unit": "cup"
+      },
+      {
+        "item": "bread crumbs",
+        "quantity": "1",
+        "unit": "cup"
+      },
+      {
+        "item": "canola or vegetable oil",
+        "quantity": "for frying",
+        "unit": ""
+      },
+      {
+        "item": "kosher salt and freshly ground black pepper",
+        "quantity": "to taste",
+        "unit": ""
+      },
+      {
+        "item": "ripe medium Hass avocados, halved, pitted, and sliced",
+        "quantity": "2",
+        "unit": "avocados"
+      },
+      {
+        "item": "homemade or store-bought cemita buns, sesame seed buns, or brioche buns, halved",
+        "quantity": "4",
+        "unit": "buns"
+      },
+      {
+        "item": "shredded Queso Oaxaca from 1 (14-ounce) ball of cheese, or fresh mozzarella or string cheese",
+        "quantity": "2",
+        "unit": "cups"
+      },
+      {
+        "item": "raw onion rings (about 1/4 inch thick)",
+        "quantity": "12",
+        "unit": "rings"
+      },
+      {
+        "item": "chipotle chiles from 1 (7-ounce) can whole chipotle chiles in adobo, or pickled jalapeños from 1 (12-ounce) can",
+        "quantity": "4",
+        "unit": "chiles"
+      },
+      {
+        "item": "papalo leaves, or fresh cilantro leaves",
+        "quantity": "20",
+        "unit": "leaves"
+      },
+      {
+        "item": "extra-virgin olive oil",
+        "quantity": "for drizzling",
+        "unit": ""
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Set up three shallow bowls: one with flour, one with milk, and one with bread crumbs. Season the cutlets with salt and pepper."
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "Dredge each cutlet in flour, then dip in milk, then coat with bread crumbs. Set aside on a plate."
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Heat oil in a large skillet over medium-high heat. Fry the cutlets until golden brown and cooked through, about 3-4 minutes per side. Drain on paper towels."
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "To assemble the cemitas, place a fried cutlet on the bottom half of each bun. Top with sliced avocado, shredded cheese, onion rings, chipotle chiles, and papalo leaves."
+      },
+      {
+        "stepNumber": 5,
+        "instruction": "Drizzle with olive oil, close the sandwich, and serve immediately."
+      }
+    ]
+  },
+  {
+    "id": "milkshakes",
+    "title": "Sundae Milkshake",
+    "description": "A creamy and fruity milkshake made with vanilla ice cream, blueberries, bananas, and kefir, topped with whipped cream and chocolate syrup.",
+    "image": "/assets/sundae.jpg",
+    "cuisine": "American",
+    "mealType": "drink",
+    "prepTime": 10,
+    "cookTime": 0,
+    "servings": 2,
+    "difficulty": "easy",
+    "dietary": ["contains dairy", "gluten-free"],
+    "ingredients": [
+      {
+        "item": "vanilla bean ice cream",
+        "quantity": "2",
+        "unit": "cups"
+      },
+      {
+        "item": "blueberries",
+        "quantity": "1",
+        "unit": "cup"
+      },
+      {
+        "item": "medium ripe bananas",
+        "quantity": "2",
+        "unit": "bananas"
+      },
+      {
+        "item": "full-fat plain kefir",
+        "quantity": "1 1/4",
+        "unit": "cup"
+      },
+      {
+        "item": "whipped cream",
+        "quantity": "for topping",
+        "unit": ""
+      },
+      {
+        "item": "chocolate syrup",
+        "quantity": "for drizzling",
+        "unit": ""
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "In a blender, combine the vanilla ice cream, blueberries, bananas, and kefir."
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "Blend on high speed until smooth and creamy, about 30-45 seconds."
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Pour the milkshake into serving glasses."
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "Top with whipped cream and drizzle with chocolate syrup before serving."
+      }
+    ]
+  },
+  {
+    "id": "sushi",
+    "title": "Traditional Sushi (Hosomaki)",
+    "description": "Traditional Japanese sushi rolls made with seasoned rice, fresh tuna, and cucumber wrapped in nori seaweed.",
+    "image": "/assets/sushi.jpg",
+    "cuisine": "Japanese",
+    "mealType": "dinner",
+    "prepTime": 45,
+    "cookTime": 20,
+    "servings": 4,
+    "difficulty": "medium",
+    "dietary": ["gluten-free", "dairy-free"],
+    "ingredients": [
+      {
+        "item": "Japanese short grain rice",
+        "quantity": "2",
+        "unit": "cups"
+      },
+      {
+        "item": "seasoned rice vinegar",
+        "quantity": "4",
+        "unit": "tablespoon"
+      },
+      {
+        "item": "Japanese or Persian cucumber",
+        "quantity": "1",
+        "unit": "cucumber"
+      },
+      {
+        "item": "sushi-grade tuna",
+        "quantity": "200",
+        "unit": "grams"
+      },
+      {
+        "item": "rice vinegar",
+        "quantity": "1",
+        "unit": "tablespoon"
+      },
+      {
+        "item": "Nori (seaweed) sheets",
+        "quantity": "5",
+        "unit": "sheets"
+      },
+      {
+        "item": "soy sauce",
+        "quantity": "for serving",
+        "unit": ""
+      },
+      {
+        "item": "wasabi",
+        "quantity": "optional",
+        "unit": ""
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "Rinse the rice thoroughly until the water runs clear. Cook according to package instructions, then let cool slightly."
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "Mix the cooked rice with seasoned rice vinegar while it's still warm. Let the rice cool completely."
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Slice the cucumber into thin strips and cut the tuna into long, thin strips."
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "Place a nori sheet on a bamboo mat, shiny side down. Spread a thin layer of rice evenly over the nori, leaving a 1-inch border at the top."
+      },
+      {
+        "stepNumber": 5,
+        "instruction": "Place tuna and cucumber strips in the center of the rice. Roll tightly using the bamboo mat, moistening the top border with water to seal."
+      },
+      {
+        "stepNumber": 6,
+        "instruction": "Cut each roll into 6-8 pieces with a sharp, wet knife. Serve with soy sauce and wasabi."
+      }
+    ]
+  },
+  {
+    "id": "vegan-kebabs",
+    "title": "Vegan Kebabs",
+    "description": "Grilled vegetable and soy curl kebabs marinated in a tangy Mediterranean dressing with herbs and garlic.",
+    "image": "/assets/vegan-kebabs.jpg",
+    "cuisine": "Mediterranean",
+    "mealType": "dinner",
+    "prepTime": 30,
+    "cookTime": 15,
+    "servings": 4,
+    "difficulty": "easy",
+    "dietary": ["vegan", "gluten-free"],
+    "ingredients": [
+      {
+        "item": "soy curls",
+        "quantity": "8",
+        "unit": "ounce bag"
+      },
+      {
+        "item": "medium zucchini, sliced into thick rounds",
+        "quantity": "2",
+        "unit": "zucchini"
+      },
+      {
+        "item": "large yellow summer squash, sliced into thick rounds",
+        "quantity": "1",
+        "unit": "squash"
+      },
+      {
+        "item": "red bell pepper, cut into chunks",
+        "quantity": "1",
+        "unit": "pepper"
+      },
+      {
+        "item": "green bell pepper, cut into chunks",
+        "quantity": "1",
+        "unit": "pepper"
+      },
+      {
+        "item": "red onion, cut into chunks",
+        "quantity": "1",
+        "unit": "onion"
+      },
+      {
+        "item": "olive oil",
+        "quantity": "1/2",
+        "unit": "cup"
+      },
+      {
+        "item": "lemon juice",
+        "quantity": "1/4",
+        "unit": "cup"
+      },
+      {
+        "item": "water",
+        "quantity": "1/4",
+        "unit": "cup"
+      },
+      {
+        "item": "dijon mustard",
+        "quantity": "2",
+        "unit": "tablespoons"
+      },
+      {
+        "item": "agave",
+        "quantity": "2",
+        "unit": "tablespoons"
+      },
+      {
+        "item": "garlic, minced",
+        "quantity": "4",
+        "unit": "cloves"
+      },
+      {
+        "item": "dried oregano",
+        "quantity": "1",
+        "unit": "teaspoon"
+      },
+      {
+        "item": "dried basil",
+        "quantity": "1",
+        "unit": "teaspoon"
+      },
+      {
+        "item": "salt",
+        "quantity": "1/2",
+        "unit": "teaspoon"
+      },
+      {
+        "item": "ground black pepper",
+        "quantity": "1/2",
+        "unit": "teaspoon"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "instruction": "In a large bowl, whisk together olive oil, lemon juice, water, dijon mustard, agave, minced garlic, oregano, basil, salt, and black pepper to make the marinade."
+      },
+      {
+        "stepNumber": 2,
+        "instruction": "Add soy curls and vegetables to the marinade, tossing to coat evenly. Let marinate for at least 30 minutes or up to 2 hours."
+      },
+      {
+        "stepNumber": 3,
+        "instruction": "Thread the marinated vegetables and soy curls onto skewers, alternating between different vegetables and soy curls."
+      },
+      {
+        "stepNumber": 4,
+        "instruction": "Preheat grill to medium-high heat. Grill kebabs for 12-15 minutes, turning occasionally, until vegetables are tender and slightly charred."
+      },
+      {
+        "stepNumber": 5,
+        "instruction": "Serve hot with any remaining marinade drizzled over the top."
+      }
+    ]
   }
 ] 

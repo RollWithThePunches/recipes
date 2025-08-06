@@ -42,10 +42,10 @@
             "image": "/assets/burgers.jpg"
           },
           {
-            "id": "shake-mixin",
+            "id": "milkshakes",
             "title": "Shake mixin'",
             "description": "Blend ice cream, milk, and flavorings until smooth for creamy milkshakes",
-            "image": "/assets/sunday.jpg"
+            "image": "/assets/sundae.jpg"
           },
           {
             "id": "lime-corn",
@@ -79,6 +79,7 @@
           { "id": "sides", "name": "Sides", "href": "/category/mexican/sides" },
           { "id": "soups", "name": "Soups", "href": "/category/mexican/soups" },
           { "id": "main-dish", "name": "Main dish", "href": "/category/mexican/main-dish" },
+          { "id": "sandwiches", "name": "Sandwiches", "href": "/category/mexican/sandwiches" },
           { "id": "desserts", "name": "Desserts", "href": "/category/mexican/desserts" },
           { "id": "drinks", "name": "Drinks", "href": "/category/mexican/drinks" }
         ]
@@ -86,7 +87,7 @@
       "featuredRecipe": "barbacoa-tacos",
       "exploreSection": {
         "title": "Explore more Mexican food",
-        "recipes": ["lime-corn", "margaritas", "barbacoa-tacos"]
+        "recipes": ["lime-corn", "margaritas", "barbacoa-tacos", "cemitas"]
       },
       "subcategories": {
         "main-dish": {
@@ -113,6 +114,12 @@
           "description": "Warm and comforting Mexican soups",
           "recipes": []
         },
+        "sandwiches": {
+          "id": "sandwiches",
+          "name": "Sandwiches",
+          "description": "Delicious Mexican sandwiches and tortas perfect for any meal",
+          "recipes": ["cemitas"]
+        },
         "desserts": {
           "id": "desserts",
           "name": "Desserts",
@@ -124,6 +131,120 @@
           "name": "Drinks",
           "description": "Refreshing Mexican beverages and cocktails",
           "recipes": ["margaritas"]
+        }
+      }
+    },
+    "american": {
+      "id": "american",
+      "name": "American",
+      "description": "Classic American comfort food and modern favorites",
+      "navigation": {
+        "title": "What are you in the mood for?",
+        "mealTypes": [
+          { "id": "main-dish", "name": "Main dish", "href": "/category/american/main-dish" },
+          { "id": "drinks", "name": "Drinks", "href": "/category/american/drinks" },
+          { "id": "desserts", "name": "Desserts", "href": "/category/american/desserts" }
+        ]
+      },
+      "featuredRecipe": "char-burgers",
+      "exploreSection": {
+        "title": "Explore more American food",
+        "recipes": ["char-burgers", "milkshakes"]
+      },
+      "subcategories": {
+        "main-dish": {
+          "id": "main-dish",
+          "name": "Main dish",
+          "description": "Hearty and satisfying American main dishes perfect for any meal",
+          "recipes": ["char-burgers"]
+        },
+        "drinks": {
+          "id": "drinks",
+          "name": "Drinks",
+          "description": "Refreshing American beverages and cocktails",
+          "recipes": ["milkshakes"]
+        },
+        "desserts": {
+          "id": "desserts",
+          "name": "Desserts",
+          "description": "Sweet American desserts to end your meal",
+          "recipes": []
+        }
+      }
+    },
+    "japanese": {
+      "id": "japanese",
+      "name": "Japanese",
+      "description": "Traditional Japanese cuisine with modern twists",
+      "navigation": {
+        "title": "What are you in the mood for?",
+        "mealTypes": [
+          { "id": "main-dish", "name": "Main dish", "href": "/category/japanese/main-dish" },
+          { "id": "appetizers", "name": "Appetizers", "href": "/category/japanese/appetizers" },
+          { "id": "sides", "name": "Sides", "href": "/category/japanese/sides" }
+        ]
+      },
+      "featuredRecipe": "sushi",
+      "exploreSection": {
+        "title": "Explore more Japanese food",
+        "recipes": ["sushi"]
+      },
+      "subcategories": {
+        "main-dish": {
+          "id": "main-dish",
+          "name": "Main dish",
+          "description": "Traditional Japanese main dishes perfect for any meal",
+          "recipes": ["sushi"]
+        },
+        "appetizers": {
+          "id": "appetizers",
+          "name": "Appetizers",
+          "description": "Delicious Japanese appetizers to start your meal",
+          "recipes": []
+        },
+        "sides": {
+          "id": "sides",
+          "name": "Sides",
+          "description": "Perfect Japanese side dishes to complement your meal",
+          "recipes": []
+        }
+      }
+    },
+    "mediterranean": {
+      "id": "mediterranean",
+      "name": "Mediterranean",
+      "description": "Fresh and healthy Mediterranean flavors",
+      "navigation": {
+        "title": "What are you in the mood for?",
+        "mealTypes": [
+          { "id": "main-dish", "name": "Main dish", "href": "/category/mediterranean/main-dish" },
+          { "id": "appetizers", "name": "Appetizers", "href": "/category/mediterranean/appetizers" },
+          { "id": "sides", "name": "Sides", "href": "/category/mediterranean/sides" }
+        ]
+      },
+      "featuredRecipe": "vegan-kebabs",
+      "exploreSection": {
+        "title": "Explore more Mediterranean food",
+        "recipes": ["vegan-kebabs"]
+      },
+      "subcategories": {
+        "main-dish": {
+          "id": "main-dish",
+          "name": "Main dish",
+          "description": "Fresh and healthy Mediterranean main dishes perfect for any meal",
+          "recipes": ["vegan-kebabs"]
+        },
+        "appetizers": {
+          "id": "appetizers",
+          "name": "Appetizers",
+          "description": "Delicious Mediterranean appetizers to start your meal",
+          "recipes": []
+        },
+        "sides": {
+          "id": "sides",
+          "name": "Sides",
+          "description": "Perfect Mediterranean side dishes to complement your meal",
+          "recipes": []
         }
       }
     }

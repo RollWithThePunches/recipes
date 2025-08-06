@@ -73,7 +73,7 @@ export default async function SubcategoryPage({
               <Breadcrumb items={breadcrumbItems} showHomeIcon={false} />
 
               {/* Page Title */}
-              <Heading as="h1" size="5xl" font="heading" className="text-left w-full">
+              <Heading as="h1" size="5xl" font="heading" className="text-left w-full mt-8">
                 {subcategoryData.name}
               </Heading>
 

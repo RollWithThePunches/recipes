@@ -64,6 +64,8 @@ function getBreadcrumbItems(
     soup: "Soups",
     dessert: "Desserts",
     drink: "Drinks",
+    sandwich: "Sandwiches",
+    sandwiches: "Sandwiches",
   };
 
   const mealTypeUrlPaths: Record<string, string> = {
@@ -73,6 +75,8 @@ function getBreadcrumbItems(
     soup: "soups",
     dessert: "desserts",
     drink: "drinks",
+    sandwich: "sandwiches",
+    sandwiches: "sandwiches",
   };
 
   const baseItems: BreadcrumbItem[] = [{ label: "Home", href: "/" }];
