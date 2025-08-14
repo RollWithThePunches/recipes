@@ -162,6 +162,7 @@ export default function AccountPage() {
                     </CardContent>
                   </Card>
                 </Link>
+                <img src="https://example.com/example.jpg" />
               </div>
             </section>
           </div>

@@ -63,6 +63,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "axe-linter": "axe-linter-connector -s ./src -d . --local --license-key=eyJjb21wYW55TmFtZSI6IlRob21zb24gUmV1dGVycyIsImV4cGlyZXMiOiIyMDI1LTExLTI4VDE4OjMwOjAwLjAwMFoifQ==.37CsNzP8bnyNMdaL5OIBE3p0SeqshjEFefLoCYak2Wm6VbV8dAjPEcT3yO0RkbKsuh6+ZQz+gseb5qUFEwxSmw== --url=https://axe-linter.deque.com",
     "eslint": "^9",
     "eslint-config-next": "15.3.4",
     "jest": "^30.0.4",
